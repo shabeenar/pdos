@@ -19,7 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url(); ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
-
+    <script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -45,69 +45,76 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Items</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="">Items</a>
+                    <a class="collapse-item" href="">Categories</a>
+                </div>
+            </div>
+        </li>
         <!-- Nav Item - Item -->
         <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("welcome"); ?>">
+            <a class="nav-link" href="<?php echo base_url("item/item"); ?>">
                 <i class="fas fa-fw fa-utensils"></i>
                 <span>Item</span></a>
         </li>
         <!-- Nav Item - Patient -->
         <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("welcome"); ?>">
+            <a class="nav-link" href="<?php echo base_url("patient/patient"); ?>">
                 <i class="fas fa-fw fa-bed"></i>
                 <span>Patient</span></a>
         </li>
         <!-- Nav Item - Ward -->
         <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("welcome"); ?>">
+            <a class="nav-link" href="<?php echo base_url("ward/ward"); ?>">
                 <i class="fas fa-fw fa-hospital-alt"></i>
                 <span>Ward</span></a>
         </li>
         <!-- Nav Item - Order -->
         <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("welcome"); ?>">
+            <a class="nav-link" href="<?php echo base_url("order/order"); ?>">
                 <i class="fas fa-fw fa-cart-plus"></i>
                 <span>Order</span></a>
         </li>
         <!-- Nav Item - Purchase -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="<?php echo base_url("purchase/purchase"); ?>">
                 <i class="fas fa-fw fa-money-bill-alt"></i>
                 <span>Purchase</span></a>
         </li>
         <!-- Nav Item - Supplier -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-truck"></i>
+            <a class="nav-link" href="<?php echo base_url("supplier/supplier"); ?>">
+                <i class="fas fa-fw fa-users"></i>
                 <span>Supplier</span></a>
         </li>
         <!-- Nav Item - Stock -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="<?php echo base_url("stock/stock"); ?>">
                 <i class="fas fa-fw fa-archive"></i>
                 <span>Stock</span></a>
         </li>
         <!-- Nav Item - Users -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo base_url("users/users"); ?>">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-user"></i>
                 <span>Users</span></a>
         </li>
         <!-- Nav Item - Notification -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="<?php echo base_url("notification/notification"); ?>">
                 <i class="fas fa-fw fa-bell"></i>
                 <span>Notification</span></a>
         </li>
-        <!-- Nav Item - Backup -->
-        <li class="nav-item active">
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-history"></i>
-                <span>Backup</span></a>
-        </li>
         <!-- Nav Item - Report -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="<?php echo base_url("report/report"); ?>">
                 <i class="fas fa-fw fa-flag-checkered"></i>
                 <span>Report</span></a>
         </li>

@@ -1,7 +1,12 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
+class Stock extends CI_Controller {
 
-class Stock
-{
-
+    public function index()
+    {
+        $this->load->view('header');
+        $this->load->view('stock/stock');
+        $this->load->view('footer');
+    }
 }
