@@ -1,5 +1,27 @@
 <!-- Begin Page Content -->
+<!-- container-fluid -->
 <div class="container-fluid">
+    <?php if ($this->session->flashdata('alert')) { ?>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.notify({
+                        message: '<?php echo $this->session->flashdata('alert')['message']?>'
+                    },
+                    {
+                        type: '<?php echo $this->session->flashdata('alert')['type']?>',
+                        placement: {
+                            from: "bottom",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated fadeInDown',
+                            exit: 'animated fadeOutUp'
+                        },
+                    });
+            });
+        </script>
+    <?php } ?>
+
     <div class="row">
         <div class="col-md-12">
             <div class="text-right mb-4">
@@ -7,7 +29,7 @@
                 </button>
             </div>
             <!--users table-->
-            <table class="table table-bordered">
+            <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
                     <th>Name</th>
@@ -26,7 +48,7 @@
                         <td><?php echo $user->phone; ?></td>
                         <td><?php echo $user->nic; ?></td>
                         <td><?php echo $user->role; ?></td>
-                        <td><?php echo $user->ward; ?></td>
+                        <td><?php echo $user->ward_id; ?></td>
                         <td class="text-center">
                             <button type="button" class="btn btn-sm btn-secondary"><i class="fas fa-pencil-alt"></i>
                             </button>
@@ -48,12 +70,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="modal-title">
-                    Add New Users
+                    Add New User
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+<!--  add new form to modal-->
             <form action="<?php echo base_url('users/users/create_user'); ?>" method="post">
                 <div class="modal-body">
                     <div class="row">
@@ -100,13 +123,15 @@
                         <div class="form-group col-md-6">
                             <label>City</label>
                             <select class="form-control" name="city">
-                                <option>Colombo</option>
+                                <option disabled selected value style="display:none;">--select city--</option>
+                                <option >Data 1</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label>District</label>
                             <select class="form-control" name="district">
-                                <option>Colombo</option>
+                                <option disabled selected value style="display:none;">--select district--</option>
+                                <option >Data 1</option>
                             </select>
                         </div>
                     </div>
@@ -114,7 +139,8 @@
                         <div class="form-group col-md-6">
                             <label>Province</label>
                             <select class="form-control" name="province">
-                                <option>Western</option>
+                                <option disabled selected value style="display:none;">--select province--</option>
+                                <option >Data 1</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
@@ -131,15 +157,15 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Role Name</label>
-                            <select class="form-control" name="role">
-                                <option>Doctor</option>
-                                <option>Nurse</option>
-                            </select>
+                            <input type="text" class="form-control" name="role">
                         </div>
                         <div class="form-group col-md-6">
                             <label>Ward</label>
                             <select class="form-control" name="ward">
-                                <option>Ward 1</option>
+                                <option disabled selected value style="display:none;">--select ward--</option>
+                                <?php foreach ($wards as $ward) { ?>
+                                    <option><?php echo $ward->number;?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>

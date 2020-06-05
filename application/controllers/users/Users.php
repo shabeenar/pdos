@@ -6,12 +6,14 @@ class Users extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('UsersModel');
+        $this->load->model('WardModel');
     }
 
     public function index()
     {
         $data = array(
             'users' => $this->UsersModel->select(),
+            'wards' => $this->WardModel->select(),
         );
 
         $this->load->view('header');
@@ -35,11 +37,17 @@ class Users extends CI_Controller {
             'province'  => $this->input->post('province'),
             'gender'    => $this->input->post('gender'),
             'role'      => $this->input->post('role'),
-            'ward'      => $this->input->post('ward'),
+            'ward_id'   => $this->input->post('ward'),
         );
 
         $result = $this->UsersModel->create($new_user);
-        if ($result == true){
+        if ($result){
+            $alert = array(
+                'type' => "success",
+                'message' => "User successfully added",
+            );
+
+            $this->session->set_flashdata('alert',$alert);
             redirect("users/Users");
         }
     }

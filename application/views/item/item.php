@@ -1,33 +1,63 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <?php if ($this->session->flashdata('alert')) { ?>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.notify({
+                        message: '<?php echo $this->session->flashdata('alert')['message']?>'
+                    },
+                    {
+                        type: '<?php echo $this->session->flashdata('alert')['type']?>',
+                        placement: {
+                            from: "bottom",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated fadeInDown',
+                            exit: 'animated fadeOutUp'
+                        },
+                    });
+            });
+        </script>
+    <?php } ?>
+
     <div class="row">
         <div class="col-md-12">
             <div class="text-right mb-4">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#item_modal">Add Item</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#item_modal">Add Item
+                </button>
             </div>
-            <dic class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        Items
-                    </div>
-                </div>
-                <div class="card-body">
-                    <!--item table-->
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Item Name</th>
-                            <th>Brand Name</th>
-                            <th>Category</th>
-                            <th>Item Price</th>
-                            <th>Quantity</th>
-                            <th>Date</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div class="card-footer"></div>
-            </dic>
+            <!--item table-->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Item Name</th>
+                    <th>Unit</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <!--display data on index-->
+                <tbody>
+                <?php foreach ($items as $item) { ?>
+                    <tr>
+
+                        <td><?php echo $item->item_category_id; ?></td>
+                        <td><?php echo $item->name; ?></td>
+                        <td><?php echo $item->unit_id; ?></td>
+                        <td><?php echo $item->quantity; ?></td>
+                        <td><?php echo $item->price; ?></td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-sm btn-secondary"><i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
+                        </td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -49,34 +79,41 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label>Category</label>
+                            <label>Item Category</label>
                             <select class="form-control" name="category">
-                                <option>Select Category</option>
+                                <option disabled selected value style="display:none;">--select category--</option>
+                                <?php foreach ($categories as $category) { ?>
+                                    <option value="<?php echo $category->id; ?>"> <?php echo $category->name; ?></option>
+                                <?php } ?>
+
                             </select>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label>Brand Name</label>
-                            <select class="form-control" name="brand">
-                                <option>Select Brand</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-md-6">
                             <label>Item Name</label>
                             <input type="text" class="form-control" name="name">
                         </div>
-                        <div class="form-group col-md-4">
-                            <label>Item Price</label>
-                            <input type="number" class="form-control" name="price">
-                        </div>
                     </div>
                     <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Unit of Measure</label>
+                            <select class="form-control" name="unit">
+                                <option disabled selected value style="display:none;">--select unit--</option>
+                                <?php foreach ($units as $unit) { ?>
+                                    <option value="<?php echo $unit->id; ?>"> <?php echo $unit->name; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
                         <div class="form-group col-md-6">
                             <label>Quantity</label>
                             <input type="text" class="form-control" name="quantity">
                         </div>
-                        <div class="form-group col-md-3">
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Item Price</label>
+                            <input type="number" class="form-control" name="price">
+                        </div>
+                        <div class="form-group col-md-6">
                             <label>Expire Date</label>
                             <input type="date" class="form-control" name="exp_date">
                         </div>

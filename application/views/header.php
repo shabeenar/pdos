@@ -45,37 +45,50 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
-        <!-- Nav Item - Pages Collapse Menu -->
+        <!-- Nav Items - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseItems"
+               aria-expanded="true" aria-controls="collapseItems">
+                <i class="fas fa-fw fa-utensils"></i>
                 <span>Items</span>
             </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="collapseItems" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="">Items</a>
-                    <a class="collapse-item" href="">Categories</a>
+                    <!-- Nav Item - Item -->
+                    <a class="collapse-item" href="<?php echo base_url("item/item"); ?>">Item</a>
+                    <!-- Nav Item - Categories -->
+                    <a class="collapse-item" href="<?php echo base_url("item/itemcategory"); ?>">Item Categories</a>
+                    <!-- Nav Item - Stock -->
+                    <a class="collapse-item" href="<?php echo base_url("item/stock"); ?>">Stock</a>
+                    <!-- Nav Item - Unit of messure -->
+                    <a class="collapse-item" href="<?php echo base_url("item/unit"); ?>">Unit of Measure</a>
                 </div>
             </div>
         </li>
-        <!-- Nav Item - Item -->
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("item/item"); ?>">
-                <i class="fas fa-fw fa-utensils"></i>
-                <span>Item</span></a>
-        </li>
-        <!-- Nav Item - Patient -->
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("patient/patient"); ?>">
+
+        <!-- Nav Patients - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePatients"
+               aria-expanded="true" aria-controls="collapsePatients">
                 <i class="fas fa-fw fa-bed"></i>
-                <span>Patient</span></a>
+                <span>Patients</span>
+            </a>
+            <div id="collapsePatients" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <!-- Nav Item - Patient -->
+                    <a class="collapse-item" href="<?php echo base_url("patient/patient"); ?>">Patient</a>
+                    <!-- Nav Item - Patient Categories -->
+                    <a class="collapse-item" href="<?php echo base_url("patient/patientcategory"); ?>">Patient
+                        Categories</a>
+                    <!-- Nav Item - Diet Categories -->
+                    <a class="collapse-item" href="<?php echo base_url("patient/dietcategory"); ?>">Diet
+                        Categories</a>
+                    <!-- Nav Item - Ward -->
+                    <a class="collapse-item" href="<?php echo base_url("patient/ward"); ?>">Ward</a>
+                </div>
+            </div>
         </li>
-        <!-- Nav Item - Ward -->
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("ward/ward"); ?>">
-                <i class="fas fa-fw fa-hospital-alt"></i>
-                <span>Ward</span></a>
-        </li>
+
         <!-- Nav Item - Order -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo base_url("order/order"); ?>">
@@ -94,23 +107,11 @@
                 <i class="fas fa-fw fa-users"></i>
                 <span>Supplier</span></a>
         </li>
-        <!-- Nav Item - Stock -->
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("stock/stock"); ?>">
-                <i class="fas fa-fw fa-archive"></i>
-                <span>Stock</span></a>
-        </li>
         <!-- Nav Item - Users -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo base_url("users/users"); ?>">
                 <i class="fas fa-fw fa-user"></i>
                 <span>Users</span></a>
-        </li>
-        <!-- Nav Item - Notification -->
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("notification/notification"); ?>">
-                <i class="fas fa-fw fa-bell"></i>
-                <span>Notification</span></a>
         </li>
         <!-- Nav Item - Report -->
         <li class="nav-item active">

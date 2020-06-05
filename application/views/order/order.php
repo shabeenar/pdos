@@ -5,13 +5,6 @@
             <div class="text-right mb-4">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#order_modal">Place Orders</button>
             </div>
-            <dic class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        Orders
-                    </div>
-                </div>
-                <div class="card-body">
                     <!--orders table-->
                     <table class="table table-bordered">
                         <thead>
@@ -24,9 +17,6 @@
                         </tr>
                         </thead>
                     </table>
-                </div>
-                <div class="card-footer"></div>
-            </dic>
         </div>
     </div>
 </div>
