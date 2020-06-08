@@ -44,9 +44,9 @@
                 <?php foreach ($items as $item) { ?>
                     <tr>
 
-                        <td><?php echo $item->item_category_id; ?></td>
+                        <td><?php echo $item->category_name; ?></td>
                         <td><?php echo $item->name; ?></td>
-                        <td><?php echo $item->unit_id; ?></td>
+                        <td><?php echo $item->unit_name; ?></td>
                         <td><?php echo $item->quantity; ?></td>
                         <td><?php echo $item->price; ?></td>
                         <td class="text-center">
