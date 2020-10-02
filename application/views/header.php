@@ -19,7 +19,10 @@
 
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url(); ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Base URL -->
+    <script>var base_url = '<?php echo site_url() ?>';</script>
     <script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -58,10 +61,9 @@
                     <a class="collapse-item" href="<?php echo base_url("item/item"); ?>">Item</a>
                     <!-- Nav Item - Categories -->
                     <a class="collapse-item" href="<?php echo base_url("item/itemcategory"); ?>">Item Categories</a>
-                    <!-- Nav Item - Stock -->
-                    <a class="collapse-item" href="<?php echo base_url("item/stock"); ?>">Stock</a>
                     <!-- Nav Item - Unit of messure -->
                     <a class="collapse-item" href="<?php echo base_url("item/unit"); ?>">Unit of Measure</a>
+
                 </div>
             </div>
         </li>
@@ -75,50 +77,68 @@
             </a>
             <div id="collapsePatients" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <!-- Nav Item - Patient -->
+                    <!-- Nav Patient - Patient -->
                     <a class="collapse-item" href="<?php echo base_url("patient/patient"); ?>">Patient</a>
-                    <!-- Nav Item - Patient Categories -->
+                    <!-- Nav Patient - Patient Categories -->
                     <a class="collapse-item" href="<?php echo base_url("patient/patientcategory"); ?>">Patient
                         Categories</a>
-                    <!-- Nav Item - Diet Categories -->
+                    <!-- Nav Patient - Diet Categories -->
                     <a class="collapse-item" href="<?php echo base_url("patient/dietcategory"); ?>">Diet
                         Categories</a>
-                    <!-- Nav Item - Ward -->
+                    <!-- Nav Patient - Ward -->
                     <a class="collapse-item" href="<?php echo base_url("patient/ward"); ?>">Ward</a>
                 </div>
             </div>
         </li>
 
-        <!-- Nav Item - Order -->
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("order/order"); ?>">
-                <i class="fas fa-fw fa-cart-plus"></i>
-                <span>Order</span></a>
+        <!-- Nav Kitchen - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseKitchen"
+               aria-expanded="true" aria-controls="collapseKitchen">
+                <i class="fas fa-fw fa-bed"></i>
+                <span>Kitchen</span>
+            </a>
+            <div id="collapseKitchen" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <!-- Nav Kitchen - Meal Order -->
+                    <a class="collapse-item" href="<?php echo base_url("kitchen/order"); ?>">Meal Order</a>
+                    <!-- Nav Kitchen - Meals -->
+                    <a class="collapse-item" href="<?php echo base_url("kitchen/meals"); ?>">Meals</a>
+                </div>
+            </div>
         </li>
-        <!-- Nav Item - Purchase -->
+
+        <!-- Nav Stock -->
+        <li class="nav-item active">
+            <a class="nav-link" href="<?php echo base_url("stock/stock"); ?>">
+                <i class="fas fa-fw fa-archive"></i>
+                <span>Stock</span></a>
+        </li>
+        <!-- Nav Purchase -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo base_url("purchase/purchase"); ?>">
                 <i class="fas fa-fw fa-money-bill-alt"></i>
                 <span>Purchase</span></a>
         </li>
-        <!-- Nav Item - Supplier -->
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("supplier/supplier"); ?>">
-                <i class="fas fa-fw fa-users"></i>
-                <span>Supplier</span></a>
-        </li>
-        <!-- Nav Item - Users -->
+        <!-- Nav Users -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo base_url("users/users"); ?>">
                 <i class="fas fa-fw fa-user"></i>
                 <span>Users</span></a>
         </li>
-        <!-- Nav Item - Report -->
+        <!-- Nav Supplier -->
+        <li class="nav-item active">
+            <a class="nav-link" href="<?php echo base_url("supplier/supplier"); ?>">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Supplier</span></a>
+        </li>
+        <!-- Nav Report -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo base_url("report/report"); ?>">
                 <i class="fas fa-fw fa-flag-checkered"></i>
                 <span>Report</span></a>
         </li>
+        <!-- Nav Item - Stock -->
 
     </ul>
     <!-- End of Sidebar -->
@@ -170,7 +190,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">User</span>
                             <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                         </a>
                         <!-- Dropdown - User Information -->
@@ -180,15 +200,6 @@
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Settings
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Activity Log
-                            </a>
-                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout

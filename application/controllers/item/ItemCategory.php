@@ -40,4 +40,42 @@ class ItemCategory extends CI_Controller {
         }
 
     }
+
+    public function get_itemcategory(){
+        $id = $this->input->post('id');
+        $result = $this->ItemCategoryModel->get_itemcategory($id);
+        echo json_encode($result);
+    }
+
+    public function update_itemcategory(){
+        $update = array(
+            'code'=> $this->input->post('code'),
+            'name'=> $this->input->post('name'),
+        );
+        $id = $this->input->post('update_id');
+
+        $result = $this->ItemCategoryModel->update_itemcategory($update, $id);
+        if ($result){
+            $alert = array(
+                'type' =>"warning",
+                'message' =>"updated successfully",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect("item/ItemCategory");
+        }
+
+    }
+
+    public function delete_itemcategory(){
+        $id = $this->input->post('id');
+        $result = $this->ItemCategoryModel->delete_itemcategory($id);
+        if($result){
+            $alert = array(
+                'type' =>"danger",
+                'message'=>"Deleted Successfully",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect('item/ItemCategory');
+        }
+    }
 }

@@ -40,4 +40,44 @@ class DietCategory extends CI_Controller {
         }
 
     }
+
+    public function get_dietcategory(){
+        $id = $this->input->post('id');
+        $result = $this->DietCategoryModel->get_dietcategory($id);
+        echo json_encode($result);
+    }
+
+    public function update_dietcategory(){
+        $update = array(
+            'category_code' =>$this->input->post('category_code'),
+            'category_name' =>$this->input->post('category_name'),
+        );
+        $id = $this->input->post('update_id');
+
+        $result = $this->DietCategoryModel->update_dietcategory($update, $id);
+        if ($result){
+            $alert = array(
+                'type' =>"warning",
+                'message' =>"updated successfully",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect("patient/DietCategory");
+        }
+    }
+
+    public function delete_dietcategory(){
+        $id = $this->input->post('id');
+        $result = $this->DietCategoryModel->delete_dietcategory($id);
+        if($result){
+            $alert = array(
+                'type' =>"danger",
+                'message'=>"Deleted Successfully",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect('patient/DietCategory');
+        }
+
+    }
+
+
 }

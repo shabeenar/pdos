@@ -7,12 +7,18 @@ class Supplier extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('SupplierModel');
+        $this->load->model('DistrictModel');
+        $this->load->model('ProvinceModel');
+        $this->load->model('CitiesModel');
     }
 
     public function index()
     {
         $data = array(
             'suppliers' => $this->SupplierModel->select(),
+            'districts' => $this->DistrictModel->select(),
+            'provinces' => $this->ProvinceModel->select(),
+            'cities'    => $this->CitiesModel->select(),
         );
 
         $this->load->view('header');
@@ -28,9 +34,9 @@ class Supplier extends CI_Controller {
             'email'     => $this->input->post('email'),
             'street'    => $this->input->post('street'),
             'street_two'=> $this->input->post('street_two'),
-            'city'      => $this->input->post('city'),
-            'district'  => $this->input->post('district'),
-            'province'  => $this->input->post('province'),
+            'city_id'      => $this->input->post('city'),
+            'district_id'  => $this->input->post('district'),
+            'province_id'  => $this->input->post('province'),
         );
 
         $result = $this->SupplierModel->create($new_supplier);
@@ -43,5 +49,75 @@ class Supplier extends CI_Controller {
             $this->session->set_flashdata('alert',$alert);
             redirect("supplier/Supplier");
         }
+    }
+
+    public function get_supplier(){
+        $id = $this->input->post('id');
+        $result = $this->SupplierModel->get_supplier($id);
+        echo json_encode($result);
+    }
+
+    public function update_supplier(){
+        $update = array(
+            'name'      => $this->input->post('name'),
+            'phone'     => $this->input->post('phone'),
+            'email'     => $this->input->post('email'),
+            'street'    => $this->input->post('street'),
+            'street_two'=> $this->input->post('street_two'),
+            'city_id'      => $this->input->post('city'),
+            'district_id'  => $this->input->post('district'),
+            'province_id'  => $this->input->post('province'),
+        );
+        $id = $this->input->post('update_id');
+
+        $result = $this->SupplierModel->update_supplier($update, $id);
+        if ($result){
+            $alert = array(
+                'type' =>"warning",
+                'message' =>"updated successfully",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect("supplier/Supplier");
+        }
+    }
+
+    public function inactivate(){
+        $id = $this->input->post('id');
+        $result = $this->SupplierModel->inactivate($id);
+        if ($result){
+            $alert = array(
+                'type' =>"success",
+                'message' =>"Supplier Deactivated",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect("supplier/Supplier");
+        }
+    }
+
+    public function activate(){
+        $id = $this->input->post('id');
+        $result = $this->SupplierModel->activate($id);
+        if ($result){
+            $alert = array(
+                'type' =>"success",
+                'message' =>"Supplier Activated",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect("supplier/Supplier");
+        }
+    }
+
+    public function delete_supplier(){
+        $id = $this->input->post('id');
+        $result = $this->SupplierModel->delete_supplier($id);
+        if($result){
+            $alert = array(
+                'type' =>"danger",
+                'message'=>"Deleted Successfully",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect('supplier/Supplier');
+        }
+
     }
 }

@@ -53,9 +53,16 @@
 <script src="<?php echo base_url(); ?>assets/vendor/chart.js/Chart.min.js"></script>
 
 <!--Jquery Validator-->
-<script src="<?php echo base_url()?>assets/js/jquery-validator.js"></script>
+<script src="<?php echo base_url();?>assets/js/jquery-validation.js"></script>
 
-<script src="<?php echo base_url()?>assets/js/bootstrap-notify.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/bootstrap-notify.min.js"></script>
+
+<script>
+    // jquery validate plugin
+    $.validate();
+</script>
+
+<script src="<?php echo base_url();?>assets/js/chart.js/Chart.js"></script>
 
 
 

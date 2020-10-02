@@ -39,4 +39,43 @@ class Ward extends CI_Controller {
             redirect("patient/Ward");
         }
     }
+
+    public function get_ward(){
+        $id = $this->input->post('id');
+        $result = $this->WardModel->get_ward($id);
+        echo json_encode($result);
+    }
+
+    public function update_ward(){
+        $update = array(
+            'number'=> $this->input->post('number'),
+            'name'  => $this->input->post('name'),
+            'gender'=> $this->input->post('gender'),
+        );
+        $id = $this->input->post('update_id');
+
+        $result = $this->WardModel->update_ward($update, $id);
+        if ($result){
+            $alert = array(
+                'type' =>"warning",
+                'message' =>"updated successfully",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect('patient/Ward');
+        }
+    }
+
+    public function delete_ward(){
+        $id = $this->input->post('id');
+        $result = $this->WardModel->delete_ward($id);
+        if($result){
+            $alert = array(
+                'type' =>"danger",
+                'message'=>"Deleted Successfully",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect('patient/Ward');
+        }
+
+    }
 }

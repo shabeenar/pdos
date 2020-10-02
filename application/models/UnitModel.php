@@ -13,8 +13,39 @@ Class UnitModel extends CI_Model {
 
     public function select(){
         $this->db->from('unit');
+        $this->db->where('status', 1);
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function get_unit($id){
+        $this->db->from('unit');
+        $this->db->where('id',$id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function update_unit($update, $id){
+        $this->db->where('id',$id);
+        $this->db->update('unit',$update);
+        if ($this->db->affected_rows() == 1){
+            return true;
+        }
+        else{
+            return $this->db->error();
+        }
+    }
+
+    public function delete_unit($id){
+        $this->db->where('id',$id);
+        $this->db->update('unit', array('status'=>0));
+        if ($this->db->affected_rows() == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }
 
