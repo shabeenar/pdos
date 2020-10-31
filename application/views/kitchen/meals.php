@@ -45,7 +45,7 @@
                 <?php foreach ($meals as $meal) { ?>
 
                     <tr>
-                        <td><?php echo $meal->code; ?></td>
+                        <td class="text-right"><?php echo $meal->code; ?></td>
                         <td><?php echo $meal->meal_name; ?></td>
                         <td class="text-center"><input type="radio" <?php if($meal->breakfast == 1) { echo "checked"; }?>/></td>
                         <td class="text-center"><input type="radio" <?php if($meal->lunch == 1) { echo "checked"; }?>/></td>

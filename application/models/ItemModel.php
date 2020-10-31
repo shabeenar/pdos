@@ -51,7 +51,7 @@ Class ItemModel extends CI_Model {
     }
 
     public function get_single_product($id){
-        $this->db->select('item.*,item_category.name as category_name,unit.name as unit_name');
+        $this->db->select('item.*,item_category.name as category_name,unit.name as unit_name, unit.id as unit_id');
         $this->db->from('item');
         $this->db->join('item_category','item_category.id = item.item_category_id');
         $this->db->join('unit','unit.id = item.unit_id');

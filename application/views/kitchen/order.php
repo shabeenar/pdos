@@ -10,23 +10,27 @@
                         <thead>
                         <tr>
                             <th>Order ID</th>
-                            <th>Patient Category</th>
                             <th>Ward</th>
-                            <th>Order Status</th>
+                            <th>Total Patients</th>
+                            <th>Date</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php foreach ($orders as $order) { ?>
                             <tr>
-                                <td><?php echo $order->id; ?></td>
-                                <td><?php echo $order->patient_category; ?></td>
-                                <td><?php echo $order->ward; ?></td>
-                                <td></td>
+                                <td class="text-right"><?php echo $order->id; ?></td>
+                                <td><?php echo $order->ward_name; ?></td>
+                                <td class="text-right"><?php echo $order->total_patients; ?></td>
+                                <td><?php echo $order->order_date; ?></td>
+                                <td class="text-center"><a class="btn btn-warning btn-sm" href="<?php base_url()?>View?id=<?php echo $order->id; ?>">View</a></td>
                             </tr>
                         <?php } ?>
 
                         </tbody>
+
                     </table>
+
         </div>
     </div>
 </div>

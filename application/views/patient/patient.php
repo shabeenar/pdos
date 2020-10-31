@@ -47,7 +47,7 @@
                 <?php foreach ($patients as $patient) { ?>
                     <tr>
                         <td><?php echo $patient->name; ?></td>
-                        <td><?php echo $patient->age; ?></td>
+                        <td class="text-right"><?php echo $patient->age; ?></td>
                         <td>
                             <?php echo $patient->street.', '.$patient->street_two.','; ?><br>
                             <?php echo $patient->city_name.', '.$patient->district_name.','; ?><br>
@@ -55,7 +55,7 @@
                         </td>
                         <td><?php echo $patient->phone; ?></td>
                         <td><?php echo $patient->ward_id.' - '.$patient->ward_name; ?></td>
-                        <td><?php echo $patient->bed; ?></td>
+                        <td class="text-right"><?php echo $patient->bed; ?></td>
                         <td class="text-center">
                             <button type="button" class="btn btn-secondary btn-sm" id="update_button" data-id="<?php echo $patient->id; ?>"><i class="fas fa-pencil-alt"></i>
                             </button>
@@ -166,7 +166,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>District</label>
-                            <select class="form-control" name="district">
+                            <select class="form-control" name="district" readonly>
                                 <option disabled selected value style="display:none;">Select District</option>
                                 <?php foreach ($districts as $district) { ?>
                                     <option value="<?php echo $district->id;?>"><?php echo $district->name_en;?></option>
@@ -175,7 +175,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Province</label>
-                            <select class="form-control" name="province">
+                            <select class="form-control" name="province" readonly>
                                 <option disabled selected value style="display:none;">Select Province</option>
                                 <?php foreach ($provinces as $province) { ?>
                                     <option value="<?php echo $province->id;?>"><?php echo $province->name_en;?></option>

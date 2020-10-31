@@ -17,12 +17,39 @@
 
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url(); ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url(); ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url(); ?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/sb-admin-2.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/bootstrap-notify.min.js"></script>
 
 </head>
 
 <body class="bg-gradient-primary">
 
 <div class="container">
+    <?php if ($this->session->flashdata('alert')) { ?>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.notify({
+                        message: '<?php echo $this->session->flashdata('alert')['message']?>'
+                    },
+                    {
+                        type: '<?php echo $this->session->flashdata('alert')['type']?>',
+                        placement: {
+                            from: "bottom",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated fadeInDown',
+                            exit: 'animated fadeOutUp'
+                        },
+                    });
+            });
+        </script>
+    <?php } ?>
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
@@ -40,7 +67,7 @@
                                     <h1 class="text-gray-900" style="font-size:28px"><b>Patient Diet Ordering System</h1>
                                     <h1 class="text-gray-700 mb-4" style="font-size:20px">Colombo South Teaching Hospital</h1>
                                 </div>
-                                <form class="user" action="<?php echo base_url('login/forgotpassword/reset'); ?>" method="post">
+                                <form class="user" action="<?php echo base_url('login/login/forgotpassword'); ?>" method="post">
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address Here">
                                     </div>
@@ -70,15 +97,7 @@
 
 </div>
 
-<!-- Bootstrap core JavaScript-->
-<script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.min.js"</script>
-<script src="<?php echo base_url(); ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"</script>
 
-<!-- Core plugin JavaScript-->
-<script src="<?php echo base_url(); ?>assets/vendor/jquery-easing/jquery.easing.min.js"</script>
-
-<!-- Custom scripts for all pages-->
-<script src="<?php echo base_url(); ?>assets/js/sb-admin-2.min.js"</script>
 
 </body>
 

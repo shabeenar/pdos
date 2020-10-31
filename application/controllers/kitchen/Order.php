@@ -6,14 +6,17 @@ class Order extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        if(!$this->session->userdata('name')) {
+            redirect(redirect('login/login'));
+        }
         $this->load->model('OrderModel');
-        $this->load->model('PatientModel');
+        $this->load->model('CreateOrderModel');
     }
 
     public function index()
     {
         $data = array(
-            'orders'   => $this->OrderModel->select(),
+            'orders'   => $this->CreateOrderModel->select(),
         );
 
         $this->load->view('header');

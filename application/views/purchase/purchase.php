@@ -60,10 +60,12 @@
                     <tbody id="purchase_lines">
                     </tbody>
                 </table>
-                <div class="row">
-                    <label class="text-right mb-4">Amount Total Rs.</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="total_amount" name="total_amount" value="0.00">
+                <div>
+                    <div class="row">
+                        <label class="text-right mb-4">Amount Total Rs.</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="total_amount" name="total_amount" readonly placeholder="0.00">
+                        </div>
                     </div>
                 </div>
                 <div class="text-right mb-4">
@@ -108,6 +110,7 @@
             var id = $(this).val();
             var unit_price = "";
             var unit_of_measure = "";
+            var unit_of_measure_id = "";
             $.ajax({
                 type: 'post',
                 url: base_url + 'purchase/Purchase/get_single_product',
@@ -117,19 +120,26 @@
                 success: function (response) {
                    unit_price = response[0]['price'];
                    unit_of_measure = response[0]['unit_name'];
-
+                   unit_of_measure_id = response[0]['unit_id'];
                 }
             })
             $(this).closest('tr').find('#purchase_price').val(unit_price);
             $(this).closest('tr').find('#purchase_uom').val(unit_of_measure);
+            $(this).closest('tr').find('#purchase_uom_id').val(unit_of_measure_id);
         })
 
         $('#purchase_lines').on('change', '#purchase_qty, #purchase_price', function () {
             var line_total = 0;
+            var sub_total = 0;
             var line_price = $(this).closest('tr').find('#purchase_price').val();
             var line_quantity = $(this).closest('tr').find('#purchase_qty').val();
             line_total = line_price * line_quantity;
             $(this).closest('tr').find('#purchase_total').val(line_total);
+
+            $('#purchase_lines tr').each(function () {
+                  sub_total += parseFloat($(this).find('#purchase_total').val());
+            })
+            $('#total_amount').val(sub_total);
         })
     })
 </script>

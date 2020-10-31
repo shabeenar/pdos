@@ -42,7 +42,7 @@
                 <tbody>
                 <?php foreach ($dietcategories as $dietcategory) { ?>
                     <tr>
-                        <td><?php echo $dietcategory->category_code; ?></td>
+                        <td class="text-right"><?php echo $dietcategory->category_code; ?></td>
                         <td><?php echo $dietcategory->category_name; ?></td>
                         <td class="text-center">
                             <button type="button" class="btn btn-sm btn-secondary" id="update_button" data-id="<?php echo $dietcategory->id; ?>"><i class="fas fa-pencil-alt"></i>

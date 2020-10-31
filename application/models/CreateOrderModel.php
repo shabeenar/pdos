@@ -4,7 +4,12 @@ Class CreateOrderModel extends CI_Model
 
     public function select()
     {
-        $this->db->from('order');
+        $this->db->select('order_lines.*, order.order_date as order_date, ward.name as ward_name, patient_category.category_name as patient_category_name');
+        $this->db->from('order_lines');
+        $this->db->join('order', 'order.id = order_lines.order_id');
+        $this->db->join('ward','ward.id = order_lines.ward_id');
+        $this->db->join('patient_category','patient_category.id = order_lines.patient_category_id');
+        $this->db->where('order_lines.id', 1);
         $query = $this->db->get();
         return $query->result();
     }
@@ -54,6 +59,12 @@ Class CreateOrderModel extends CI_Model
         $this->db->insert('order', array('order_date'=>$date));
         $insert_id = $this->db->insert_id();
         return $insert_id;
+    }
+
+    public function create_mealorder($order_lines,$order_id){
+        $this->db->insert_batch('order_lines',$order_lines);
+        $query = $this->db->get_where('order_lines',array('order_id'=>$order_id));
+        return $query->result();
     }
 
 

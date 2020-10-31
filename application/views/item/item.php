@@ -47,9 +47,9 @@
 
                         <td><?php echo $item->category_name; ?></td>
                         <td><?php echo $item->name; ?></td>
-                        <td><?php echo $item->quantity; ?></td>
+                        <td class="text-right"><?php echo $item->quantity; ?></td>
                         <td><?php echo $item->unit_name; ?></td>
-                        <td><?php echo $item->price; ?></td>
+                        <td class="text-right"><?php echo $item->price; ?></td>
                         <td>
                             <div class="progress">
                                 <?php if (0 < $item->inventory_level && $item->inventory_level < 30) { ?>

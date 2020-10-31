@@ -5,6 +5,9 @@ class Users extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        if(!$this->session->userdata('name')) {
+            redirect(redirect('login/login'));
+        }
         $this->load->model('UsersModel');
         $this->load->model('WardModel');
         $this->load->model('DistrictModel');
@@ -54,7 +57,7 @@ class Users extends CI_Controller {
             'gender'    => $this->input->post('gender'),
             'role'      => $this->input->post('role'),
             'ward_id'   => $this->input->post('ward'),
-            'password'  => $randomString
+            'password'  => sha1($randomString)
         );
 
         $mail_settings = Array(

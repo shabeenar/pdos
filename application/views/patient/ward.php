@@ -43,7 +43,7 @@
                 <tbody>
                 <?php foreach ($wards as $ward) { ?>
                     <tr>
-                        <td><?php echo $ward->number; ?></td>
+                        <td class="text-right"><?php echo $ward->number; ?></td>
                         <td><?php echo $ward->name; ?></td>
                         <td><?php echo $ward->gender; ?></td>
                         <td class="text-center">

@@ -95,7 +95,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseKitchen"
                aria-expanded="true" aria-controls="collapseKitchen">
-                <i class="fas fa-fw fa-bed"></i>
+                <i class="fas fa-fw fa-home"></i>
                 <span>Kitchen</span>
             </a>
             <div id="collapseKitchen" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -115,11 +115,22 @@
                 <span>Stock</span></a>
         </li>
         <!-- Nav Purchase -->
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("purchase/purchase"); ?>">
-                <i class="fas fa-fw fa-money-bill-alt"></i>
-                <span>Purchase</span></a>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePurchase"
+               aria-expanded="true" aria-controls="collapsePurchase">
+                <i class="fas fa-fw fa-shopping-cart"></i>
+                <span>Purchase</span>
+            </a>
+            <div id="collapsePurchase" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <!-- Nav Kitchen - Meal Order -->
+                    <a class="collapse-item" href="<?php echo base_url("purchase/purchase"); ?>">Create Purchase</a>
+                    <!-- Nav Kitchen - Meals -->
+                    <a class="collapse-item" href="<?php echo base_url("purchase/viewpurchase"); ?>">View Purchase</a>
+                </div>
+            </div>
         </li>
+
         <!-- Nav Users -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo base_url("users/users"); ?>">
@@ -190,17 +201,12 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">User</span>
-                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $this->session->userdata('name');?></span>
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profile
-                            </a>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <a class="dropdown-item" href="<?php echo base_url('login/Login/logout')?>">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
                             </a>

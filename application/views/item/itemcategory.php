@@ -40,7 +40,7 @@
                 <tbody>
                 <?php foreach ($itemcategories as $itemcategory) { ?>
                     <tr>
-                        <td><?php echo $itemcategory->code; ?></td>
+                        <td class="text-right"><?php echo $itemcategory->code; ?></td>
                         <td><?php echo $itemcategory->name; ?></td>
                         <td class="text-center">
                             <button type="button" class="btn btn-sm btn-secondary" id="update_button" data-id="<?php echo $itemcategory->id; ?>"><i class="fas fa-pencil-alt"></i>

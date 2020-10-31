@@ -7,6 +7,9 @@ class Item extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if(!$this->session->userdata('name')) {
+            redirect(redirect('login/login'));
+        }
         $this->load->model('ItemModel');
         $this->load->model('ItemCategoryModel');
         $this->load->model('UnitModel');

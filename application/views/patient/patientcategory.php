@@ -42,7 +42,7 @@
                 <tbody>
                 <?php foreach ($patientcategories as $patientcategory) { ?>
                     <tr>
-                        <td><?php echo $patientcategory->category_code; ?></td>
+                        <td class="text-right"><?php echo $patientcategory->category_code; ?></td>
                         <td><?php echo $patientcategory->category_name; ?></td>
                         <td class="text-center">
                             <button type="button" class="btn btn-sm btn-secondary" id="update_button" data-id="<?php echo $patientcategory->id; ?>"><i class="fas fa-pencil-alt"></i>

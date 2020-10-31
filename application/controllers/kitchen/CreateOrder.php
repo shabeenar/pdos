@@ -6,6 +6,9 @@ class CreateOrder extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        if(!$this->session->userdata('name')) {
+            redirect(redirect('login/login'));
+        }
         $this->load->model('CreateOrderModel');
         $this->load->model('PatientModel');
         $this->load->model('PatientCategoryModel');
@@ -29,18 +32,21 @@ class CreateOrder extends CI_Controller {
         $date = $this->input->post('date');
         $order_id = $this->CreateOrderModel->create($date);
 
-//        $order_lines = array();
-//        $lines = array();
-//
-//        for ($i = 0; $i < count($this->input->post('order_patient_ward')); $i++) {
-//            $lines['order_id'] = $order_id;
-//            $lines['ward_id'] = $this->input->post('ward_id');
-//            $lines['patient_category_id'] = $this->input->post('patient_category_id');
-//            $lines['total_patients'] = $this->input->post('total_patients');
-//            $lines['breakfast_meal_id'] = $this->input->post('breakfast_meal_id');
-//            $lines['lunch_meal_id'] = $this->input->post('lunch_meal_id');
-//            $lines['dinner_meal_id'] = $this->input->post('dinner_meal_id');
-//        }
+        $order_lines = array();
+        $lines = array();
+
+        for ($i = 0; $i < count($this->input->post('order_patient_ward')); $i++) {
+            $lines['order_id'] = $order_id;
+            $lines['ward_id'] = $this->input->post('order_patient_ward')[$i];
+            $lines['patient_category_id'] = $this->input->post('order_patient_category')[$i];
+            $lines['total_patients'] = $this->input->post('order_total_patient')[$i];
+            $lines['breakfast_meal_id'] = $this->input->post('order_breakfast')[$i];
+            $lines['lunch_meal_id'] = $this->input->post('order_lunch')[$i];
+            $lines['dinner_meal_id'] = $this->input->post('order_dinner')[$i];
+            array_push($order_lines,$lines);
+        }
+        $result = $this->CreateOrderModel->create_mealorder($order_lines,$order_id);
+        redirect('kitchen/View?id='.$order_id);
 
     }
 

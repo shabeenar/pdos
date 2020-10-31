@@ -6,6 +6,9 @@ class Supplier extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        if(!$this->session->userdata('name')) {
+            redirect(redirect('login/login'));
+        }
         $this->load->model('SupplierModel');
         $this->load->model('DistrictModel');
         $this->load->model('ProvinceModel');
