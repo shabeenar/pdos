@@ -24,12 +24,38 @@ class Unit extends CI_Controller {
         $this->load->view('footer');
     }
 
+    public function form_validations(){
+
+        $this->form_validation->set_rules('name', 'Unit Name', 'trim|required|alpha|max_length[20]');
+        $this->form_validation->set_rules('unit', 'SI Symbol', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $result = array(
+                'error' => true,
+                'messages' => validation_errors(),
+            );
+            echo json_encode($result);
+        }
+        else
+        {
+            $result = array(
+                'error' => false,
+                'messages' => "",
+            );
+            echo json_encode($result);
+        }
+    }
+
     public function create_unit()
     {
         $new_unit = array(
             'name' => $this->input->post('name'),
             'unit' => $this->input->post('unit'),
         );
+
+        $this->form_validation->set_rules('name', 'Unit Name', 'trim|required|alpha|max_length[20]');
+        $this->form_validation->set_rules('unit', 'SI Symbol', 'required');
 
         $result = $this->UnitModel->create($new_unit);
         if ($result){
@@ -55,6 +81,10 @@ class Unit extends CI_Controller {
             'name' =>$this->input->post('name'),
             'unit' =>$this->input->post('unit'),
         );
+
+        $this->form_validation->set_rules('name', 'Unit Name', 'trim|required|alpha|max_length[20]');
+        $this->form_validation->set_rules('unit', 'SI Symbol', 'required');
+
         $id = $this->input->post('update_id');
 
         $result = $this->UnitModel->update_unit($update, $id);
@@ -82,3 +112,12 @@ class Unit extends CI_Controller {
 
     }
 }
+
+//patterns
+//
+//numbers only ^[0-9]*$
+//numbers and letters ^[0-9][A-Za-z0-9 -]*$
+//letters ony  [^A-Za-z]
+//    nic [0-9]{9}[x|X|v|V]|[0-9]{11}[x|X|v|V]
+//decimals \-?\d+\.\d+
+//al spaces ^[a-zA-Z0-9 ]*$

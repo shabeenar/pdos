@@ -24,12 +24,38 @@ class ItemCategory extends CI_Controller {
         $this->load->view('footer');
     }
 
+    public function form_validations(){
+
+        $this->form_validation->set_rules('code', 'Code', 'required|numeric');
+        $this->form_validation->set_rules('name', 'Item Category Name', 'trim|required|alpha|max_length[50]');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $result = array(
+                'error' => true,
+                'messages' => validation_errors(),
+            );
+            echo json_encode($result);
+        }
+        else
+        {
+            $result = array(
+                'error' => false,
+                'messages' => "",
+            );
+            echo json_encode($result);
+        }
+    }
+
     public function create_itemcategory()
     {
         $new_itemcategory = array(
             'code'=> $this->input->post('code'),
             'name'=> $this->input->post('name'),
         );
+
+        $this->form_validation->set_rules('code', 'Code', 'required|numeric');
+        $this->form_validation->set_rules('name', 'Item Category Name', 'trim|required|alpha|max_length[50]');
 
         $result = $this->ItemCategoryModel->create($new_itemcategory);
         if ($result){
@@ -55,6 +81,10 @@ class ItemCategory extends CI_Controller {
             'code'=> $this->input->post('code'),
             'name'=> $this->input->post('name'),
         );
+
+        $this->form_validation->set_rules('code', 'Code', 'required|numeric');
+        $this->form_validation->set_rules('name', 'Item Category Name', 'trim|required|alpha|max_length[50]');
+
         $id = $this->input->post('update_id');
 
         $result = $this->ItemCategoryModel->update_itemcategory($update, $id);

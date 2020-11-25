@@ -35,6 +35,43 @@ class Patient extends CI_Controller {
         $this->load->view('footer');
     }
 
+    public function form_validations(){
+
+        $this->form_validation->set_rules('patient_category', 'Patient Category', 'required');
+        $this->form_validation->set_rules('name', 'Name', 'trim|required|alpha_numeric_spaces|max_length[50]');
+        $this->form_validation->set_rules('age', 'Age', 'required|numeric|max_length[3]');
+        $this->form_validation->set_rules('birthday', 'Birthday', 'required');
+        $this->form_validation->set_rules('nic', 'NIC', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('gender', 'Gender', 'required');
+        $this->form_validation->set_rules('street', 'Street', 'required');
+        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('district', 'District', 'required');
+        $this->form_validation->set_rules('province', 'Province', 'required');
+        $this->form_validation->set_rules('in_date', 'In Date', 'required');
+        $this->form_validation->set_rules('ward', 'Ward Name', 'required');
+        $this->form_validation->set_rules('bed', 'Bed Number', 'required|numeric');
+        $this->form_validation->set_rules('diet_category', 'Diet Category', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $result = array(
+                'error' => true,
+                'messages' => validation_errors(),
+            );
+            echo json_encode($result);
+        }
+        else
+        {
+            $result = array(
+                'error' => false,
+                'messages' => "",
+            );
+            echo json_encode($result);
+        }
+    }
+
     public function create_patient()
     {
         $new_patient = array(
@@ -55,6 +92,23 @@ class Patient extends CI_Controller {
             'bed'                => $this->input->post('bed'),
             'diet_category_id'   => $this->input->post('diet_category'),
         );
+
+        $this->form_validation->set_rules('patient_category', 'Patient Category', 'required');
+        $this->form_validation->set_rules('name', 'Name', 'trim|required|alpha_numeric_spaces|max_length[50]');
+        $this->form_validation->set_rules('age', 'Age', 'required|numeric|max_length[3]');
+        $this->form_validation->set_rules('birthday', 'Birthday', 'required');
+        $this->form_validation->set_rules('nic', 'NIC', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('gender', 'Gender', 'required');
+        $this->form_validation->set_rules('street', 'Street', 'required');
+        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('district', 'District', 'required');
+        $this->form_validation->set_rules('province', 'Province', 'required');
+        $this->form_validation->set_rules('in_date', 'In Date', 'required');
+        $this->form_validation->set_rules('ward', 'Ward Name', 'required');
+        $this->form_validation->set_rules('bed', 'Bed Number', 'required|numeric');
+        $this->form_validation->set_rules('diet_category', 'Diet Category', 'required');
 
         $result = $this->PatientModel->create($new_patient);
         if ($result){
@@ -93,6 +147,24 @@ class Patient extends CI_Controller {
             'bed'                => $this->input->post('bed'),
             'diet_category_id'   => $this->input->post('diet_category'),
         );
+
+        $this->form_validation->set_rules('patient_category', 'Patient Category', 'required');
+        $this->form_validation->set_rules('name', 'Name', 'trim|required|alpha_numeric_spaces|max_length[50]');
+        $this->form_validation->set_rules('age', 'Age', 'required|numeric|max_length[3]');
+        $this->form_validation->set_rules('birthday', 'Birthday', 'required');
+        $this->form_validation->set_rules('nic', 'NIC', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('gender', 'Gender', 'required');
+        $this->form_validation->set_rules('street', 'Street', 'required');
+        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('district', 'District', 'required');
+        $this->form_validation->set_rules('province', 'Province', 'required');
+        $this->form_validation->set_rules('in_date', 'In Date', 'required');
+        $this->form_validation->set_rules('ward', 'Ward Name', 'required');
+        $this->form_validation->set_rules('bed', 'Bed Number', 'required|numeric');
+        $this->form_validation->set_rules('diet_category', 'Diet Category', 'required');
+
         $id = $this->input->post('update_id');
 
         $result = $this->PatientModel->update_patient($update, $id);

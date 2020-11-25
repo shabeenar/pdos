@@ -73,29 +73,55 @@
                 </button>
             </div>
             <!--  add new form to modal-->
-            <form action="<?php echo base_url('item/unit/create_unit'); ?>" method="post">
+            <form action="<?php echo base_url('item/unit/create_unit'); ?>" method="post" id="unit-form" data-toggle="validator">
                 <div class="modal-body">
+                    <div class="alert alert-danger" id="errors">
+
+                    </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" data-validation="required">
+                            <input type="text" class="form-control" id="name" name="name" data-error="Name is required" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Unit</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="unit" name="unit">
+                            <input type="text" class="form-control" id="unit" name="unit" data-error="SI Symbol is required" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="reset" class="btn btn-secondary">Reset</button>
-                    <button type="submit" class="btn btn-primary" id="submit">Add</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    $('#errors').hide();
+    function submitUnitsForm(){
+        $.ajax({
+            type: 'post',
+            url: base_url + 'item/Unit/form_validations',
+            async: false,
+            dataType: 'json',
+            data: {},
+            success: function (response) {
+                if(response.error == true) {
+                    $('#errors').html(response.messages);
+                    $('#errors').show();
+                } else {
+                    $('#errors').hide();
+                }
+            }
+        });
+    };
+</script>
 
 <!--update Unit modal-->
 <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="update_unit_modal">

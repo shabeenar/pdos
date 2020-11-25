@@ -349,6 +349,7 @@
     </div>
 </div>
 
+
 <script>
     $(document).ready(function () {
         $('#users_table').on('click', '#update_button', function() {

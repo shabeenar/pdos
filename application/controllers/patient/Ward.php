@@ -23,6 +23,30 @@ class Ward extends CI_Controller {
         $this->load->view('footer');
     }
 
+    public function form_validations(){
+
+        $this->form_validation->set_rules('number', 'Ward Number', 'required|alpha_numeric');
+        $this->form_validation->set_rules('name', 'Ward Name', 'trim|required|alpha_numeric|max_length[50]');
+        $this->form_validation->set_rules('gender', 'Ward Gender', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $result = array(
+                'error' => true,
+                'messages' => validation_errors(),
+            );
+            echo json_encode($result);
+        }
+        else
+        {
+            $result = array(
+                'error' => false,
+                'messages' => "",
+            );
+            echo json_encode($result);
+        }
+    }
+
     public function create_ward()
     {
         $new_ward = array(
@@ -30,6 +54,10 @@ class Ward extends CI_Controller {
             'name'  => $this->input->post('name'),
             'gender'=> $this->input->post('gender'),
         );
+
+        $this->form_validation->set_rules('number', 'Ward Number', 'required|alpha_numeric');
+        $this->form_validation->set_rules('name', 'Ward Name', 'trim|required|alpha_numeric|max_length[50]');
+        $this->form_validation->set_rules('gender', 'Ward Gender', 'required');
 
         $result = $this->WardModel->create($new_ward);
         if ($result){
@@ -55,6 +83,11 @@ class Ward extends CI_Controller {
             'name'  => $this->input->post('name'),
             'gender'=> $this->input->post('gender'),
         );
+
+        $this->form_validation->set_rules('number', 'Ward Number', 'required|alpha_numeric');
+        $this->form_validation->set_rules('name', 'Ward Name', 'trim|required|alpha_numeric|max_length[50]');
+        $this->form_validation->set_rules('gender', 'Ward Gender', 'required');
+
         $id = $this->input->post('update_id');
 
         $result = $this->WardModel->update_ward($update, $id);

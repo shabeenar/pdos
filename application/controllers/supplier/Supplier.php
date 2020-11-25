@@ -29,6 +29,35 @@ class Supplier extends CI_Controller {
         $this->load->view('footer');
     }
 
+    public function form_validations(){
+
+        $this->form_validation->set_rules('name', 'Supplier Name', 'trim|required|alpha_numeric_spaces|max_length[50]');
+        $this->form_validation->set_rules('phone', 'Phone', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('street', 'Street', 'required');
+        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('district', 'District', 'required');
+        $this->form_validation->set_rules('province', 'Province', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $result = array(
+                'error' => true,
+                'messages' => validation_errors(),
+            );
+            echo json_encode($result);
+        }
+        else
+        {
+            $result = array(
+                'error' => false,
+                'messages' => "",
+            );
+            echo json_encode($result);
+        }
+    }
+
     public function create_supplier()
     {
         $new_supplier = array(
@@ -41,6 +70,15 @@ class Supplier extends CI_Controller {
             'district_id'  => $this->input->post('district'),
             'province_id'  => $this->input->post('province'),
         );
+
+        $this->form_validation->set_rules('name', 'Supplier Name', 'trim|required|alpha_numeric_spaces|max_length[50]');
+        $this->form_validation->set_rules('phone', 'Phone', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('street', 'Street', 'required');
+        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('district', 'District', 'required');
+        $this->form_validation->set_rules('province', 'Province', 'required');
 
         $result = $this->SupplierModel->create($new_supplier);
         if ($result){
@@ -71,6 +109,16 @@ class Supplier extends CI_Controller {
             'district_id'  => $this->input->post('district'),
             'province_id'  => $this->input->post('province'),
         );
+
+        $this->form_validation->set_rules('name', 'Supplier Name', 'trim|required|alpha_numeric_spaces|max_length[50]');
+        $this->form_validation->set_rules('phone', 'Phone', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('street', 'Street', 'required');
+        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('district', 'District', 'required');
+        $this->form_validation->set_rules('province', 'Province', 'required');
+
         $id = $this->input->post('update_id');
 
         $result = $this->SupplierModel->update_supplier($update, $id);

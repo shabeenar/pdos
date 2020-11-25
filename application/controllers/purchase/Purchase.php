@@ -43,12 +43,41 @@ class Purchase extends CI_Controller {
 
     }
 
+    public function form_validations(){
+
+        $this->form_validation->set_rules('supplier', 'Supplier Name', 'required');
+        $this->form_validation->set_rules('date', 'Date', 'required');
+        $this->form_validation->set_rules('total_amount', 'Total Amount', 'required|decimal|numeric');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $result = array(
+                'error' => true,
+                'messages' => validation_errors(),
+            );
+            echo json_encode($result);
+        }
+        else
+        {
+            $result = array(
+                'error' => false,
+                'messages' => "",
+            );
+            echo json_encode($result);
+        }
+    }
+
     public function create_purchase(){
         $purchase = array(
             'supplier_id' => $this->input->post('supplier'),
             'date' => $this->input->post('date'),
             'total_price' => $this->input->post('total_amount'),
         );
+
+        $this->form_validation->set_rules('supplier', 'Supplier Name', 'required');
+        $this->form_validation->set_rules('date', 'Date', 'required');
+        $this->form_validation->set_rules('total_amount', 'Total Amount', 'required|decimal|numeric');
+
         $purchase_id = $this->PurchaseModel->create($purchase);
 
         $purchase_lines = array();
@@ -67,4 +96,6 @@ class Purchase extends CI_Controller {
         $result = $this->PurchaseModel->create_purchase($purchase_lines, $purchase_id);
         redirect('purchase/View?id='.$purchase_id);
     }
+
+
 }

@@ -23,9 +23,9 @@ Class ViewModel extends CI_Model
         return $query->result();
     }
 
-    public function addtostock($id){
+    public function addtostock($id, $confirm_date){
         $this->db->where('id', $id);
-        $this->db->update('purchase', array('status'=>2));
+        $this->db->update('purchase', array('status'=>2, 'confirm_date'=>$confirm_date));
         if ($this->db->affected_rows()==1){
             return true;
         }

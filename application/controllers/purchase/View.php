@@ -26,10 +26,23 @@ class View extends CI_Controller {
         $this->load->view('footer');
     }
 
-    public function addtostock(){
-        $id = $this->input->get('id');
-        $result = $this->ViewModel->addtostock($id);
 
+
+    public function addtostock(){
+        $id = $this->input->post('id');
+        $confirm_date = $this->input->post('confirm_order_date');
+        $result = $this->ViewModel->addtostock($id, $confirm_date);
+
+        if ($result){
+            $alert = array(
+                'type' =>"warning",
+                'message' =>"added successfully",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect("purchase/View");
+        }
     }
+
+
 
 }

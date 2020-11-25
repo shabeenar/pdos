@@ -90,7 +90,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?php echo base_url('item/item/create_item'); ?>" method="post" id="item_create_form">
+            <form action="<?php echo base_url('item/item/create_item'); ?>" method="post" id="item_create_form" data-toggle="validator">
                 <div class="modal-body">
                     <div class="row">
                         <div class="alert alert-danger form-group col-md-12" id="alert_id">

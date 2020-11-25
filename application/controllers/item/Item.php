@@ -28,8 +28,42 @@ class Item extends CI_Controller
         $this->load->view('footer');
     }
 
+    public function form_validations(){
+
+        $this->form_validation->set_rules('category', 'Category Name', 'required');
+        $this->form_validation->set_rules('name', 'Item name', 'trim|required|alpha|max_length[20]');
+        $this->form_validation->set_rules('unit', 'Unit name', 'required');
+        $this->form_validation->set_rules('quantity', 'Quantity', 'required|numeric');
+        $this->form_validation->set_rules('price', 'Price', 'required|decimal|numeric');
+        $this->form_validation->set_rules('exp_date', 'Expire Date', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $result = array(
+                'error' => true,
+                'messages' => validation_errors(),
+            );
+            echo json_encode($result);
+        }
+        else
+        {
+            $result = array(
+                'error' => false,
+                'messages' => "",
+            );
+            echo json_encode($result);
+        }
+    }
+
     public function create_item()
     {
+        $this->form_validation->set_rules('category', 'Category Name', 'required');
+        $this->form_validation->set_rules('name', 'Item name', 'trim|required|alpha|max_length[20]');
+        $this->form_validation->set_rules('unit', 'Unit name', 'required');
+        $this->form_validation->set_rules('quantity', 'Quantity', 'required|numeric');
+        $this->form_validation->set_rules('price', 'Price', 'required|decimal|numeric');
+        $this->form_validation->set_rules('exp_date', 'Expire Date', 'required');
+
         $new_item = array(
             'item_category_id'=> $this->input->post('category'),
             'name'            => $this->input->post('name'),
@@ -38,6 +72,8 @@ class Item extends CI_Controller
             'price'           => $this->input->post('price'),
             'exp_date'        => $this->input->post('exp_date'),
         );
+
+
 
         $result = $this->ItemModel->create($new_item);
         if ($result) {
@@ -66,6 +102,14 @@ class Item extends CI_Controller
             'price'           => $this->input->post('price'),
             'exp_date'        => $this->input->post('exp_date'),
         );
+
+        $this->form_validation->set_rules('category', 'Category Name', 'required');
+        $this->form_validation->set_rules('name', 'Item name', 'trim|required|alpha|max_length[20]');
+        $this->form_validation->set_rules('unit', 'Unit name', 'required');
+        $this->form_validation->set_rules('quantity', 'Quantity', 'required|numeric');
+        $this->form_validation->set_rules('price', 'Price', 'required|decimal|numeric');
+        $this->form_validation->set_rules('exp_date', 'Expire Date', 'required');
+
         $id = $this->input->post('update_id');
 
         $result = $this->ItemModel->update_item($update, $id);

@@ -22,7 +22,30 @@
     <!-- Base URL -->
     <script>var base_url = '<?php echo site_url() ?>';</script>
     <script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 
+    <style>
+        body {
+            background: #EECDA3;
+            background: -webkit-linear-gradient(to top, #EF629F, #EECDA3);
+            background: linear-gradient(to top, #EF629F, #EECDA3);
+        }
+
+        .has-error label,
+        .has-error textarea {
+            color: red;
+            border-color: red;
+        }
+        .has-error input, .has-error select {
+            border: thin solid red !important;
+        }
+
+        .list-unstyled li {
+            font-size: 13px;
+            padding: 4px 0 0;
+            color: red;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -204,12 +227,16 @@
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $this->session->userdata('name');?></span>
                         </a>
                         <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="userDropdown">
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="<?php echo base_url('users/users')?>" >
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
                             <a class="dropdown-item" href="<?php echo base_url('login/Login/logout')?>">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
                             </a>
+
                         </div>
                     </li>
 

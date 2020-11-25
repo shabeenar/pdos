@@ -90,61 +90,69 @@
                 </button>
             </div>
             <!--  add new form to modal-->
-            <form action="<?php echo base_url('supplier/supplier/create_supplier'); ?>" method="post">
+            <form action="<?php echo base_url('supplier/supplier/create_supplier'); ?>" method="post" id="supplier-form" data-toggle="validator">
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Supplier Name</label>
-                            <input type="text" class="form-control" name="name">
+                            <input type="text" class="form-control" name="name" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Phone</label>
-                            <input type="tel" class="form-control" name="phone">
+                            <input type="tel" class="form-control" name="phone" maxlength="12" minlength="9" pattern="^[0-9]*$" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email">
+                            <input type="email" class="form-control" name="email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Street</label>
-                            <input type="text" class="form-control" name="street">
+                            <input type="text" class="form-control" name="street" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Street Two</label>
-                            <input type="text" class="form-control" name="street_two">
+                            <input type="text" class="form-control" name="street_two" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group col-md-6">
                             <label>City</label>
-                            <select class="form-control" name="city">
+                            <select class="form-control" name="city" required>
                                 <option disabled selected value style="display:none;">Select City</option>
                                 <?php foreach ($cities as $city) { ?>
                                     <option value="<?php echo $city->id;?>"><?php echo $city->name_en;?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>District</label>
-                            <select class="form-control" name="district">
+                            <select class="form-control" name="district" required>
                                 <option disabled selected value style="display:none;">Select District</option>
                                 <?php foreach ($districts as $district) { ?>
                                     <option value="<?php echo $district->id;?>"><?php echo $district->name_en;?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Province</label>
-                            <select class="form-control" name="province">
+                            <select class="form-control" name="province" required>
                                 <option disabled selected value style="display:none;">Select Province</option>
                                 <?php foreach ($provinces as $province) { ?>
                                     <option value="<?php echo $province->id;?>"><?php echo $province->name_en;?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
                 </div>

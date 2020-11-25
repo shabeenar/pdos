@@ -13,11 +13,38 @@ class Login extends CI_Controller{
         $this->load->view('login/login');
     }
 
+    public function form_validations(){
+
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $result = array(
+                'error' => true,
+                'messages' => validation_errors(),
+            );
+            echo json_encode($result);
+        }
+        else
+        {
+            $result = array(
+                'error' => false,
+                'messages' => "",
+            );
+            echo json_encode($result);
+        }
+    }
+
     public function signup(){
         $create = array(
             'email' => $this->input->post('email'),
             'password' => sha1($this->input->post('password')),
         );
+
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+
         $result = $this->LoginModel->login_user($create);
         if ($result){
             $this->session->set_userdata('name', $result[0]->first_name.' '.$result[0]->last_name);
@@ -38,6 +65,8 @@ class Login extends CI_Controller{
     public function forgotpassword(){
         $email = $this->input->post('email');
         $result = $this->LoginModel->forgotpassword($email);
+
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 
         if($result) {
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

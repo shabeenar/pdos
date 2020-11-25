@@ -24,7 +24,7 @@
         <div class="col-md-12">
 
 
-            <form action="<?php echo base_url('purchase/View'); ?>" method="post">
+            <form action="<?php echo base_url('purchase/View/addtostock'); ?>" method="post">
 
                 <div class="row">
                     <label class="col-sm-2 col-form-label">Supplier</label>
@@ -45,7 +45,7 @@
                 <div class="row">
                     <label class="col-sm-2 col-form-label">Confirm Order Date</label>
                     <div class="form-group col-sm-4">
-                    <input type="text" class="form-control" id="confirm_order_date" name="confirm_order_date">
+                    <input type="date" class="form-control" id="confirm_order_date" name="confirm_order_date">
                     </div>
                 </div>
                 <table class="table table-bordered" id="purchase_table">
@@ -86,10 +86,11 @@
                 </div>
 
                 <div class="text-right mb-4">
-                    <a type="submit" class="btn btn-success" href="<?php echo base_url()?>Purchase/View/addtostock?id=<?php echo $purchase->id; ?>">Add to Stock</a>
+                    <button type="submit" class="btn btn-success">Add to Stock</button>
                 </div>
 
             </form>
+
 
             <!--unit category table-->
 

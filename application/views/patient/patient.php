@@ -111,7 +111,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Patient Name</label>
-                            <input type="text" class="form-control" name="name" required>
+                            <input type="text" class="form-control" name="name">
                         </div>
                     </div>
                     <div class="row">

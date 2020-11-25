@@ -43,7 +43,13 @@
                         <td><?php echo $purchase->supplier_name; ?></td>
                         <td><?php echo $purchase->date; ?></td>
                         <td class="text-right"><?php echo $purchase->total_price; ?></td>
-                        <td class="text-center"><a class="btn btn-warning btn-sm" href="<?php base_url()?>View?id=<?php echo $purchase->id; ?>">View</a> </td>
+                        <td class="text-center">
+                            <?php if ($purchase->status == 1){ ?>
+                                    <a class="btn btn-warning btn-sm" href="<?php base_url()?>View?id=<?php echo $purchase->id; ?>">View</a>
+                            <?php }else{ ?>
+                                    <a class="btn btn-warning btn-sm" href="<?php base_url()?>View/?id=<?php echo $purchase->id; ?>">View</a>
+                            <?php } ?>
+                        </td>
                         </tr>
                     <?php } ?>
                     </tbody>

@@ -32,6 +32,41 @@ class Users extends CI_Controller {
         $this->load->view('footer');
     }
 
+    public function form_validations(){
+
+        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|alpha|max_length[30]');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|alpha|max_length[30]');
+        $this->form_validation->set_rules('nic', 'NIC', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('birthday', 'Birthday', 'required');
+        $this->form_validation->set_rules('street', 'Street', 'required');
+        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('district', 'District', 'required');
+        $this->form_validation->set_rules('province', 'Province', 'required');
+        $this->form_validation->set_rules('gender', 'Gender', 'required');
+        $this->form_validation->set_rules('role', 'Role', 'required');
+        $this->form_validation->set_rules('ward', 'Ward Name', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $result = array(
+                'error' => true,
+                'messages' => validation_errors(),
+            );
+            echo json_encode($result);
+        }
+        else
+        {
+            $result = array(
+                'error' => false,
+                'messages' => "",
+            );
+            echo json_encode($result);
+        }
+    }
+
     public function create_user()
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -59,6 +94,21 @@ class Users extends CI_Controller {
             'ward_id'   => $this->input->post('ward'),
             'password'  => sha1($randomString)
         );
+
+        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|alpha|max_length[30]');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|alpha|max_length[30]');
+        $this->form_validation->set_rules('nic', 'NIC', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('birthday', 'Birthday', 'required');
+        $this->form_validation->set_rules('street', 'Street', 'required');
+        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('district', 'District', 'required');
+        $this->form_validation->set_rules('province', 'Province', 'required');
+        $this->form_validation->set_rules('gender', 'Gender', 'required');
+        $this->form_validation->set_rules('role', 'Role', 'required');
+        $this->form_validation->set_rules('ward', 'Ward Name', 'required');
 
         $mail_settings = Array(
             'protocol'    => 'smtp',
@@ -124,6 +174,21 @@ class Users extends CI_Controller {
             'role'      => $this->input->post('role'),
             'ward_id'   => $this->input->post('ward'),
         );
+        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|alpha|max_length[30]');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|alpha|max_length[30]');
+        $this->form_validation->set_rules('nic', 'NIC', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('birthday', 'Birthday', 'required');
+        $this->form_validation->set_rules('street', 'Street', 'required');
+        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('district', 'District', 'required');
+        $this->form_validation->set_rules('province', 'Province', 'required');
+        $this->form_validation->set_rules('gender', 'Gender', 'required');
+        $this->form_validation->set_rules('role', 'Role', 'required');
+        $this->form_validation->set_rules('ward', 'Ward Name', 'required');
+
         $id = $this->input->post('update_id');
 
         $result = $this->UsersModel->update_user($update, $id);
