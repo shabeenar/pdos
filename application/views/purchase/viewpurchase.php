@@ -1,4 +1,9 @@
 <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item"><a href="<?php echo base_url('welcome')?>">Dashboard</a></li>
+        <li class="breadcrumb-item active">Purchase Order Management</li>
+    </ol>
+
     <?php if ($this->session->flashdata('alert')) { ?>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -26,6 +31,10 @@
 
             <form action="<?php echo base_url('purchase/ViewPurchase'); ?>" method="post">
 
+                <div class="text-right mb-4">
+                    <a type="button" class="btn btn-success" href="<?php echo base_url("purchase/purchase"); ?>">Create Purchase Order</a>
+                </div>
+
                 <table class="table table-bordered" id="purchase_table">
                     <thead>
                     <tr>
@@ -44,11 +53,7 @@
                         <td><?php echo $purchase->date; ?></td>
                         <td class="text-right"><?php echo $purchase->total_price; ?></td>
                         <td class="text-center">
-                            <?php if ($purchase->status == 1){ ?>
-                                    <a class="btn btn-warning btn-sm" href="<?php base_url()?>View?id=<?php echo $purchase->id; ?>">View</a>
-                            <?php }else{ ?>
-                                    <a class="btn btn-warning btn-sm" href="<?php base_url()?>View/?id=<?php echo $purchase->id; ?>">View</a>
-                            <?php } ?>
+                            <a class="btn btn-warning btn-sm" href="<?php base_url()?>View?id=<?php echo $purchase->id; ?>">View</a>
                         </td>
                         </tr>
                     <?php } ?>

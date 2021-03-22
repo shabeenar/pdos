@@ -1,6 +1,11 @@
 <!-- Begin Page Content -->
 <!-- container-fluid -->
 <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item"><a href="<?php echo base_url('welcome')?>">Dashboard</a></li>
+        <li class="breadcrumb-item active">Unit of Measure Management</li>
+    </ol>
+
     <?php if ($this->session->flashdata('alert')) { ?>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -81,14 +86,18 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" data-error="Name is required" required>
+                            <input type="text" class="form-control" id="name" name="name" required>
+
+<!--                            <input type="text" class="form-control" id="name" name="name" data-error="Name is required" required>-->
+
                             <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Unit</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="unit" name="unit" data-error="SI Symbol is required" required>
+                            <input type="text" class="form-control" id="unit" name="unit" required>
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>

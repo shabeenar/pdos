@@ -35,7 +35,7 @@ class Item extends CI_Controller
         $this->form_validation->set_rules('unit', 'Unit name', 'required');
         $this->form_validation->set_rules('quantity', 'Quantity', 'required|numeric');
         $this->form_validation->set_rules('price', 'Price', 'required|decimal|numeric');
-        $this->form_validation->set_rules('exp_date', 'Expire Date', 'required');
+
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -62,7 +62,7 @@ class Item extends CI_Controller
         $this->form_validation->set_rules('unit', 'Unit name', 'required');
         $this->form_validation->set_rules('quantity', 'Quantity', 'required|numeric');
         $this->form_validation->set_rules('price', 'Price', 'required|decimal|numeric');
-        $this->form_validation->set_rules('exp_date', 'Expire Date', 'required');
+
 
         $new_item = array(
             'item_category_id'=> $this->input->post('category'),
@@ -108,7 +108,6 @@ class Item extends CI_Controller
         $this->form_validation->set_rules('unit', 'Unit name', 'required');
         $this->form_validation->set_rules('quantity', 'Quantity', 'required|numeric');
         $this->form_validation->set_rules('price', 'Price', 'required|decimal|numeric');
-        $this->form_validation->set_rules('exp_date', 'Expire Date', 'required');
 
         $id = $this->input->post('update_id');
 

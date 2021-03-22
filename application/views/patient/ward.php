@@ -1,6 +1,11 @@
 <!-- Begin Page Content -->
 <!-- container-fluid -->
 <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item"><a href="<?php echo base_url('welcome')?>">Dashboard</a></li>
+        <li class="breadcrumb-item active">Ward Management</li>
+    </ol>
+
     <?php if ($this->session->flashdata('alert')) { ?>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -73,16 +78,20 @@
                 </button>
             </div>
             <!--  add new form to modal-->
-            <form action="<?php echo base_url('patient/ward/create_ward'); ?>" method="post">
+            <form action="<?php echo base_url('patient/ward/create_ward'); ?>" method="post" data-toggle="validator">
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Ward Number</label>
-                            <input type="text" class="form-control" name="number">
+                            <input type="text" class="form-control" name="number" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Ward Name</label>
-                            <input type="text" class="form-control" name="name">
+                            <input type="text" class="form-control" name="name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -118,17 +127,21 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--  add new form to modal-->
-            <form action="<?php echo base_url('patient/ward/update_ward'); ?>" method="post">
+            <!--  update new form to modal-->
+            <form action="<?php echo base_url('patient/ward/update_ward'); ?>" method="post" data-toggle="validator">
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Ward Number</label>
-                            <input type="text" class="form-control" name="number" id="update_number">
+                            <input type="text" class="form-control" name="number" id="update_number" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Ward Name</label>
-                            <input type="text" class="form-control" name="name" id="update_name">
+                            <input type="text" class="form-control" name="name" id="update_name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -166,7 +179,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--  add new form to modal-->
+            <!--  delete new form to modal-->
             <form action="<?php echo base_url('patient/ward/delete_ward'); ?>" method="post">
                 <div class="modal-body">
                     <p>Are You Sure Want To Delete This?</p>

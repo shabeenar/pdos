@@ -33,12 +33,8 @@ class Supplier extends CI_Controller {
 
         $this->form_validation->set_rules('name', 'Supplier Name', 'trim|required|alpha_numeric_spaces|max_length[50]');
         $this->form_validation->set_rules('phone', 'Phone', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('street', 'Street', 'required');
-        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
         $this->form_validation->set_rules('city', 'City', 'required');
-        $this->form_validation->set_rules('district', 'District', 'required');
-        $this->form_validation->set_rules('province', 'Province', 'required');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -73,12 +69,8 @@ class Supplier extends CI_Controller {
 
         $this->form_validation->set_rules('name', 'Supplier Name', 'trim|required|alpha_numeric_spaces|max_length[50]');
         $this->form_validation->set_rules('phone', 'Phone', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('street', 'Street', 'required');
-        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
         $this->form_validation->set_rules('city', 'City', 'required');
-        $this->form_validation->set_rules('district', 'District', 'required');
-        $this->form_validation->set_rules('province', 'Province', 'required');
 
         $result = $this->SupplierModel->create($new_supplier);
         if ($result){
@@ -112,12 +104,8 @@ class Supplier extends CI_Controller {
 
         $this->form_validation->set_rules('name', 'Supplier Name', 'trim|required|alpha_numeric_spaces|max_length[50]');
         $this->form_validation->set_rules('phone', 'Phone', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('street', 'Street', 'required');
-        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
         $this->form_validation->set_rules('city', 'City', 'required');
-        $this->form_validation->set_rules('district', 'District', 'required');
-        $this->form_validation->set_rules('province', 'Province', 'required');
 
         $id = $this->input->post('update_id');
 

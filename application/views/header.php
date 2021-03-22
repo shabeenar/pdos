@@ -138,20 +138,10 @@
                 <span>Stock</span></a>
         </li>
         <!-- Nav Purchase -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePurchase"
-               aria-expanded="true" aria-controls="collapsePurchase">
+        <li class="nav-item active">
+            <a class="nav-link" href="<?php echo base_url("purchase/viewpurchase"); ?>">
                 <i class="fas fa-fw fa-shopping-cart"></i>
-                <span>Purchase</span>
-            </a>
-            <div id="collapsePurchase" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <!-- Nav Kitchen - Meal Order -->
-                    <a class="collapse-item" href="<?php echo base_url("purchase/purchase"); ?>">Create Purchase</a>
-                    <!-- Nav Kitchen - Meals -->
-                    <a class="collapse-item" href="<?php echo base_url("purchase/viewpurchase"); ?>">View Purchase</a>
-                </div>
-            </div>
+                <span>Purchase</span></a>
         </li>
 
         <!-- Nav Users -->
@@ -172,7 +162,12 @@
                 <i class="fas fa-fw fa-flag-checkered"></i>
                 <span>Report</span></a>
         </li>
-        <!-- Nav Item - Stock -->
+        <!-- Nav Company Details -->
+        <li class="nav-item active">
+            <a class="nav-link" href="<?php echo base_url("company/company"); ?>">
+                <i class="fas fa-fw fa-angle-double-right"></i>
+                <span>Company Details</span></a>
+        </li>
 
     </ul>
     <!-- End of Sidebar -->
@@ -228,7 +223,7 @@
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="<?php echo base_url('users/users')?>" >
+                            <a class="dropdown-item" href="<?php echo base_url('users/profile')?>" >
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>

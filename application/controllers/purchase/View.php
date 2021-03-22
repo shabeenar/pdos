@@ -29,19 +29,35 @@ class View extends CI_Controller {
 
 
     public function addtostock(){
-        $id = $this->input->post('id');
-        $confirm_date = $this->input->post('confirm_order_date');
-        $result = $this->ViewModel->addtostock($id, $confirm_date);
+        $po_id = $this->input->post('id');
 
-        if ($result){
-            $alert = array(
-                'type' =>"warning",
-                'message' =>"added successfully",
-            );
-            $this->session->set_flashdata('alert',$alert);
-            redirect("purchase/View");
+        $result = $this->ViewModel->get_purchases($po_id);
+
+        foreach ($result as $result){
+            $this->ViewModel->update_quantity($result->quantity,$result->item_id);
         }
+
+        $data = array(
+            'confirm_date'   => $this->input->post('confirm_order_date'),
+            'status' => '2',
+        );
+
+        $recieved_quantity=$this->ViewModel->confirm_po($po_id,$data);
+
+        redirect('purchase/View?id='.$po_id);
+
+//        if ($recieved_quantity){
+//            $alert = array(
+//                'type' =>"warning",
+//                'message' =>"updated successfully",
+//            );
+//            $this->session->set_flashdata('alert',$alert);
+//            redirect('purchase/View?id='.$po_id);
+//
+//        }
+
     }
+
 
 
 

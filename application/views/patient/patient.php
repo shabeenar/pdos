@@ -1,6 +1,11 @@
 <!-- Begin Page Content -->
 <!-- container-fluid -->
 <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item"><a href="<?php echo base_url('welcome')?>">Dashboard</a></li>
+        <li class="breadcrumb-item active">Patient Management</li>
+    </ol>
+
     <?php if ($this->session->flashdata('alert')) { ?>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -97,55 +102,71 @@
                 </button>
             </div>
             <!--  add new form to modal-->
-            <form action="<?php echo base_url('patient/patient/create_patient'); ?>" method="post" id="commentForm">
+            <form action="<?php echo base_url('patient/patient/create_patient'); ?>" method="post" id="commentForm" data-toggle="validator">
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Patient Category</label>
-                            <select class="form-control" name="patient_category">
+                            <select class="form-control" name="patient_category" required>
                                 <option disabled selected value style="display:none;">Select Category</option>
                                 <?php foreach ($patient_categories as $patient_category) { ?>
                                     <option value="<?php echo $patient_category->id;?>"><?php echo $patient_category->category_name;?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Patient Name</label>
-                            <input type="text" class="form-control" name="name">
+                            <input type="text" class="form-control" name="name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Age</label>
-                            <input type="text" class="form-control" name="age">
+                            <input type="text" class="form-control" name="age" maxlength="3" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Date of Birth</label>
-                            <input type="date" class="form-control" name="birthday">
+                            <input type="date" class="form-control" name="birthday" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>NIC</label>
-                            <input type="text" class="form-control" name="nic">
+                            <input type="text" class="form-control" name="nic" pattern="[0-9]{9}[x|X|v|V]|[0-9]{11}[x|X|v|V]" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Phone</label>
-                            <input type="tel" class="form-control" name="phone">
+                            <input type="tel" class="form-control" name="phone" maxlength="12" minlength="9" pattern="^[0-9]*$" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Gender</label>
-                                <select class="form-control" name="gender">
+                                <select class="form-control" name="gender" required>
                                 <option disabled selected value style="display:none;">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Street</label>
-                            <input type="text" class="form-control" name="street">
+                            <input type="text" class="form-control" name="street" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -155,12 +176,14 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>City</label>
-                            <select class="form-control" name="city">
+                            <select class="form-control" name="city" required>
                                 <option disabled selected value style="display:none;">Select City</option>
                                 <?php foreach ($cities as $city) { ?>
                                     <option value="<?php echo $city->id;?>"><?php echo $city->name_en;?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -186,31 +209,39 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>In Date</label>
-                            <input type="date" class="form-control" name="in_date">
+                            <input type="date" class="form-control" name="in_date" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Ward</label>
-                            <select class="form-control" name="ward">
+                            <select class="form-control" name="ward" required>
                                 <option disabled selected value style="display:none;">Select Ward</option>
                                 <?php foreach ($wards as $ward) { ?>
                                     <option value="<?php echo $ward->id;?>"><?php echo $ward->number.' - '.$ward->name; ?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Bed Number</label>
-                            <input type="text" class="form-control" name="bed">
+                            <input type="text" class="form-control" name="bed" maxlength="4" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Diet Category</label>
-                            <select class="form-control" name="diet_category">
+                            <select class="form-control" name="diet_category" required>
                                 <option disabled selected value style="display:none;">Select Category</option>
                                 <?php foreach ($diet_categories as $diet_category) { ?>
                                     <option value="<?php echo $diet_category->id;?>"><?php echo $diet_category->category_name;?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
 
@@ -236,56 +267,72 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--  add new form to modal-->
-            <form action="<?php echo base_url('patient/patient/update_patient'); ?>" method="post" id="commentForm">
+            <!--  update new form to modal-->
+            <form action="<?php echo base_url('patient/patient/update_patient'); ?>" method="post" id="commentForm" data-toggle="validator">
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Patient Category</label>
-                            <select class="form-control" name="patient_category" id="update_patient_category">
+                            <select class="form-control" name="patient_category" id="update_patient_category" required>
                                 <option disabled selected value style="display:none;">Select Category</option>
                                 <?php foreach ($patient_categories as $patient_category) { ?>
                                     <option value="<?php echo $patient_category->id;?>"><?php echo $patient_category->category_name;?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Patient Name</label>
                             <input type="text" class="form-control" name="name" id="update_name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Age</label>
-                            <input type="text" class="form-control" name="age" id="update_age">
+                            <input type="text" class="form-control" name="age" id="update_age" maxlength="3" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Date of Birth</label>
-                            <input type="date" class="form-control" name="birthday" id="update_birthday">
+                            <input type="date" class="form-control" name="birthday" id="update_birthday" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>NIC</label>
-                            <input type="text" class="form-control" name="nic" id="update_nic">
+                            <input type="text" class="form-control" name="nic" id="update_nic" pattern="[0-9]{9}[x|X|v|V]|[0-9]{11}[x|X|v|V]" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Phone</label>
-                            <input type="tel" class="form-control" name="phone" id="update_phone">
+                            <input type="tel" class="form-control" name="phone" id="update_phone" maxlength="12" minlength="9" pattern="^[0-9]*$" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Gender</label>
-                            <select class="form-control" name="gender" id="update_gender">
+                            <select class="form-control" name="gender" id="update_gender" required>
                                 <option disabled selected value style="display:none;">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Street</label>
-                            <input type="text" class="form-control" name="street" id="update_street">
+                            <input type="text" class="form-control" name="street" id="update_street" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -295,12 +342,14 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>City</label>
-                            <select class="form-control" name="city" id="update_city">
+                            <select class="form-control" name="city" id="update_city" required>
                                 <option disabled selected value style="display:none;">Select City</option>
                                 <?php foreach ($cities as $city) { ?>
                                     <option value="<?php echo $city->id;?>"><?php echo $city->name_en;?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -326,31 +375,39 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>In Date</label>
-                            <input type="date" class="form-control" name="in_date" id="update_in_date">
+                            <input type="date" class="form-control" name="in_date" id="update_in_date" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Ward</label>
-                            <select class="form-control" name="ward" id="update_ward">
+                            <select class="form-control" name="ward" id="update_ward" required>
                                 <option disabled selected value style="display:none;">Select Ward</option>
                                 <?php foreach ($wards as $ward) { ?>
                                     <option value="<?php echo $ward->id;?>"><?php echo $ward->number.' - '.$ward->name; ?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Bed Number</label>
-                            <input type="text" class="form-control" name="bed" id="update_bed">
+                            <input type="text" class="form-control" name="bed" id="update_bed" maxlength="4" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Diet Category</label>
-                            <select class="form-control" name="diet_category" id="update_diet_category">
+                            <select class="form-control" name="diet_category" id="update_diet_category" required>
                                 <option disabled selected value style="display:none;">Select Category</option>
                                 <?php foreach ($diet_categories as $diet_category) { ?>
                                     <option value="<?php echo $diet_category->id;?>"><?php echo $diet_category->category_name;?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <input type="hidden" id="update_id" name="update_id" value="">

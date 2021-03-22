@@ -1,6 +1,12 @@
 <!-- Begin Page Content -->
 <!-- container-fluid -->
 <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item"><a href="<?php echo base_url('welcome')?>">Dashboard</a></li>
+        <li class="breadcrumb-item active"> <a href="<?php echo base_url('purchase/viewpurchase')?>">Purchase Order Management</a></li>
+        <li class="breadcrumb-item active">Create Purchase Order</li>
+    </ol>
+
     <?php if ($this->session->flashdata('alert')) { ?>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -69,7 +75,7 @@
                     </div>
                 </div>
                 <div class="text-right mb-4">
-                    <button type="submit" class="btn btn-success">Create Purchase Order</button>
+                    <button type="submit" class="btn btn-success">Create Order</button>
                 </div>
             </form>
 

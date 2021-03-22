@@ -46,12 +46,31 @@ class Login extends CI_Controller{
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
 
         $result = $this->LoginModel->login_user($create);
+
         if ($result){
+            $this->session->set_userdata('id', $result[0]->id);
             $this->session->set_userdata('name', $result[0]->first_name.' '.$result[0]->last_name);
-            $this->session->set_userdata('email', $result[2]->email);
-            $this->session->set_userdata('id', $result[3]->id);
+            $this->session->set_userdata('nic', $result[0]->nic);
+            $this->session->set_userdata('phone', $result[0]->phone);
+            $this->session->set_userdata('email', $result[0]->email);
+            $this->session->set_userdata('birthday', $result[0]->birthday);
+            $this->session->set_userdata('street', $result[0]->street);
+            $this->session->set_userdata('street_two', $result[0]->street_two);
+            $this->session->set_userdata('city', $result[0]->city_name);
+            $this->session->set_userdata('district', $result[0]->district_name);
+            $this->session->set_userdata('province', $result[0]->province_name);
+            $this->session->set_userdata('gender', $result[0]->gender);
+            $this->session->set_userdata('role', $result[0]->role_name);
+            $this->session->set_userdata('ward', $result[0]->ward_name);
+
             redirect('welcome');
         }else{
+            $alert = array(
+                'type'   => "danger",
+                'message'=> "Invalid Username or Password",
+            );
+
+            $this->session->set_flashdata('alert',$alert);
             redirect('login/Login');
         }
     }

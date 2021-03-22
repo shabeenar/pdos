@@ -1,5 +1,10 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item"><a href="<?php echo base_url('welcome')?>">Dashboard</a></li>
+        <li class="breadcrumb-item active">Meal Order Management</li>
+    </ol>
+
     <div class="row">
         <div class="col-md-12">
             <div class="text-right mb-4">

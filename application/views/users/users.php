@@ -1,6 +1,11 @@
 <!-- Begin Page Content -->
 <!-- container-fluid -->
 <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item"><a href="<?php echo base_url('welcome')?>">Dashboard</a></li>
+        <li class="breadcrumb-item active">User Management</li>
+    </ol>
+
     <?php if ($this->session->flashdata('alert')) { ?>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -47,7 +52,7 @@
                         <td><?php echo $user->first_name; ?></td>
                         <td><?php echo $user->phone; ?></td>
                         <td><?php echo $user->nic; ?></td>
-                        <td><?php echo $user->role; ?></td>
+                        <td><?php echo $user->role_name; ?></td>
                         <td><?php echo $user->id.' - '.$user->ward_name; ?></td>
                         <td class="text-center">
                             <button type="button" class="btn btn-sm btn-secondary" id="update_button" data-id="<?php echo $user->id; ?>"><i class="fas fa-pencil-alt"></i>
@@ -89,42 +94,56 @@
                 </button>
             </div>
 <!--  add new form to modal-->
-            <form action="<?php echo base_url('users/users/create_user'); ?>" method="post">
+            <form action="<?php echo base_url('users/users/create_user'); ?>" method="post" data-toggle="validator">
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>First Name</label>
-                            <input type="text" class="form-control" name="first_name">
+                            <input type="text" class="form-control" name="first_name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Last Name</label>
-                            <input type="text" class="form-control" name="last_name">
+                            <input type="text" class="form-control" name="last_name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>NIC</label>
-                            <input type="text" class="form-control" name="nic">
+                            <input type="text" class="form-control" name="nic" pattern="[0-9]{9}[x|X|v|V]|[0-9]{11}[x|X|v|V]" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Phone</label>
-                            <input type="tel" class="form-control" name="phone">
+                            <input type="tel" class="form-control" name="phone" maxlength="12" minlength="9" pattern="^[0-9]*$" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email">
+                            <input type="email" class="form-control" name="email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Date of Birth</label>
-                            <input type="date" class="form-control" name="birthday">
+                            <input type="date" class="form-control" name="birthday" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Street</label>
-                            <input type="text" class="form-control" name="street">
+                            <input type="text" class="form-control" name="street" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Street Two</label>
@@ -134,12 +153,14 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>City</label>
-                            <select class="form-control" name="city">
+                            <select class="form-control" name="city" required>
                                 <option disabled selected value style="display:none;">Select City</option>
                                 <?php foreach ($cities as $city) { ?>
                                     <option value="<?php echo $city->id; ?>"><?php echo $city->name_en; ?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>District</label>
@@ -163,32 +184,38 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Gender</label>
-                                <select class="form-control" name="gender">
+                                <select class="form-control" name="gender" required>
                                 <option disabled selected value style="display:none;">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Role Name</label>
-                            <select class="form-control" name="role">
+                            <select class="form-control" name="role" required>
                                 <option disabled selected value style="display:none;">Select Role</option>
                                 <?php foreach ($roles as $role){ ?>
                                     <option value="<?php echo $role->id; ?>"><?php echo $role->role; ?></option>
                                 <?php } ?>
 
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Ward</label>
-                            <select class="form-control" name="ward">
+                            <select class="form-control" name="ward" required>
                                 <option disabled selected value style="display:none;">Select Ward</option>
                                 <?php foreach ($wards as $ward) { ?>
                                     <option value="<?php echo $ward->id;?>"><?php echo $ward->number.' - '.$ward->name; ?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                 </div>
@@ -213,43 +240,57 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--  add new form to modal-->
-            <form action="<?php echo base_url('users/users/update_user'); ?>" method="post">
+            <!--  update new form to modal-->
+            <form action="<?php echo base_url('users/users/update_user'); ?>" method="post" data-toggle="validator">
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>First Name</label>
-                            <input type="text" class="form-control" name="first_name" id="update_first_name">
+                            <input type="text" class="form-control" name="first_name" id="update_first_name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Last Name</label>
-                            <input type="text" class="form-control" name="last_name" id="update_last_name">
+                            <input type="text" class="form-control" name="last_name" id="update_last_name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>NIC</label>
-                            <input type="text" class="form-control" name="nic" id="update_nic">
+                            <input type="text" class="form-control" name="nic" id="update_nic" pattern="[0-9]{9}[x|X|v|V]|[0-9]{11}[x|X|v|V]" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Phone</label>
-                            <input type="tel" class="form-control" name="phone" id="update_phone">
+                            <input type="tel" class="form-control" name="phone" id="update_phone" maxlength="12" minlength="9" pattern="^[0-9]*$" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email" id="update_email">
+                            <input type="email" class="form-control" name="email" id="update_email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Date of Birth</label>
-                            <input type="date" class="form-control" name="birthday" id="update_birthday">
+                            <input type="date" class="form-control" name="birthday" id="update_birthday" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Street</label>
-                            <input type="text" class="form-control" name="street" id="update_street">
+                            <input type="text" class="form-control" name="street" id="update_street" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Street Two</label>
@@ -259,12 +300,14 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>City</label>
-                            <select class="form-control" name="city" id="update_city">
+                            <select class="form-control" name="city" id="update_city" required>
                                 <option disabled selected value style="display:none;">Select City</option>
                                 <?php foreach ($cities as $city) { ?>
                                     <option value="<?php echo $city->id; ?>"><?php echo $city->name_en; ?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>District</label>
@@ -288,26 +331,38 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Gender</label>
-                            <select class="form-control" name="gender" id="update_gender">
+                            <select class="form-control" name="gender" id="update_gender" required>
                                 <option disabled selected value style="display:none;">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Role Name</label>
-                            <input type="text" class="form-control" name="role" id="update_role">
+                            <select class="form-control" name="role" id="update_role" required>
+                                <option disabled selected value style="display:none;">Select Role</option>
+                                <?php foreach ($roles as $role){ ?>
+                                    <option value="<?php echo $role->id; ?>"><?php echo $role->role; ?></option>
+                                <?php } ?>
+
+                            </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Ward</label>
-                            <select class="form-control" name="ward" id="update_ward">
+                            <select class="form-control" name="ward" id="update_ward" required>
                                 <option disabled selected value style="display:none;">Select Ward</option>
                                 <?php foreach ($wards as $ward) { ?>
                                     <option value="<?php echo $ward->id;?>"><?php echo $ward->number.' - '.$ward->name; ?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <input type="hidden" id="update_id" name="update_id" value="">
@@ -374,7 +429,7 @@
                     $('#update_district').val(response[0]['district_id']);
                     $('#update_province').val(response[0]['province_id']);
                     $('#update_gender').val(response[0]['gender']);
-                    $('#update_role').val(response[0]['role']);
+                    $('#update_role').val(response[0]['role_id']);
                     $('#update_ward').val(response[0]['ward_id']);
                     $('#update_id').val(response[0]['id']);
                     $('#update_user_modal').modal('show');
@@ -387,7 +442,27 @@
             $('#delete_id').val(id);
             $('#delete_user_modal').modal('show');
         })
+
+        $('#update_city').on('change', function () {
+            var city = $(this).val();
+
+            $.ajax({
+                type: 'post',
+                url: base_url + 'users/Users/get_city',
+                async: false,
+                dataType: 'json',
+                data: {'city': city},
+                success: function(response) {
+                    $('#update_district').val(response[0]['district_id']);
+                    $('#update_province').val(response[0]['province_id']);
+                    $('#update_id').val(response[0]['city']);
+                    $('#update_user_modal').modal('show');
+                }
+            })
+        })
+
     });
+
 </script>
 
 

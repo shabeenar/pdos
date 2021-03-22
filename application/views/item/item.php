@@ -1,5 +1,10 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item"><a href="<?php echo base_url('welcome')?>">Dashboard</a></li>
+        <li class="breadcrumb-item active">Item Management</li>
+    </ol>
+
     <?php if ($this->session->flashdata('alert')) { ?>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -90,7 +95,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?php echo base_url('item/item/create_item'); ?>" method="post" id="item_create_form" data-toggle="validator">
+            <form action="<?php echo base_url('item/item/create_item'); ?>" method="post" id="item_create_form" data-toggle="validator" data-toggle="validator">
                 <div class="modal-body">
                     <div class="row">
                         <div class="alert alert-danger form-group col-md-12" id="alert_id">
@@ -100,38 +105,47 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Item Category</label>
-                            <select class="form-control" name="category">
+                            <select class="form-control" name="category" required>
                                 <option disabled selected value style="display:none;">Select Category</option>
                                 <?php foreach ($categories as $category) { ?>
                                     <option value="<?php echo $category->id; ?>"> <?php echo $category->name; ?></option>
                                 <?php } ?>
-
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Item Name</label>
-                            <input type="text" class="form-control" name="name">
+                            <input type="text" class="form-control" name="name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Unit of Measure</label>
-                            <select class="form-control" name="unit" id="unit_name">
+                            <select class="form-control" name="unit" id="unit_name" required>
                                 <option disabled selected value style="display:none;">Select Unit</option>
                                 <?php foreach ($units as $unit) { ?>
                                     <option value="<?php echo $unit->id; ?>"> <?php echo $unit->name; ?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Quantity</label>
-                            <input type="text" class="form-control" name="quantity" id="quantity_name">
+                            <input type="text" class="form-control" name="quantity" id="quantity_name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Item Price</label>
-                            <input type="number" class="form-control" name="price">
+                            <input type="number" class="form-control" name="price" pattern="\-?\d+\.\d+" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Expire Date</label>
@@ -161,43 +175,53 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?php echo base_url('item/item/update_item'); ?>" method="post">
+            <form action="<?php echo base_url('item/item/update_item'); ?>" method="post" data-toggle="validator">
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Item Category</label>
-                            <select class="form-control" name="category" id="update_category">
+                            <select class="form-control" name="category" id="update_category" required>
                                 <option disabled selected value style="display:none;">Select Category</option>
                                 <?php foreach ($categories as $category) { ?>
                                     <option value="<?php echo $category->id; ?>"> <?php echo $category->name; ?></option>
                                 <?php } ?>
-
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Item Name</label>
-                            <input type="text" class="form-control" name="name" id="update_name">
+                            <input type="text" class="form-control" name="name" id="update_name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Quantity</label>
-                            <input type="text" class="form-control" name="quantity" id="update_quantity">
+                            <input type="text" class="form-control" name="quantity" id="update_quantity" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
+
                         <div class="form-group col-md-6">
                             <label>Unit of Measure</label>
-                            <select class="form-control" name="unit" id="update_unit">
+                            <select class="form-control" name="unit" id="update_unit" required>
                                 <option disabled selected value style="display:none;">Select Unit</option>
                                 <?php foreach ($units as $unit) { ?>
                                     <option value="<?php echo $unit->id; ?>"> <?php echo $unit->name; ?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Item Price</label>
-                            <input type="number" class="form-control" name="price" id="update_price">
+                            <input type="number" class="form-control" name="price" id="update_price" pattern="\-?\d+\.\d+" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Expire Date</label>

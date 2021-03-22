@@ -1,4 +1,10 @@
 <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item"><a href="<?php echo base_url('welcome')?>">Dashboard</a></li>
+        <li class="breadcrumb-item active"> <a href="<?php echo base_url('purchase/viewpurchase')?>">Purchase Order Management</a></li>
+        <li class="breadcrumb-item active">View Purchase Order</li>
+    </ol>
+
     <?php if ($this->session->flashdata('alert')) { ?>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -45,7 +51,7 @@
                 <div class="row">
                     <label class="col-sm-2 col-form-label">Confirm Order Date</label>
                     <div class="form-group col-sm-4">
-                    <input type="date" class="form-control" id="confirm_order_date" name="confirm_order_date">
+                    <input type="date" class="form-control" id="confirm_order_date" name="confirm_order_date" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                 </div>
                 <table class="table table-bordered" id="purchase_table">
@@ -83,8 +89,11 @@
                             <?php } ?>
                         </div>
                     </div>
+
+
                 </div>
 
+                <input type="hidden" id="id" name="id" value="<?php echo $purchase->id; ?>">
                 <div class="text-right mb-4">
                     <button type="submit" class="btn btn-success">Add to Stock</button>
                 </div>

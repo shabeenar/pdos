@@ -13,9 +13,10 @@ Class UsersModel extends CI_Model {
 
 //get data from db
     public function select(){
-        $this->db->select('users.*,ward.name as ward_name');
+        $this->db->select('users.*,ward.name as ward_name, role_names.role as role_name');
         $this->db->from('users');
         $this->db->join('ward','ward.number = users.ward_id');
+        $this->db->join('role_names','role_names.id = users.role_id');
         $this->db->where(array('users.status' => 1));
         $query = $this->db->get();
         return $query->result();
@@ -71,6 +72,16 @@ Class UsersModel extends CI_Model {
             return false;
         }
 
+    }
+
+    public function get_district_province_postalcode($id){
+        $this->db->select('cities.*,districts.name_en as district_name,provinces.name_en as province_name, provinces.id as province_id');
+        $this->db->from('cities');
+        $this->db->join('districts','districts.id = cities.district_id');
+        $this->db->join('provinces','provinces.id = districts.province_id');
+        $this->db->where('cities.id', $id);
+        $query = $this->db->get();
+        return $query->result();
     }
 }
 

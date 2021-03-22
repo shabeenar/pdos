@@ -1,6 +1,11 @@
 <!-- Begin Page Content -->
 <!-- container-fluid -->
 <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item"><a href="<?php echo base_url('welcome')?>">Dashboard</a></li>
+        <li class="breadcrumb-item active">Supplier Management</li>
+    </ol>
+
     <?php if ($this->session->flashdata('alert')) { ?>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -97,30 +102,33 @@
                             <label>Supplier Name</label>
                             <input type="text" class="form-control" name="name" required>
                             <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Phone</label>
                             <input type="tel" class="form-control" name="phone" maxlength="12" minlength="9" pattern="^[0-9]*$" required>
                             <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" required>
-                            <div class="help-block with-errors"></div>
+                            <input type="email" class="form-control" name="email">
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Street</label>
                             <input type="text" class="form-control" name="street" required>
                             <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Street Two</label>
-                            <input type="text" class="form-control" name="street_two" required>
-                            <div class="help-block with-errors"></div>
+                            <input type="text" class="form-control" name="street_two">
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>City</label>
@@ -131,28 +139,29 @@
                                 <?php } ?>
                             </select>
                             <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>District</label>
-                            <select class="form-control" name="district" required>
+                            <select class="form-control" name="district">
                                 <option disabled selected value style="display:none;">Select District</option>
                                 <?php foreach ($districts as $district) { ?>
                                     <option value="<?php echo $district->id;?>"><?php echo $district->name_en;?></option>
                                 <?php } ?>
                             </select>
-                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Province</label>
-                            <select class="form-control" name="province" required>
+                            <select class="form-control" name="province">
                                 <option disabled selected value style="display:none;">Select Province</option>
                                 <?php foreach ($provinces as $province) { ?>
                                     <option value="<?php echo $province->id;?>"><?php echo $province->name_en;?></option>
                                 <?php } ?>
                             </select>
-                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                 </div>
@@ -177,27 +186,34 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--  add new form to modal-->
-            <form action="<?php echo base_url('supplier/supplier/update_supplier'); ?>" method="post">
+            <!--  update new form to modal-->
+            <form action="<?php echo base_url('supplier/supplier/update_supplier'); ?>" method="post" data-toggle="validator">
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Supplier Name</label>
-                            <input type="text" class="form-control" name="name" id="update_name">
+                            <input type="text" class="form-control" name="name" id="update_name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Phone</label>
-                            <input type="tel" class="form-control" name="phone" id="update_phone">
+                            <input type="tel" class="form-control" name="phone" id="update_phone" maxlength="12" minlength="9" pattern="^[0-9]*$" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Email</label>
                             <input type="email" class="form-control" name="email" id="update_email">
+
                         </div>
                         <div class="form-group col-md-6">
                             <label>Street</label>
-                            <input type="text" class="form-control" name="street" id="update_street">
+                            <input type="text" class="form-control" name="street" id="update_street" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -207,12 +223,14 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>City</label>
-                            <select class="form-control" name="city" id="update_city">
+                            <select class="form-control" name="city" id="update_city" required>
                                 <option disabled selected value style="display:none;">Select City</option>
                                 <?php foreach ($cities as $city) { ?>
                                     <option value="<?php echo $city->id;?>"><?php echo $city->name_en;?></option>
                                 <?php } ?>
                             </select>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -259,7 +277,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--  add new form to modal-->
+            <!--  delete new form to modal-->
             <form action="<?php echo base_url('supplier/supplier/delete_supplier'); ?>" method="post">
                 <div class="modal-body">
                     <p>Are You Sure Want To Delete This?</p>

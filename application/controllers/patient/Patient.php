@@ -45,10 +45,7 @@ class Patient extends CI_Controller {
         $this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[10]');
         $this->form_validation->set_rules('gender', 'Gender', 'required');
         $this->form_validation->set_rules('street', 'Street', 'required');
-        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
         $this->form_validation->set_rules('city', 'City', 'required');
-        $this->form_validation->set_rules('district', 'District', 'required');
-        $this->form_validation->set_rules('province', 'Province', 'required');
         $this->form_validation->set_rules('in_date', 'In Date', 'required');
         $this->form_validation->set_rules('ward', 'Ward Name', 'required');
         $this->form_validation->set_rules('bed', 'Bed Number', 'required|numeric');
@@ -101,10 +98,7 @@ class Patient extends CI_Controller {
         $this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[10]');
         $this->form_validation->set_rules('gender', 'Gender', 'required');
         $this->form_validation->set_rules('street', 'Street', 'required');
-        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
         $this->form_validation->set_rules('city', 'City', 'required');
-        $this->form_validation->set_rules('district', 'District', 'required');
-        $this->form_validation->set_rules('province', 'Province', 'required');
         $this->form_validation->set_rules('in_date', 'In Date', 'required');
         $this->form_validation->set_rules('ward', 'Ward Name', 'required');
         $this->form_validation->set_rules('bed', 'Bed Number', 'required|numeric');
@@ -156,10 +150,7 @@ class Patient extends CI_Controller {
         $this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[10]');
         $this->form_validation->set_rules('gender', 'Gender', 'required');
         $this->form_validation->set_rules('street', 'Street', 'required');
-        $this->form_validation->set_rules('street_two', 'Street Two', 'required');
         $this->form_validation->set_rules('city', 'City', 'required');
-        $this->form_validation->set_rules('district', 'District', 'required');
-        $this->form_validation->set_rules('province', 'Province', 'required');
         $this->form_validation->set_rules('in_date', 'In Date', 'required');
         $this->form_validation->set_rules('ward', 'Ward Name', 'required');
         $this->form_validation->set_rules('bed', 'Bed Number', 'required|numeric');

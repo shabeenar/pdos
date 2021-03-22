@@ -9,7 +9,6 @@ class Report extends CI_Controller {
         if(!$this->session->userdata('name')) {
             redirect(redirect('login/login'));
         }
-        $this->load->model('ReportModel');
 
     }
 

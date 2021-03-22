@@ -1,6 +1,11 @@
 <!-- Begin Page Content -->
 <!-- container-fluid -->
 <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item"><a href="<?php echo base_url('welcome')?>">Dashboard</a></li>
+        <li class="breadcrumb-item active">Diet Category Management</li>
+    </ol>
+
     <?php if ($this->session->flashdata('alert')) { ?>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -71,18 +76,22 @@
                 </button>
             </div>
             <!--  add new form to modal-->
-            <form action="<?php echo base_url('patient/dietcategory/create_dietcategory'); ?>" method="post">
+            <form action="<?php echo base_url('patient/dietcategory/create_dietcategory'); ?>" method="post" data-toggle="validator">
                 <div class="modal-body">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Code</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="category_code" name="category_code">
+                            <input type="text" class="form-control" id="category_code" name="category_code" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="category_name" name="category_name">
+                            <input type="text" class="form-control" id="category_name" name="category_name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                 </div>
@@ -108,18 +117,22 @@
                 </button>
             </div>
             <!--  add new form to modal-->
-            <form action="<?php echo base_url('patient/dietcategory/update_dietcategory'); ?>" method="post">
+            <form action="<?php echo base_url('patient/dietcategory/update_dietcategory'); ?>" method="post" data-toggle="validator">
                 <div class="modal-body">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Code</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="update_category_code" name="category_code">
+                            <input type="text" class="form-control" id="update_category_code" name="category_code" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="update_category_name" name="category_name">
+                            <input type="text" class="form-control" id="update_category_name" name="category_name" required>
+                            <div class="help-block with-errors"></div>
+
                         </div>
                     </div>
                     <input type="hidden" id="update_id" name="update_id" value="">

@@ -60,16 +60,16 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block"><img src="<?php echo base_url('assets/img/index.jpg'); ?>" width="500" height="550" style="box-shadow: 5px 10px 10px 0px rgba(0,0,0,0.5)"></div>
+                        <div class="col-lg-6 d-none d-lg-block"><img src="<?php echo base_url('assets/img/login'); ?>" width="500" height="550" style="box-shadow: 5px 10px 10px 0px rgba(0,0,0,0.5)"></div>
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="text-gray-900" style="font-size:28px"><b>Patient Diet Ordering System</h1>
                                     <h1 class="text-gray-700 mb-4" style="font-size:20px">Colombo South Teaching Hospital</h1>
                                 </div>
-                                <form class="user" action="<?php echo base_url('login/login/forgotpassword'); ?>" method="post">
+                                <form class="user" action="<?php echo base_url('login/login/forgotpassword'); ?>" method="post" data-toggle="validator">
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address Here">
+                                        <input type="email" class="form-control form-control-user" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address Here" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Send Email

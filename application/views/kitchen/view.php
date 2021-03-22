@@ -1,4 +1,10 @@
 <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item"><a href="<?php echo base_url('welcome')?>">Dashboard</a></li>
+        <li class="breadcrumb-item active"> <a href="<?php echo base_url('kitchen/order')?>">Meal Order Management</a></li>
+        <li class="breadcrumb-item active">View Meal Order</li>
+    </ol>
+
     <?php if ($this->session->flashdata('alert')) { ?>
         <script type="text/javascript">
             $(document).ready(function () {
