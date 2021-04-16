@@ -144,28 +144,50 @@
                 <span>Purchase</span></a>
         </li>
 
-        <!-- Nav Users -->
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("users/users"); ?>">
-                <i class="fas fa-fw fa-user"></i>
-                <span>Users</span></a>
-        </li>
         <!-- Nav Supplier -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo base_url("supplier/supplier"); ?>">
                 <i class="fas fa-fw fa-users"></i>
                 <span>Supplier</span></a>
         </li>
-        <!-- Nav Report -->
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("report/report"); ?>">
+
+        <!-- Nav Reports - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReport"
+               aria-expanded="true" aria-controls="collapseReport">
                 <i class="fas fa-fw fa-flag-checkered"></i>
-                <span>Report</span></a>
+                <span>Reports</span>
+            </a>
+            <div id="collapseReport" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <!-- Nav Expenditure - Expenditure Report -->
+                    <a class="collapse-item" href="<?php echo base_url("report/expenditurereport"); ?>">Expenditure Reports</a>
+
+                    <!-- Nav Reports - Meal Order Report -->
+                    <a class="collapse-item" href="<?php echo base_url("report/mealorderreport"); ?>">Meal Order Reports</a>
+
+                    <!-- Nav Reports - Patient Report -->
+                    <a class="collapse-item" href="<?php echo base_url("report/patientreport"); ?>">Patient Reports</a>
+
+                    <!-- Nav Reports - User Report -->
+                    <a class="collapse-item" href="<?php echo base_url("report/userreport"); ?>">User Reports</a>
+
+                </div>
+            </div>
         </li>
+
+
+        <!-- Nav Users -->
+        <li class="nav-item active">
+            <a class="nav-link" href="<?php echo base_url("users/users"); ?>">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Users</span></a>
+        </li>
+
         <!-- Nav Company Details -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo base_url("company/company"); ?>">
-                <i class="fas fa-fw fa-angle-double-right"></i>
+                <i class="fas fa-fw fa-building"></i>
                 <span>Company Details</span></a>
         </li>
 
@@ -219,12 +241,14 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-circle fa-sm fa-fw mr-2"></i>
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $this->session->userdata('name');?></span>
+
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="<?php echo base_url('users/profile')?>" >
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
                             <a class="dropdown-item" href="<?php echo base_url('login/Login/logout')?>">

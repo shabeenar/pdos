@@ -58,13 +58,13 @@
                         <td>
                             <div class="progress">
                                 <?php if (0 < $item->inventory_level && $item->inventory_level < 30) { ?>
-                                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: <?php echo $item->inventory_level; ?>%" aria-valuenow="<?php echo $item->inventory_level; ?>>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: <?php echo $item->inventory_level; ?>%" aria-valuenow="<?php echo $item->inventory_level; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 <?php } ?>
                                 <?php if (31 < $item->inventory_level && $item->inventory_level < 60) { ?>
-                                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: <?php echo $item->inventory_level; ?>%" aria-valuenow="<?php echo $item->inventory_level; ?>>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: <?php echo $item->inventory_level; ?>%" aria-valuenow="<?php echo $item->inventory_level; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 <?php } ?>
                                 <?php if (61 < $item->inventory_level && $item->inventory_level < 100) { ?>
-                                    <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: <?php echo $item->inventory_level; ?>%" aria-valuenow="<?php echo $item->inventory_level; ?>>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: <?php echo $item->inventory_level; ?>%" aria-valuenow="<?php echo $item->inventory_level; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 <?php } ?>
 
                             </div>
@@ -98,10 +98,13 @@
             <form action="<?php echo base_url('item/item/create_item'); ?>" method="post" id="item_create_form" data-toggle="validator" data-toggle="validator">
                 <div class="modal-body">
                     <div class="row">
+
                         <div class="alert alert-danger form-group col-md-12" id="alert_id">
                             <strong>Invalid Quantity</strong>
                         </div>
+
                     </div>
+
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Item Category</label>

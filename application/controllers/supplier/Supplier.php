@@ -159,4 +159,11 @@ class Supplier extends CI_Controller {
         }
 
     }
+
+    public function get_city(){
+        $id = $this->input->post('city');
+        $result =$this->SupplierModel->get_district_province_postalcode($id);
+
+        echo json_encode($result);
+    }
 }

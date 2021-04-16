@@ -9,7 +9,7 @@ class CreateOrder extends CI_Controller {
         if(!$this->session->userdata('name')) {
             redirect(redirect('login/login'));
         }
-        $this->load->model('CreateOrderModel');
+        $this->load->model('OrderModel');
         $this->load->model('PatientModel');
         $this->load->model('PatientCategoryModel');
         $this->load->model('WardModel');
@@ -19,7 +19,7 @@ class CreateOrder extends CI_Controller {
     public function index()
     {
         $data = array(
-            'orders'   => $this->CreateOrderModel->select(),
+            'orders'   => $this->OrderModel->select(),
         );
 
         $this->load->view('header');
@@ -30,7 +30,7 @@ class CreateOrder extends CI_Controller {
     public function create_mealorder()
     {
         $date = $this->input->post('date');
-        $order_id = $this->CreateOrderModel->create($date);
+        $order_id = $this->OrderModel->create($date);
 
         $order_lines = array();
         $lines = array();
@@ -43,9 +43,10 @@ class CreateOrder extends CI_Controller {
             $lines['breakfast_meal_id'] = $this->input->post('order_breakfast')[$i];
             $lines['lunch_meal_id'] = $this->input->post('order_lunch')[$i];
             $lines['dinner_meal_id'] = $this->input->post('order_dinner')[$i];
+//            $this->OrderModel->update_order_quantity($this->input->post('product_id')[$i], $this->input->post('sales_qty')[$i]);
             array_push($order_lines,$lines);
         }
-        $result = $this->CreateOrderModel->create_mealorder($order_lines,$order_id);
+        $result = $this->OrderModel->create_mealorder($order_lines,$order_id);
         redirect('kitchen/View?id='.$order_id);
 
     }
@@ -70,19 +71,19 @@ class CreateOrder extends CI_Controller {
 
     public function get_ward_categories(){
         $id = $this->input->post('id');
-        $result = $this->CreateOrderModel->get_ward_categories($id);
+        $result = $this->OrderModel->get_ward_categories($id);
         echo json_encode($result);
     }
 
     public function get_total_patients(){
         $id = $this->input->post('id');
         $ward = $this->input->post('ward_id');
-        $result = $this->CreateOrderModel->get_total_patients($id,$ward);
+        $result = $this->OrderModel->get_total_patients($id,$ward);
         echo json_encode($result);
     }
 
     public function get_breakfast(){
-        $result = $this->CreateOrderModel->get_breakfast();
+        $result = $this->OrderModel->get_breakfast();
         $row = '<option selected disabled>Select Menu</option>';
         foreach ($result as $breakfast){
             $row .= '<option value=" ' . $breakfast->id . '">'. $breakfast->meal_name . '</option>';
@@ -91,7 +92,7 @@ class CreateOrder extends CI_Controller {
     }
 
     public function get_lunch(){
-        $result = $this->CreateOrderModel->get_lunch();
+        $result = $this->OrderModel->get_lunch();
         $row = '<option selected disabled>Select Menu</option>';
         foreach ($result as $lunch){
             $row .= '<option value=" ' . $lunch->id . '">'. $lunch->meal_name . '</option>';
@@ -100,7 +101,7 @@ class CreateOrder extends CI_Controller {
     }
 
     public function get_dinner(){
-        $result = $this->CreateOrderModel->get_dinner();
+        $result = $this->OrderModel->get_dinner();
         $row = '<option selected disabled>Select Menu</option>';
         foreach ($result as $dinner){
             $row .= '<option value=" ' . $dinner->id . '">'. $dinner->meal_name . '</option>';

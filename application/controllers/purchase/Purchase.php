@@ -94,7 +94,15 @@ class Purchase extends CI_Controller {
         }
 
         $result = $this->PurchaseModel->create_purchase($purchase_lines, $purchase_id);
-        redirect('purchase/View?id='.$purchase_id);
+
+        if ($result == true) {
+            redirect('purchase/View?id='.$purchase_id);
+        }else if ($result == false) {
+            redirect('purchase/purchase');
+        }
+
+
+//        redirect('purchase/View?id='.$purchase_id);
     }
 
 

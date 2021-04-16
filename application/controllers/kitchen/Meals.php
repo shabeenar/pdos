@@ -111,7 +111,7 @@ class Meals extends CI_Controller {
     }
 
     public function delete_meal(){
-        $id = $this->input->post('id');
+        $id = $this->input->post('delete_id');
         $result = $this->MealsModel->delete_meal($id);
         if($result){
             $alert = array(

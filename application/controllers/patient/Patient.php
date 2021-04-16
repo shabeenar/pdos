@@ -69,6 +69,7 @@ class Patient extends CI_Controller {
         }
     }
 
+
     public function create_patient()
     {
         $new_patient = array(
@@ -207,4 +208,32 @@ class Patient extends CI_Controller {
             redirect('patient/Patient');
         }
     }
+
+    public function get_city(){
+        $id = $this->input->post('city');
+        $result =$this->PatientModel->get_district_province_postalcode($id);
+
+        echo json_encode($result);
+    }
+
+    public function check_phone(){
+        $phone = $this->input->post('phone');
+        $result = $this->PatientModel->check_phone($phone);
+
+        echo json_encode($result);
+
+
+    }
+
+    public function check_nic(){
+        $nic = $this->input->post('nic');
+        $result = $this->PatientModel->check_nic($nic);
+
+        echo json_encode($result);
+
+
+    }
+
+
+
 }

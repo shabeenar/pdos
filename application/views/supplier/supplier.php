@@ -132,7 +132,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>City</label>
-                            <select class="form-control" name="city" required>
+                            <select class="form-control" name="city" id="city" required>
                                 <option disabled selected value style="display:none;">Select City</option>
                                 <?php foreach ($cities as $city) { ?>
                                     <option value="<?php echo $city->id;?>"><?php echo $city->name_en;?></option>
@@ -145,22 +145,15 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>District</label>
-                            <select class="form-control" name="district">
-                                <option disabled selected value style="display:none;">Select District</option>
-                                <?php foreach ($districts as $district) { ?>
-                                    <option value="<?php echo $district->id;?>"><?php echo $district->name_en;?></option>
-                                <?php } ?>
-                            </select>
 
+                            <input class="form-control" type="text" id="district" name="district" readonly>
+                            <input type="hidden"  name="district_id" id="district_id">
                         </div>
+
                         <div class="form-group col-md-6">
                             <label>Province</label>
-                            <select class="form-control" name="province">
-                                <option disabled selected value style="display:none;">Select Province</option>
-                                <?php foreach ($provinces as $province) { ?>
-                                    <option value="<?php echo $province->id;?>"><?php echo $province->name_en;?></option>
-                                <?php } ?>
-                            </select>
+                            <input class="form-control" type="text" id="province" name="province" readonly>
+                            <input type="hidden"  name="province_id" id="province_id">
 
                         </div>
                     </div>
@@ -236,22 +229,16 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>District</label>
-                            <select class="form-control" name="district" id="update_district">
-                                <option disabled selected value style="display:none;">Select District</option>
-                                <?php foreach ($districts as $district) { ?>
-                                    <option value="<?php echo $district->id;?>"><?php echo $district->name_en;?></option>
-                                <?php } ?>
-                            </select>
+                            <input class="form-control" type="text" id="update_district" name="district" readonly>
+                            <input type="hidden"  name="update_district_id" id="update_district_id">
                         </div>
+
                         <div class="form-group col-md-6">
                             <label>Province</label>
-                            <select class="form-control" name="province" id="update_province">
-                                <option disabled selected value style="display:none;">Select Province</option>
-                                <?php foreach ($provinces as $province) { ?>
-                                    <option value="<?php echo $province->id;?>"><?php echo $province->name_en;?></option>
-                                <?php } ?>
-                            </select>
+                            <input class="form-control" type="text" id="update_province" name="province" readonly>
+                            <input type="hidden"  name="update_province_id" id="update_province_id">
                         </div>
+
                     </div>
                     <input type="hidden" id="update_id" name="update_id" value="">
 
@@ -311,8 +298,8 @@
                     $('#update_street').val(response[0]['street']);
                     $('#update_street_two').val(response[0]['street_two']);
                     $('#update_city').val(response[0]['city_id']);
-                    $('#update_district').val(response[0]['district_id']);
-                    $('#update_province').val(response[0]['province_id']);
+                    $('#update_district').val(response[0]['district_name']);
+                    $('#update_province').val(response[0]['province_name']);
                     $('#update_id').val(response[0]['id']);
                     $('#update_supplier_modal').modal('show');
                 }
@@ -324,6 +311,47 @@
             $('#delete_id').val(id);
             $('#delete_supplier_modal').modal('show');
         })
+
+        $('#city').on('change', function () {
+            var city = $(this).val();
+
+            $.ajax({
+                type: 'post',
+                url: base_url + 'supplier/Supplier/get_city',
+                async: false,
+                dataType: 'json',
+                data: {'city': city},
+                success: function(response) {
+                    $('#district').val(response[0]['district_name']);
+                    $('#district_id').val(response[0]['district_id']);
+                    $('#province').val(response[0]['province_name']);
+                    $('#province_id').val(response[0]['province_id']);
+                    $('#id').val(response[0]['city']);
+                    $('#supplier_modal').modal('show');
+                }
+            })
+        })
+
+        $('#update_city').on('change', function () {
+            var city = $(this).val();
+
+            $.ajax({
+                type: 'post',
+                url: base_url + 'supplier/Supplier/get_city',
+                async: false,
+                dataType: 'json',
+                data: {'city': city},
+                success: function(response) {
+                    $('#update_district').val(response[0]['district_name']);
+                    $('#update_district_id').val(response[0]['district_id']);
+                    $('#update_province').val(response[0]['province_name']);
+                    $('#update_province_id').val(response[0]['province_id']);
+                    $('#update_id').val(response[0]['city']);
+                    $('#update_supplier_modal').modal('show');
+                }
+            })
+        })
+
     });
 </script>
 

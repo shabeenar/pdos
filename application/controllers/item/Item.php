@@ -140,4 +140,6 @@ class Item extends CI_Controller
         $result = $this->ItemModel->get_quantity($uom);
         echo json_encode($result);
     }
+
+
 }

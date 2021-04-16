@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ViewPurchase extends CI_Controller {
+class MealIngredients extends CI_Controller {
 
     public function __construct()
     {
@@ -9,18 +9,21 @@ class ViewPurchase extends CI_Controller {
         if(!$this->session->userdata('name')) {
             redirect(redirect('login/login'));
         }
-        $this->load->model('PurchaseModel');
+        $this->load->model('MealIngredientsModel');
+
     }
 
     public function index()
     {
+        $id = $this->input->get('id');
         $data = array(
-            'purchases' => $this->PurchaseModel->select(),
+            'meal_ingredients' => $this->MealIngredientsModel->select($id),
         );
 
         $this->load->view('header');
-        $this->load->view('purchase/viewpurchase', $data);
+        $this->load->view('kitchen/mealingredients', $data);
         $this->load->view('footer');
     }
+
 
 }

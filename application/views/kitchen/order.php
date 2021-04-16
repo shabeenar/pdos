@@ -21,6 +21,7 @@
                             <th class="text-center">Actions</th>
                         </tr>
                         </thead>
+
                         <tbody>
                         <?php foreach ($orders as $order) { ?>
                             <tr>

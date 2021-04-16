@@ -10,6 +10,7 @@ class PatientCategory extends CI_Controller {
             redirect(redirect('login/login'));
         }
         $this->load->model('PatientCategoryModel');
+        $this->load->model('PatientModel');
     }
 
 
@@ -111,4 +112,14 @@ class PatientCategory extends CI_Controller {
         }
 
     }
+
+    public function check_category_name(){
+        $category_name = $this->input->post('category_name');
+        $result = $this->PatientModel->check_category_name($category_name);
+
+        echo json_encode($result);
+
+
+    }
+
 }

@@ -49,6 +49,12 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="email" value="<?php echo $company->email; ?>">
+
+                    </div>
+
+                    <div class="form-group col-md-6">
                         <label>Address</label>
                         <textarea type="text" class="form-control" name="address"><?php echo $company->address; ?></textarea>
 
@@ -56,9 +62,35 @@
 
                     </div>
 
-                    <input type="hidden" id="update_id" name="update_id" value="">
-
                 </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Number of Beds</label>
+
+                            <input type="text" class="form-control" name="beds" value="<?php echo $company->number_beds; ?>">
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Number of Wards</label>
+                            <input type="tel" class="form-control" name="wards" value="<?php echo $company->number_wards; ?>">
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Open Hours</label>
+
+                            <input type="text" class="form-control" name="hours" value="Open 24 Hours">
+
+                        </div>
+
+                        <input type="hidden" id="update_id" name="update_id" value="">
+
+                    </div>
+
                 <?php } ?>
 
 

@@ -10,6 +10,7 @@ class DietCategory extends CI_Controller {
             redirect(redirect('login/login'));
         }
         $this->load->model('DietCategoryModel');
+        $this->load->model('PatientModel');
     }
 
 
@@ -109,6 +110,15 @@ class DietCategory extends CI_Controller {
             $this->session->set_flashdata('alert',$alert);
             redirect('patient/DietCategory');
         }
+
+    }
+
+    public function check_diet_name(){
+        $category_name = $this->input->post('category_name');
+        $result = $this->PatientModel->check_diet_name($category_name);
+
+        echo json_encode($result);
+
 
     }
 

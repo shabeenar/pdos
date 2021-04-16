@@ -40,20 +40,41 @@
                         <?php } ?>
                     </div>
                 </div>
+
                 <div class="row">
                     <label class="col-sm-2 col-form-label">Purchase Order Date</label>
                     <div class="form-group col-sm-4">
-                        <?php foreach ($purchases as $purchase) { ?>
+
                         <input type="text" class="form-control" id="date" name="date" value="<?php echo $purchase->date; ?>" readonly>
-                        <?php } ?>
+
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-sm-2 col-form-label">Confirm Order Date</label>
                     <div class="form-group col-sm-4">
-                    <input type="date" class="form-control" id="confirm_order_date" name="confirm_order_date" value="<?php echo date('Y-m-d'); ?>">
+
+                        <input type="date" class="form-control" id="confirm_order_date" name="confirm_order_date" value="<?php echo $purchase->confirm_date; ?>" <?php if ($purchase->status != 1) { echo "readonly"; } ?> >
+
                     </div>
                 </div>
+
+
+                    <div class="text-right mb-4">
+
+                        <?php if ($purchase->status == 1) { ?>
+                        <h5><span class="badge badge-secondary ">Draft</span></h5>
+
+                        <?php } elseif ($purchase->status == 2) { ?>
+                        <h5><span class="badge badge-success ">Added to Stock</span></h5>
+
+                        <?php } elseif ($purchase->status == 0) { ?>
+                        <h5><span class="badge badge-danger ">Canceled</span></h5>
+
+                        <?php } ?>
+
+                    </div>
+
+
                 <table class="table table-bordered" id="purchase_table">
                     <thead>
                     <tr>
@@ -84,21 +105,35 @@
                     <div class="row">
                         <label class="text-right mb-4">Amount Total Rs.</label>
                         <div class="col-sm-4">
-                            <?php foreach ($purchases as $purchase) { ?>
+
                             <input type="text" class="form-control" id="total_amount" name="total_amount" value="<?php echo $purchase->total_price; ?>" placeholder="0.00" readonly>
-                            <?php } ?>
+
                         </div>
                     </div>
 
 
                 </div>
 
-                <input type="hidden" id="id" name="id" value="<?php echo $purchase->id; ?>">
+                <input type="hidden" id="id" name="id" value="<?php echo $purchase->id; ?>" >
+
                 <div class="text-right mb-4">
+                    <?php if ($purchase->status == 1) { ?>
                     <button type="submit" class="btn btn-success">Add to Stock</button>
+                    <?php } ?>
                 </div>
 
             </form>
+
+            <div class="text-right mb-4">
+                <form action="<?php echo base_url('purchase/View/cancel_po') ?>" method="post">
+                    <input type="hidden" id="id" name="id" value="<?php echo $purchase->id; ?>" >
+
+                <?php if ($purchase->status == 1) { ?>
+                    <button type="submit" class="btn btn-danger">Cancel</button>
+                <?php } ?>
+
+                </form>
+            </div>
 
 
             <!--unit category table-->

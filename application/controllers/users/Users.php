@@ -87,8 +87,9 @@ class Users extends CI_Controller {
             'district_id'=> $this->input->post('district'),
             'province_id'=> $this->input->post('province'),
             'gender'    => $this->input->post('gender'),
-            'role'      => $this->input->post('role'),
+            'role_id'      => $this->input->post('role'),
             'ward_id'   => $this->input->post('ward'),
+            'create_date' => date("Y-m-d"),
             'password'  => sha1($randomString)
         );
 
@@ -165,7 +166,7 @@ class Users extends CI_Controller {
             'district_id'=> $this->input->post('district'),
             'province_id'=> $this->input->post('province'),
             'gender'    => $this->input->post('gender'),
-            'role'      => $this->input->post('role'),
+            'role_id'    => $this->input->post('role'),
             'ward_id'   => $this->input->post('ward'),
         );
 

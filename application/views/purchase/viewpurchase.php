@@ -41,6 +41,7 @@
                         <th>Supplier Name</th>
                         <th>Purchase Date</th>
                         <th>Amount Total</th>
+                        <th>Status</th>
                         <th class="text-center">Actions</th>
 
                     </tr>
@@ -52,6 +53,20 @@
                         <td><?php echo $purchase->supplier_name; ?></td>
                         <td><?php echo $purchase->date; ?></td>
                         <td class="text-right"><?php echo $purchase->total_price; ?></td>
+
+                        <td class="text-center">
+                            <?php if ($purchase->status == 1) { ?>
+                                <h5><span class="badge badge-secondary ">Draft</span></h5>
+
+                            <?php } elseif ($purchase->status == 2) { ?>
+                                <h5><span class="badge badge-success ">Added to Stock</span></h5>
+
+                            <?php } elseif ($purchase->status == 0) { ?>
+                                <h5><span class="badge badge-danger ">Canceled</span></h5>
+
+                            <?php } ?>
+                        </td>
+
                         <td class="text-center">
                             <a class="btn btn-warning btn-sm" href="<?php base_url()?>View?id=<?php echo $purchase->id; ?>">View</a>
                         </td>

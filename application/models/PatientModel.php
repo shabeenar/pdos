@@ -24,8 +24,11 @@ Class PatientModel extends CI_Model {
     }
 
     public function get_patient($id){
+        $this->db->select('patient.*,districts.name_en as district_name,provinces.name_en as province_name');
         $this->db->from('patient');
-        $this->db->where('id',$id);
+        $this->db->join('districts','districts.id = patient.district_id');
+        $this->db->join('provinces','provinces.id = patient.province_id');
+        $this->db->where('patient.id',$id);
         $query = $this->db->get();
         return $query->result();
     }
@@ -81,6 +84,55 @@ Class PatientModel extends CI_Model {
         return $query->result();
     }
 
+    public function check_phone($phone){
+        $query = $this->db->from('patient')->where('phone', $phone);
+        if(count($query->get()->result_array()) >= 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function get_district_province_postalcode($id){
+        $this->db->select('cities.*,districts.name_en as district_name,provinces.name_en as province_name, provinces.id as province_id');
+        $this->db->from('cities');
+        $this->db->join('districts','districts.id = cities.district_id');
+        $this->db->join('provinces','provinces.id = districts.province_id');
+        $this->db->where('cities.id', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function check_nic($nic){
+        $query = $this->db->from('patient')->where('nic', $nic);
+        if(count($query->get()->result_array()) >= 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function check_category_name($category_name){
+        $query = $this->db->from('patient_category')->where('category_name', $category_name);
+        if(count($query->get()->result_array()) >= 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function check_diet_name($category_name){
+        $query = $this->db->from('diet_category')->where('category_name', $category_name);
+        if(count($query->get()->result_array()) >= 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 }
 

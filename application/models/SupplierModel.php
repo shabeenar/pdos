@@ -24,8 +24,11 @@ Class SupplierModel extends CI_Model {
     }
 
     public function get_supplier($id){
+        $this->db->select('supplier.*,districts.name_en as district_name,provinces.name_en as province_name');
         $this->db->from('supplier');
-        $this->db->where('id',$id);
+        $this->db->join('districts','districts.id = supplier.district_id');
+        $this->db->join('provinces','provinces.id = supplier.province_id');
+        $this->db->where('supplier.id',$id);
         $query = $this->db->get();
         return $query->result();
     }
@@ -74,6 +77,17 @@ Class SupplierModel extends CI_Model {
         }
 
     }
+
+    public function get_district_province_postalcode($id){
+        $this->db->select('cities.*,districts.name_en as district_name,provinces.name_en as province_name, provinces.id as province_id');
+        $this->db->from('cities');
+        $this->db->join('districts','districts.id = cities.district_id');
+        $this->db->join('provinces','provinces.id = districts.province_id');
+        $this->db->where('cities.id', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }
 
 ?>

@@ -37,6 +37,7 @@
                     <th>Breakfast</th>
                     <th>Lunch</th>
                     <th>Dinner</th>
+                    <th class="text-center">Meal Ingredients</th>
                     <th class="text-center">Actions</th>
                 </tr>
                 </thead>
@@ -50,6 +51,7 @@
                         <td class="text-center"><input type="radio" <?php if($meal->breakfast == 1) { echo "checked"; }?>/></td>
                         <td class="text-center"><input type="radio" <?php if($meal->lunch == 1) { echo "checked"; }?>/></td>
                         <td class="text-center"><input type="radio" <?php if($meal->dinner == 1) { echo "checked"; }?>/></td>
+                        <td class="text-center"><a class="btn btn-warning btn-sm" href="<?php base_url()?>MealIngredients?id=<?php echo $meal->id; ?>">View</a></td>
                         <td class="text-center">
                             <button type="button" class="btn btn-sm btn-secondary" id="update_button"
                                     data-id="<?php echo $meal->id; ?>"><i class="fas fa-pencil-alt"></i>
@@ -176,7 +178,7 @@
                 </button>
             </div>
             <!--  add new form to modal-->
-            <form action="<?php echo base_url('kitchen/meals/delete_meal'); ?>" method="post">
+            <form action="<?php echo base_url('kitchen/Meals/delete_meal'); ?>" method="post">
                 <div class="modal-body">
                     <p>Are You Sure Want To Delete This?</p>
 

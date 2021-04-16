@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ViewPurchase extends CI_Controller {
+class ExpenditureReport extends CI_Controller {
 
     public function __construct()
     {
@@ -9,18 +9,18 @@ class ViewPurchase extends CI_Controller {
         if(!$this->session->userdata('name')) {
             redirect(redirect('login/login'));
         }
-        $this->load->model('PurchaseModel');
+        $this->load->model('ReportModel');
+
     }
 
     public function index()
     {
-        $data = array(
-            'purchases' => $this->PurchaseModel->select(),
-        );
-
         $this->load->view('header');
-        $this->load->view('purchase/viewpurchase', $data);
+        $this->load->view('report/expenditurereport');
         $this->load->view('footer');
     }
+
+
+
 
 }

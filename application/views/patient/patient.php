@@ -44,6 +44,7 @@
                     <th>Phone</th>
                     <th>Ward</th>
                     <th>Bed Number</th>
+                    <th lass="text-center">Status</th>
                     <th class="text-center">Actions</th>
                 </tr>
                 </thead>
@@ -61,6 +62,17 @@
                         <td><?php echo $patient->phone; ?></td>
                         <td><?php echo $patient->ward_id.' - '.$patient->ward_name; ?></td>
                         <td class="text-right"><?php echo $patient->bed; ?></td>
+
+                        <td class="text-right">
+                            <?php if ($patient->active == 1) { ?>
+                                <h5><span class="badge badge-success">Active</span></h5>
+
+                            <?php } else { ?>
+                                <h5><span class="badge badge-danger ">Inactivate</span></h5>
+
+                            <?php } ?>
+                        </td>
+
                         <td class="text-center">
                             <button type="button" class="btn btn-secondary btn-sm" id="update_button" data-id="<?php echo $patient->id; ?>"><i class="fas fa-pencil-alt"></i>
                             </button>
@@ -104,6 +116,14 @@
             <!--  add new form to modal-->
             <form action="<?php echo base_url('patient/patient/create_patient'); ?>" method="post" id="commentForm" data-toggle="validator">
                 <div class="modal-body">
+
+                    <div class="alert alert-danger" id="alert-phone">
+                        Given phone number is existing
+                    </div>
+                    <div class = "alert alert-danger" id = "alert-nic">
+                        Given nic is existing
+                    </div>
+
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Patient Category</label>
@@ -140,13 +160,13 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>NIC</label>
-                            <input type="text" class="form-control" name="nic" pattern="[0-9]{9}[x|X|v|V]|[0-9]{11}[x|X|v|V]" required>
+                            <input type="text" class="form-control" name="nic" id="nic" pattern="[0-9]{9}[x|X|v|V]|[0-9]{11}[x|X|v|V]" required>
                             <div class="help-block with-errors"></div>
 
                         </div>
                         <div class="form-group col-md-6">
                             <label>Phone</label>
-                            <input type="tel" class="form-control" name="phone" maxlength="12" minlength="9" pattern="^[0-9]*$" required>
+                            <input type="tel" class="form-control" name="phone" id="phone" maxlength="12" minlength="9" pattern="^[0-9]*$" required>
                             <div class="help-block with-errors"></div>
 
                         </div>
@@ -176,7 +196,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>City</label>
-                            <select class="form-control" name="city" required>
+                            <select class="form-control" name="city" id="city" required>
                                 <option disabled selected value style="display:none;">Select City</option>
                                 <?php foreach ($cities as $city) { ?>
                                     <option value="<?php echo $city->id;?>"><?php echo $city->name_en;?></option>
@@ -189,22 +209,16 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>District</label>
-                            <select class="form-control" name="district" readonly>
-                                <option disabled selected value style="display:none;">Select District</option>
-                                <?php foreach ($districts as $district) { ?>
-                                    <option value="<?php echo $district->id;?>"><?php echo $district->name_en;?></option>
-                                <?php } ?>
-                            </select>
+                            <input class="form-control" type="text" id="district" name="district" readonly>
+                            <input type="hidden"  name="district_id" id="district_id">
                         </div>
+
                         <div class="form-group col-md-6">
                             <label>Province</label>
-                            <select class="form-control" name="province" readonly>
-                                <option disabled selected value style="display:none;">Select Province</option>
-                                <?php foreach ($provinces as $province) { ?>
-                                    <option value="<?php echo $province->id;?>"><?php echo $province->name_en;?></option>
-                                <?php } ?>
-                            </select>
+                            <input class="form-control" type="text" id="province" name="province" readonly>
+                            <input type="hidden"  name="province_id" id="province_id">
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
@@ -355,22 +369,16 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>District</label>
-                            <select class="form-control" name="district" id="update_district">
-                                <option disabled selected value style="display:none;">Select District</option>
-                                <?php foreach ($districts as $district) { ?>
-                                    <option value="<?php echo $district->id;?>"><?php echo $district->name_en;?></option>
-                                <?php } ?>
-                            </select>
+                            <input class="form-control" type="text" id="update_district" name="district" readonly>
+                            <input type="hidden"  name="update_district_id" id="update_district_id">
                         </div>
+
                         <div class="form-group col-md-6">
                             <label>Province</label>
-                            <select class="form-control" name="province" id="update_province">
-                                <option disabled selected value style="display:none;">Select Province</option>
-                                <?php foreach ($provinces as $province) { ?>
-                                    <option value="<?php echo $province->id;?>"><?php echo $province->name_en;?></option>
-                                <?php } ?>
-                            </select>
+                            <input class="form-control" type="text" id="update_province" name="province" readonly>
+                            <input type="hidden"  name="update_province_id" id="update_province_id">
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
@@ -451,6 +459,10 @@
 
 <script>
     $(document).ready(function () {
+        $('#alert-phone').hide();
+        $('#alert-nic').hide();
+
+
         $('#patient_table').on('click', '#update_button', function() {
             var id = $(this).attr('data-id');
 
@@ -471,8 +483,8 @@
                     $('#update_street').val(response[0]['street']);
                     $('#update_street_two').val(response[0]['street_two']);
                     $('#update_city').val(response[0]['city_id']);
-                    $('#update_district').val(response[0]['district_id']);
-                    $('#update_province').val(response[0]['province_id']);
+                    $('#update_district').val(response[0]['district_name']);
+                    $('#update_province').val(response[0]['province_name']);
                     $('#update_in_date').val(response[0]['in_date']);
                     $('#update_ward').val(response[0]['ward_id']);
                     $('#update_bed').val(response[0]['bed']);
@@ -488,6 +500,97 @@
             $('#delete_id').val(id);
             $('#delete_patient_modal').modal('show');
         })
+
+        $('#city').on('change', function () {
+            var city = $(this).val();
+
+            $.ajax({
+                type: 'post',
+                url: base_url + 'patient/Patient/get_city',
+                async: false,
+                dataType: 'json',
+                data: {'city': city},
+                success: function(response) {
+                    $('#district').val(response[0]['district_name']);
+                    $('#district_id').val(response[0]['district_id']);
+                    $('#province').val(response[0]['province_name']);
+                    $('#province_id').val(response[0]['province_id']);
+                    $('#id').val(response[0]['city']);
+                    $('#patient_modal').modal('show');
+                }
+            })
+        })
+
+
+        $('#update_city').on('change', function () {
+            var city = $(this).val();
+
+            $.ajax({
+                type: 'post',
+                url: base_url + 'patient/Patient/get_city',
+                async: false,
+                dataType: 'json',
+                data: {'city': city},
+                success: function(response) {
+                    $('#update_district').val(response[0]['district_name']);
+                    $('#update_district_id').val(response[0]['district_id']);
+                    $('#update_province').val(response[0]['province_name']);
+                    $('#update_province_id').val(response[0]['province_id']);
+                    $('#update_id').val(response[0]['city']);
+                    $('#update_patient_modal').modal('show');
+                }
+            })
+        })
+
+        $('#phone').on('change',function(){
+
+            var phone = $(this).val();
+
+            $.ajax({
+                type: 'post',
+                url: base_url + 'patient/Patient/check_phone',
+                async: false,
+                dataType: 'json',
+                data: {'phone': phone},
+                success: function (response) {
+                    if(response == true) {
+                        $('#alert-phone').show();
+                        $(':input[type="submit"]').prop('disabled', true)
+                    }
+                    else if(response == false) {
+                        $('#alert-phone').hide();
+                        $(':input[type="submit"]').prop('disabled', false)
+
+                    }
+                }
+            });
+        });
+
+        $('#nic').on('change',function(){
+
+            var nic = $(this).val();
+
+            $.ajax({
+                type: 'post',
+                url: base_url + 'patient/Patient/check_nic',
+                async: false,
+                dataType: 'json',
+                data: {'nic': nic},
+                success: function (response) {
+                    if(response == true) {
+                        $('#alert-nic').show();
+                        $(':input[type="submit"]').prop('disabled', true)
+                    }
+                    else if(response == false) {
+                        $('#alert-nic').hide();
+                        $(':input[type="submit"]').prop('disabled', false)
+
+                    }
+                }
+            });
+        });
+
+
     });
 </script>
 

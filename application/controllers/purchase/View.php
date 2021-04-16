@@ -9,15 +9,15 @@ class View extends CI_Controller {
         if(!$this->session->userdata('name')) {
             redirect(redirect('login/login'));
         }
-        $this->load->model('ViewModel');
+        $this->load->model('PurchaseModel');
     }
 
     public function index()
     {
         $id = $this->input->get('id');
         $data = array(
-            'purchases' => $this->ViewModel->mainlines($id),
-            'purchase_lines' => $this->ViewModel->lines($id),
+            'purchases' => $this->PurchaseModel->mainlines($id),
+            'purchase_lines' => $this->PurchaseModel->lines($id),
         );
 
 
@@ -31,10 +31,10 @@ class View extends CI_Controller {
     public function addtostock(){
         $po_id = $this->input->post('id');
 
-        $result = $this->ViewModel->get_purchases($po_id);
+        $result = $this->PurchaseModel->get_purchases($po_id);
 
         foreach ($result as $result){
-            $this->ViewModel->update_quantity($result->quantity,$result->item_id);
+            $this->PurchaseModel->update_quantity($result->quantity,$result->item_id);
         }
 
         $data = array(
@@ -42,7 +42,7 @@ class View extends CI_Controller {
             'status' => '2',
         );
 
-        $recieved_quantity=$this->ViewModel->confirm_po($po_id,$data);
+        $recieved_quantity=$this->PurchaseModel->confirm_po($po_id,$data);
 
         redirect('purchase/View?id='.$po_id);
 
@@ -56,6 +56,14 @@ class View extends CI_Controller {
 //
 //        }
 
+    }
+
+    public function cancel_po(){
+        $po_id = $this->input->post('id');
+        $result = $this->PurchaseModel->cancel_po($po_id);
+        if($result){
+            redirect('purchase/View?id='.$po_id);
+        }
     }
 
 

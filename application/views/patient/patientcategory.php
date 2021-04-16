@@ -78,6 +78,11 @@
             <!--  add new form to modal-->
             <form action="<?php echo base_url('patient/patientcategory/create_patientcategory'); ?>" method="post" data-toggle="validator">
                 <div class="modal-body">
+
+                    <div class="alert alert-danger" id="alert-name">
+                        Given patient category name is existing
+                    </div>
+
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Code</label>
                         <div class="col-sm-10">
@@ -175,6 +180,8 @@
 
 <script>
     $(document).ready(function () {
+        $('#alert-name').hide();
+
         $('#patientcategory_table').on('click', '#update_button', function() {
             var id = $(this).attr('data-id');
 
@@ -198,6 +205,31 @@
             $('#delete_id').val(id);
             $('#delete_patientcategory_modal').modal('show');
         })
+
+        $('#category_name').on('change',function(){
+
+            var category_name = $(this).val();
+
+            $.ajax({
+                type: 'post',
+                url: base_url + 'patient/PatientCategory/check_category_name',
+                async: false,
+                dataType: 'json',
+                data: {'category_name': category_name},
+                success: function (response) {
+                    if(response == true) {
+                        $('#alert-name').show();
+                        $(':input[type="submit"]').prop('disabled', true)
+                    }
+                    else if(response == false) {
+                        $('#alert-name').hide();
+                        $(':input[type="submit"]').prop('disabled', false)
+
+                    }
+                }
+            });
+        });
+
     });
 </script>
 

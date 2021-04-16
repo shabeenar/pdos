@@ -23,8 +23,11 @@ Class UsersModel extends CI_Model {
     }
 
     public function get_user($id){
+        $this->db->select('users.*,districts.name_en as district_name,provinces.name_en as province_name');
         $this->db->from('users');
-        $this->db->where('id',$id);
+        $this->db->join('districts','districts.id = users.district_id');
+        $this->db->join('provinces','provinces.id = users.province_id');
+        $this->db->where('users.id',$id);
         $query = $this->db->get();
         return $query->result();
     }

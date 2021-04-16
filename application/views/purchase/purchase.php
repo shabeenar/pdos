@@ -60,6 +60,7 @@
                         <th>Unit of Measure</th>
                         <th>Sub Total</th>
                         <th class="text-center"> <button type="button" class="btn btn-success btn-sm" id="plus_button"><i class="fas fa-fw fa-plus"></i></button></th>
+
                     </tr>
                     </thead>
                     <!--display data on index-->
@@ -74,9 +75,15 @@
                         </div>
                     </div>
                 </div>
+
+                <?php foreach ($purchases as $purchase) { ?>
+                <input type="hidden" id="id" name="id" value="<?php echo $purchase->id; ?>" >
+                <?php } ?>
+
                 <div class="text-right mb-4">
                     <button type="submit" class="btn btn-success">Create Order</button>
                 </div>
+
             </form>
 
             <!--unit category table-->
@@ -88,6 +95,56 @@
 <!-- /.container-fluid -->
 
 <script>
+    function removeCommas(nStr) {
+        if (nStr == null || nStr == "")
+            return "";
+        return nStr.toString().replace(/,/g, "");
+    }
+
+    function NumbersOnly(myfield, e, dec,neg)
+    {
+        if (isNaN(removeCommas(myfield.value)) && myfield.value != "-") {
+            return false;
+        }
+        var allowNegativeNumber = neg || false;
+        var key;
+        var keychar;
+
+        if (window.event)
+            key = window.event.keyCode;
+        else if (e)
+            key = e.which;
+        else
+            return true;
+        keychar = String.fromCharCode(key);
+        var srcEl = e.srcElement ? e.srcElement : e.target;
+        // control keys
+        if ((key == null) || (key == 0) || (key == 8) ||
+            (key == 9) || (key == 13) || (key == 27))
+            return true;
+
+        // numbers
+        else if ((("0123456789").indexOf(keychar) > -1))
+            return true;
+
+        // decimal point jump
+        else if (dec && (keychar == ".")) {
+            //myfield.form.elements[dec].focus();
+            return srcEl.value.indexOf(".") == -1;
+        }
+
+        //allow negative numbers
+        else if (allowNegativeNumber && (keychar == "-")) {
+            return (srcEl.value.length == 0 || srcEl.value == "0.00")
+        }
+        else
+            return false;
+    }
+
+
+
+
+
     $(document).ready(function () {
         $(document).on('click','#plus_button',function () {
             $.ajax({
@@ -98,7 +155,7 @@
                     row += '<tr>';
                     row += '<td><select name="purchase_product[]" id="purchase_product" class="form-control">' + options + '</select></td>';
                     row += '<td><input type="text" name="purchase_price[]" id="purchase_price" class="form-control" required/></td>';
-                    row += '<td><input type="text" name="purchase_qty[]" id="purchase_qty" class="form-control" placeholder="0.00" required/></td>';
+                    row += '<td><input type="text" name="purchase_qty[]" id="purchase_qty" class="form-control" placeholder="0.00" required onKeyPress="return NumbersOnly(this, event,true)"/></td>';
                     row += '<td><input type="text" name="purchase_uom[]" id="purchase_uom" class="form-control" readonly/><input type="hidden" name="purchase_uom_id[]" id="purchase_uom_id" class="form-control"/></td>';
                     row += '<td><input type="text" name="purchase_total[]" id="purchase_total" class="form-control" readonly/></td>';
                     row += '<td class="text-center"><button type="button" class="btn btn-danger btn-sm" id="remove_purchase_line"><i class="fa fa-minus" aria-hidden="true"></i></button></td>';
@@ -147,6 +204,8 @@
             })
             $('#total_amount').val(sub_total);
         })
+
+
     })
 </script>
 

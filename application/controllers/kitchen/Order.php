@@ -10,13 +10,12 @@ class Order extends CI_Controller {
             redirect(redirect('login/login'));
         }
         $this->load->model('OrderModel');
-        $this->load->model('CreateOrderModel');
     }
 
     public function index()
     {
         $data = array(
-            'orders'   => $this->CreateOrderModel->select(),
+            'orders'   => $this->OrderModel->select(),
         );
 
         $this->load->view('header');
