@@ -14,6 +14,7 @@ Class MealsModel extends CI_Model {
     public function select(){
         $this->db->from('meals');
         $this->db->where('status', 1);
+        $this->db->order_by('code', 'asd');
         $query = $this->db->get();
         return $query->result();
     }

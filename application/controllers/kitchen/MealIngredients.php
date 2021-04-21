@@ -16,12 +16,15 @@ class MealIngredients extends CI_Controller {
     public function index()
     {
         $id = $this->input->get('id');
+
         $data = array(
-            'meal_ingredients' => $this->MealIngredientsModel->select($id),
+            'ingredients' => $this->MealIngredientsModel->select($id),
+            'meals' => $this->MealIngredientsModel->select_meal($id),
         );
 
+
         $this->load->view('header');
-        $this->load->view('kitchen/mealingredients', $data);
+        $this->load->view('kitchen/mealingredients',$data);
         $this->load->view('footer');
     }
 

@@ -89,7 +89,7 @@ class Users extends CI_Controller {
             'gender'    => $this->input->post('gender'),
             'role_id'      => $this->input->post('role'),
             'ward_id'   => $this->input->post('ward'),
-            'create_date' => date("Y-m-d"),
+            'create_date' => date('Y-m-d'),
             'password'  => sha1($randomString)
         );
 
@@ -170,6 +170,7 @@ class Users extends CI_Controller {
             'ward_id'   => $this->input->post('ward'),
         );
 
+
         $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|alpha|max_length[30]');
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|alpha|max_length[30]');
         $this->form_validation->set_rules('nic', 'NIC', 'trim|required|max_length[10]');
@@ -184,7 +185,10 @@ class Users extends CI_Controller {
 
         $id = $this->input->post('update_id');
 
+
         $result = $this->UsersModel->update_user($update, $id);
+
+
         if ($result){
             $alert = array(
                 'type' =>"warning",
@@ -239,6 +243,24 @@ class Users extends CI_Controller {
         $id = $this->input->post('city');
         $result =$this->UsersModel->get_district_province_postalcode($id);
 
+        echo json_encode($result);
+    }
+
+    public function check_nic() {
+        $nic = $this->input->post('nic');
+        $result = $this->UsersModel->check_nic($nic);
+        echo json_encode($result);
+    }
+
+    public function check_phone() {
+        $phone = $this->input->post('phone');
+        $result = $this->UsersModel->check_phone($phone);
+        echo json_encode($result);
+    }
+
+    public function check_email() {
+        $email = $this->input->post('email');
+        $result = $this->UsersModel->check_email($email);
         echo json_encode($result);
     }
 }

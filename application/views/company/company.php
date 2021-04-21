@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form action="<?php echo base_url('company/company/update_company'); ?>" method="post">
+            <form action="<?php echo base_url('company/Company/update_company'); ?>" method="post">
                 <?php foreach ($companies as $company) { ?>
                 <div class="row">
                     <div class="form-group col-md-6">
@@ -87,11 +87,12 @@
 
                         </div>
 
-                        <input type="hidden" id="update_id" name="update_id" value="">
+                        <input type="hidden" id="update_id" name="update_id" value="<?php echo $company->id; ?>">
+                        <?php } ?>
 
                     </div>
 
-                <?php } ?>
+
 
 
                 <div class="text-right">

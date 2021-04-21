@@ -1,5 +1,6 @@
 <?php
 Class ItemModel extends CI_Model {
+
     public function create($new_item)
     {
         $this->db->insert('item', $new_item);
@@ -17,6 +18,7 @@ Class ItemModel extends CI_Model {
         $this->db->join('item_category','item_category.id = item.item_category_id');
         $this->db->join('unit','unit.id = item.unit_id');
         $this->db->where(array('item.status' => 1));
+        $this->db->order_by('item_category_id', 'asd');
         $query = $this->db->get();
         return $query->result();
     }
@@ -67,6 +69,15 @@ Class ItemModel extends CI_Model {
         return $query->result();
     }
 
+    public function check_name($name) {
+        $query = $this->db->select("*")->from('item')->where('name', $name);
+        if(count($query->get()->result_array()) == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 }
 

@@ -7,12 +7,17 @@ class Item extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if(!$this->session->userdata('name')) {
-            redirect(redirect('login/login'));
+        if(($this->session->userdata('role_id')==5 ) OR ($this->session->userdata('role_id')==3 ) OR ($this->session->userdata('role_id')==4 )) {
+            if(!$this->session->userdata('name')) {
+                redirect(redirect('login/login'));
+            }
+            $this->load->model('ItemModel');
+            $this->load->model('ItemCategoryModel');
+            $this->load->model('UnitModel');
+        } else{
+            $this->session->set_flashdata('access_alert', array('access_alert' => false));
+            redirect('login/Login');
         }
-        $this->load->model('ItemModel');
-        $this->load->model('ItemCategoryModel');
-        $this->load->model('UnitModel');
     }
 
     public function index()
@@ -138,6 +143,12 @@ class Item extends CI_Controller
     public function get_quantity(){
         $uom = $this->input->post('uom');
         $result = $this->ItemModel->get_quantity($uom);
+        echo json_encode($result);
+    }
+
+    public function check_name() {
+        $name = $this->input->post('name');
+        $result = $this->ItemModel->check_name($name);
         echo json_encode($result);
     }
 

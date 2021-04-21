@@ -44,7 +44,7 @@
                     <th>Phone</th>
                     <th>Ward</th>
                     <th>Bed Number</th>
-                    <th lass="text-center">Status</th>
+                    <th class="text-center">Status</th>
                     <th class="text-center">Actions</th>
                 </tr>
                 </thead>
@@ -63,7 +63,7 @@
                         <td><?php echo $patient->ward_id.' - '.$patient->ward_name; ?></td>
                         <td class="text-right"><?php echo $patient->bed; ?></td>
 
-                        <td class="text-right">
+                        <td class="text-center">
                             <?php if ($patient->active == 1) { ?>
                                 <h5><span class="badge badge-success">Active</span></h5>
 

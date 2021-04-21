@@ -139,7 +139,7 @@
                 </button>
             </div>
             <!--  add new form to modal-->
-            <form action="<?php echo base_url('kitchen/meals/update_meal'); ?>" method="post">
+            <form action="<?php echo base_url('kitchen/Meals/update_meal'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Code</label>
@@ -147,12 +147,32 @@
                             <input type="text" class="form-control" id="update_code" name="update_code">
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Meal Name</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="update_meal_name" name="update_meal_name">
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Meal Type</label>
+                        <div class="col-sm-10">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="update_breakfast" id="update_breakfast" value="1>
+                                <label class="form-check-label" for="inlineCheckbox1">Breakfast</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="update_lunch" id="update_lunch" value="1">
+                                <label class="form-check-label" for="inlineCheckbox2">Lunch</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="update_dinner" id="update_dinner" value="1">
+                                <label class="form-check-label" for="inlineCheckbox3">Dinner</label>
+                            </div>
+                        </div>
+                    </div>
+
                     <input type="hidden" id="update_id" name="update_id" value="">
                 </div>
 
@@ -194,7 +214,12 @@
     </div>
 </div>
 
+<!--view page script-->
+
+
+
 <script>
+
     $(document).ready(function () {
         $('#meals_table').on('click', '#update_button', function () {
             var id = $(this).attr('data-id');
@@ -208,6 +233,25 @@
                 success: function (response) {
                     $('#update_code').val(response[0]['code']);
                     $('#update_meal_name').val(response[0]['meal_name']);
+
+                    if (response[0]['breakfast']){
+                    $('#update_breakfast').prop('checked',true);
+                    } else {
+                        $('#update_breakfast').prop('checked',false);
+                    }
+
+                    if (response[0]['lunch']){
+                        $('#update_lunch').prop('checked',true);
+                    } else {
+                        $('#update_lunch').prop('checked',false);
+                    }
+
+                    if (response[0]['dinner']){
+                        $('#update_dinner').prop('checked',true);
+                    } else {
+                        $('#update_dinner').prop('checked',false);
+                    }
+
                     $('#update_id').val(response[0]['id']);
                     $('#update_meal_modal').modal('show');
                 }

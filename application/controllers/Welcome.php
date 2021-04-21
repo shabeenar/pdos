@@ -17,6 +17,8 @@ class Welcome extends CI_Controller {
 	{
 	    $categories = $this->WelcomeModel->select();
 
+
+
 	    foreach ($categories as $category){
 	        $chart_data[] = array(
                 'value' => $category->total_patient,
@@ -34,6 +36,11 @@ class Welcome extends CI_Controller {
 
 	    $data = array(
 	        'piedata' => $chart_data,
+            'patients' => $this->WelcomeModel->dashboard_patients(),
+            'meal_orders' => $this->WelcomeModel->dashboard_meal_orders(),
+            'purchases' => $this->WelcomeModel->dashboard_purchases(),
+            'items' => $this->WelcomeModel->dashboard_items(),
+            'users' => $this->WelcomeModel->dashboard_users(),
         );
 
 

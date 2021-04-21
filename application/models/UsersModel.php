@@ -9,6 +9,8 @@ Class UsersModel extends CI_Model {
         else{
             return false;
         }
+
+
     }
 
 //get data from db
@@ -23,13 +25,18 @@ Class UsersModel extends CI_Model {
     }
 
     public function get_user($id){
-        $this->db->select('users.*,districts.name_en as district_name,provinces.name_en as province_name');
         $this->db->from('users');
-        $this->db->join('districts','districts.id = users.district_id');
-        $this->db->join('provinces','provinces.id = users.province_id');
         $this->db->where('users.id',$id);
         $query = $this->db->get();
         return $query->result();
+
+//        $this->db->select('users.*,districts.name_en as district_name,provinces.name_en as province_name');
+//        $this->db->from('users');
+//        $this->db->join('districts','districts.id = users.district_id');
+//        $this->db->join('provinces','provinces.id = users.province_id');
+//        $this->db->where('users.id',$id);
+//        $query = $this->db->get();
+//        return $query->result();
     }
 
     public function update_user($update, $id){
@@ -85,6 +92,36 @@ Class UsersModel extends CI_Model {
         $this->db->where('cities.id', $id);
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function check_nic($nic) {
+        $query = $this->db->select("*")->from('users')->where('nic', $nic);
+        if(count($query->get()->result_array()) == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function check_phone($phone) {
+        $query = $this->db->select("*")->from('users')->where('phone', $phone);
+        if(count($query->get()->result_array()) == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function check_email($email) {
+        $query = $this->db->select("*")->from('users')->where('email', $email);
+        if(count($query->get()->result_array()) == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
 

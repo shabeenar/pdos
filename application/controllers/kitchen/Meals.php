@@ -87,15 +87,18 @@ class Meals extends CI_Controller {
 
     public function update_meal(){
         $update = array(
-            'code' => $this->input->post('code'),
-            'meal_name' => $this->input->post('meal_name'),
+            'code' => $this->input->post('update_code'),
+            'meal_name' => $this->input->post('update_meal_name'),
+            'breakfast' => $this->input->post('update_breakfast'),
+            'lunch' => $this->input->post('update_lunch'),
+            'dinner' => $this->input->post('update_dinner'),
         );
 
-        $this->form_validation->set_rules('code', 'Code', 'required|numeric');
-        $this->form_validation->set_rules('meal_name', 'Meal Name', 'trim|required|alpha|max_length[50]');
-        $this->form_validation->set_rules('breakfast', 'Breakfast', 'required');
-        $this->form_validation->set_rules('lunch', 'Lunch', 'required');
-        $this->form_validation->set_rules('dinner', 'Dinner', 'required');
+        $this->form_validation->set_rules('update_code', 'Code', 'required|numeric');
+        $this->form_validation->set_rules('update_meal_name', 'Meal Name', 'trim|required|alpha|max_length[50]');
+        $this->form_validation->set_rules('update_breakfast', 'Breakfast', 'required');
+        $this->form_validation->set_rules('update_lunch', 'Lunch', 'required');
+        $this->form_validation->set_rules('update_dinner', 'Dinner', 'required');
 
         $id = $this->input->post('update_id');
 

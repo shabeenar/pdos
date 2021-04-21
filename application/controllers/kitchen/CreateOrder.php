@@ -39,6 +39,7 @@ class CreateOrder extends CI_Controller {
             $lines['order_id'] = $order_id;
             $lines['ward_id'] = $this->input->post('order_patient_ward')[$i];
             $lines['patient_category_id'] = $this->input->post('order_patient_category')[$i];
+            $lines['diet_category_id'] = $this->input->post('order_diet_category')[$i];
             $lines['total_patients'] = $this->input->post('order_total_patient')[$i];
             $lines['breakfast_meal_id'] = $this->input->post('order_breakfast')[$i];
             $lines['lunch_meal_id'] = $this->input->post('order_lunch')[$i];
@@ -47,7 +48,7 @@ class CreateOrder extends CI_Controller {
             array_push($order_lines,$lines);
         }
         $result = $this->OrderModel->create_mealorder($order_lines,$order_id);
-        redirect('kitchen/View?id='.$order_id);
+        redirect('kitchen/order');
 
     }
 
@@ -75,10 +76,18 @@ class CreateOrder extends CI_Controller {
         echo json_encode($result);
     }
 
+//    new
+    public function get_patient_categories(){
+        $id = $this->input->post('id');
+        $result = $this->OrderModel->get_patient_categories($id);
+        echo json_encode($result);
+    }
+
     public function get_total_patients(){
         $id = $this->input->post('id');
         $ward = $this->input->post('ward_id');
-        $result = $this->OrderModel->get_total_patients($id,$ward);
+        $patient_category = $this->input->post('patient_category_id');
+        $result = $this->OrderModel->get_total_patients($id, $ward, $patient_category);
         echo json_encode($result);
     }
 

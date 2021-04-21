@@ -48,7 +48,7 @@
                 <div class="row">
                     <label class="col-sm-2 col-form-label">Purchase Order Date</label>
                     <div class="form-group col-sm-4">
-                        <input type="date" class="form-control" id="date" name="date">
+                        <input type="date" class="form-control" id="date" name="date" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                 </div>
                 <table class="table table-bordered" id="purchase_table">
@@ -154,8 +154,8 @@
                     var row = "";
                     row += '<tr>';
                     row += '<td><select name="purchase_product[]" id="purchase_product" class="form-control">' + options + '</select></td>';
-                    row += '<td><input type="text" name="purchase_price[]" id="purchase_price" class="form-control" required/></td>';
-                    row += '<td><input type="text" name="purchase_qty[]" id="purchase_qty" class="form-control" placeholder="0.00" required onKeyPress="return NumbersOnly(this, event,true)"/></td>';
+                    row += '<td><input type="number" name="purchase_price[]" id="purchase_price" class="form-control" required/></td>';
+                    row += '<td><input type="number" name="purchase_qty[]" id="purchase_qty" class="form-control" placeholder="0.00" required onKeyPress="return NumbersOnly(this, event,true)"/></td>';
                     row += '<td><input type="text" name="purchase_uom[]" id="purchase_uom" class="form-control" readonly/><input type="hidden" name="purchase_uom_id[]" id="purchase_uom_id" class="form-control"/></td>';
                     row += '<td><input type="text" name="purchase_total[]" id="purchase_total" class="form-control" readonly/></td>';
                     row += '<td class="text-center"><button type="button" class="btn btn-danger btn-sm" id="remove_purchase_line"><i class="fa fa-minus" aria-hidden="true"></i></button></td>';

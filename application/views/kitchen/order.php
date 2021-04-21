@@ -15,9 +15,8 @@
                         <thead>
                         <tr>
                             <th>Order ID</th>
-                            <th>Ward</th>
-                            <th>Total Patients</th>
-                            <th>Date</th>
+                            <th>Order Date</th>
+                            <th>Status</th>
                             <th class="text-center">Actions</th>
                         </tr>
                         </thead>
@@ -26,10 +25,22 @@
                         <?php foreach ($orders as $order) { ?>
                             <tr>
                                 <td class="text-right"><?php echo $order->id; ?></td>
-                                <td><?php echo $order->ward_name; ?></td>
-                                <td class="text-right"><?php echo $order->total_patients; ?></td>
                                 <td><?php echo $order->order_date; ?></td>
-                                <td class="text-center"><a class="btn btn-warning btn-sm" href="<?php base_url()?>View?id=<?php echo $order->id; ?>">View</a></td>
+
+                                <td class="text-center">
+                                    <?php if ($order->status == 1) { ?>
+                                        <h5><span class="badge badge-secondary ">Draft</span></h5>
+
+                                    <?php } elseif ($order->status == 2) { ?>
+                                        <h5><span class="badge badge-success ">Order Confirmed</span></h5>
+
+                                    <?php } elseif ($order->status == 0) { ?>
+                                        <h5><span class="badge badge-danger ">Canceled</span></h5>
+
+                                    <?php } ?>
+                                </td>
+
+                                <td class="text-center"><a class="btn btn-warning btn-sm view_meals" data-href="<?php base_url()?>View?id=<?php echo $order->id; ?>">View</a></td>
                             </tr>
                         <?php } ?>
 
@@ -41,6 +52,12 @@
     </div>
 </div>
 <!-- /.container-fluid -->
+
+<script>
+    $('.view_meals').click(function(){
+        window.location = $(this).data('href');
+    });
+</script>
 
 
 

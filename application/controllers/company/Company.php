@@ -28,8 +28,13 @@ class Company extends CI_Controller {
         $update = array(
             'name' =>$this->input->post('name'),
             'phone' =>$this->input->post('phone'),
+            'email' =>$this->input->post('email'),
             'address' =>$this->input->post('address'),
+            'number_beds' =>$this->input->post('beds'),
+            'number_wards' =>$this->input->post('wards'),
         );
+
+
 
         $id = $this->input->post('update_id');
 

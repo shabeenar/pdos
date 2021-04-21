@@ -28,6 +28,13 @@ Class PurchaseModel extends CI_Model
         $this->db->insert_batch('purchase_lines', $purchase_lines);
         $query = $this->db->get_where('purchase_lines', array('purchase_id'=>$purchase_id));
         return $query->result();
+
+        $result = $this->db->affected_rows();
+        if($result == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function mainlines($data)

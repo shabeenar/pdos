@@ -46,6 +46,17 @@ Class ItemCategoryModel extends CI_Model {
             return false;
         }
     }
+
+    public function check_name($name) {
+        $query = $this->db->select("*")->from('item_category')->where('name', $name);
+        if(count($query->get()->result_array()) == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
 
 ?>

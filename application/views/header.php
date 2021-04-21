@@ -131,12 +131,6 @@
             </div>
         </li>
 
-        <!-- Nav Stock -->
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url("stock/stock"); ?>">
-                <i class="fas fa-fw fa-archive"></i>
-                <span>Stock</span></a>
-        </li>
         <!-- Nav Purchase -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo base_url("purchase/viewpurchase"); ?>">
@@ -186,9 +180,14 @@
 
         <!-- Nav Company Details -->
         <li class="nav-item active">
+
+            <?php if ($this->session->userdata('role_id') == '2') { ?>
+
             <a class="nav-link" href="<?php echo base_url("company/company"); ?>">
                 <i class="fas fa-fw fa-building"></i>
                 <span>Company Details</span></a>
+
+            <?php } ?>
         </li>
 
     </ul>

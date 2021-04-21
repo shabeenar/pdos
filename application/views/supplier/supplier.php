@@ -6,6 +6,8 @@
         <li class="breadcrumb-item active">Supplier Management</li>
     </ol>
 
+
+
     <?php if ($this->session->flashdata('alert')) { ?>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -27,11 +29,18 @@
         </script>
     <?php } ?>
 
+
+
     <div class="row">
         <div class="col-md-12">
             <div class="text-right mb-4">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#supplier_modal">Add Supplier</button>
             </div>
+
+<!--            <div class="text-right mb-4">-->
+<!--            <button type="button" class="btn btn-secondary" name="copy" id="copy" tabindex="0">Copy</button>-->
+<!--            </div>-->
+
                     <!--supplier table-->
                     <table class="table table-bordered" id="supplier_table">
                         <thead>
@@ -40,6 +49,7 @@
                             <th>Phone</th>
                             <th>Address</th>
                             <th>Email</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center">Actions</th>
                         </tr>
                         </thead>
@@ -55,6 +65,17 @@
                                     <?php echo $supplier->province_name; ?>
                                 </td>
                                 <td><?php echo $supplier->email; ?></td>
+
+                                <td class="text-center">
+                                    <?php if ($supplier->active == 1) { ?>
+                                        <h5><span class="badge badge-success">Active</span></h5>
+
+                                    <?php } else { ?>
+                                        <h5><span class="badge badge-danger ">Inactivate</span></h5>
+
+                                    <?php } ?>
+                                </td>
+
                                 <td class="text-center">
                                     <button type="button" class="btn btn-sm btn-secondary" id="update_button" data-id="<?php echo $supplier->id; ?>"><i class="fas fa-pencil-alt"></i>
                                     </button>
@@ -281,7 +302,8 @@
 
 
 <script>
-    $(document).ready(function () {
+
+
         $('#supplier_table').on('click', '#update_button', function() {
             var id = $(this).attr('data-id');
 

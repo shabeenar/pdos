@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller{
+
     public function __construct()
     {
         parent::__construct();
@@ -48,6 +49,8 @@ class Login extends CI_Controller{
         $result = $this->LoginModel->login_user($create);
 
         if ($result){
+            $this->session->set_flashdata('alert', array('alert' => true));
+
             $this->session->set_userdata('id', $result[0]->id);
             $this->session->set_userdata('name', $result[0]->first_name.' '.$result[0]->last_name);
             $this->session->set_userdata('nic', $result[0]->nic);
@@ -57,10 +60,11 @@ class Login extends CI_Controller{
             $this->session->set_userdata('street', $result[0]->street);
             $this->session->set_userdata('street_two', $result[0]->street_two);
             $this->session->set_userdata('city', $result[0]->city_name);
-            $this->session->set_userdata('district', $result[0]->district_name);
-            $this->session->set_userdata('province', $result[0]->province_name);
+            $this->session->set_userdata('district', $result[0]->district_id);
+            $this->session->set_userdata('province', $result[0]->province_id);
             $this->session->set_userdata('gender', $result[0]->gender);
             $this->session->set_userdata('role', $result[0]->role_name);
+            $this->session->set_userdata('role_id', $result[0]->roles);
             $this->session->set_userdata('ward', $result[0]->ward_name);
 
             redirect('welcome');

@@ -41,7 +41,7 @@
                         <th>Supplier Name</th>
                         <th>Purchase Date</th>
                         <th>Amount Total</th>
-                        <th>Status</th>
+                        <th class="text-center">Status</th>
                         <th class="text-center">Actions</th>
 
                     </tr>

@@ -42,6 +42,7 @@
                     <th>NIC</th>
                     <th>Role Name</th>
                     <th>Ward</th>
+                    <th class="text-center">Status</th>
                     <th class="text-center">Actions</th>
                 </tr>
                 </thead>
@@ -54,6 +55,17 @@
                         <td><?php echo $user->nic; ?></td>
                         <td><?php echo $user->role_name; ?></td>
                         <td><?php echo $user->id.' - '.$user->ward_name; ?></td>
+
+                        <td class="text-center">
+                            <?php if ($user->active == 1) { ?>
+                                <h5><span class="badge badge-success">Active</span></h5>
+
+                            <?php } else { ?>
+                                <h5><span class="badge badge-danger ">Inactivate</span></h5>
+
+                            <?php } ?>
+                        </td>
+
                         <td class="text-center">
                             <button type="button" class="btn btn-sm btn-secondary" id="update_button" data-id="<?php echo $user->id; ?>"><i class="fas fa-pencil-alt"></i>
                             </button>
@@ -96,6 +108,18 @@
 <!--  add new form to modal-->
             <form action="<?php echo base_url('users/users/create_user'); ?>" method="post" data-toggle="validator">
                 <div class="modal-body">
+                    <div class="alert alert-danger" id="alert-nic">
+                        Given NIC already exsists
+                    </div>
+
+                    <div class="alert alert-danger" id="alert-phone">
+                        Given phone number already exsists
+                    </div>
+
+                    <div class="alert alert-danger" id="alert-email">
+                        Given email address already exsists
+                    </div>
+
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>First Name</label>
@@ -113,13 +137,13 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>NIC</label>
-                            <input type="text" class="form-control" name="nic" pattern="[0-9]{9}[x|X|v|V]|[0-9]{11}[x|X|v|V]" required>
+                            <input type="text" class="form-control" name="nic" id="nic" pattern="[0-9]{9}[x|X|v|V]|[0-9]{11}[x|X|v|V]" required>
                             <div class="help-block with-errors"></div>
 
                         </div>
                         <div class="form-group col-md-6">
                             <label>Phone</label>
-                            <input type="tel" class="form-control" name="phone" maxlength="12" minlength="9" pattern="^[0-9]*$" required>
+                            <input type="tel" class="form-control" name="phone" id="phone" maxlength="12" minlength="9" pattern="^[0-9]*$" required>
                             <div class="help-block with-errors"></div>
 
                         </div>
@@ -127,7 +151,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" required>
+                            <input type="email" class="form-control" name="email" id="email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" required>
                             <div class="help-block with-errors"></div>
 
                         </div>
@@ -401,6 +425,10 @@
 
 <script>
     $(document).ready(function () {
+        $('#alert-nic').hide();
+        $('#alert-phone').hide();
+        $('#alert-email').hide();
+
         $('#users_table').on('click', '#update_button', function() {
             var id = $(this).attr('data-id');
 
@@ -420,8 +448,8 @@
                     $('#update_street').val(response[0]['street']);
                     $('#update_street_two').val(response[0]['street_two']);
                     $('#update_city').val(response[0]['city_id']);
-                    $('#update_district').val(response[0]['district_name']);
-                    $('#update_province').val(response[0]['province_name']);
+                    $('#update_district').val(response[0]['district_id']);
+                    $('#update_province').val(response[0]['province_id']);
                     $('#update_gender').val(response[0]['gender']);
                     $('#update_role').val(response[0]['role_id']);
                     $('#update_ward').val(response[0]['ward_id']);
@@ -448,10 +476,10 @@
                 data: {'city': city},
                 success: function(response) {
                     $('#district').val(response[0]['district_name']);
-                    $('#district_id').val(response[0]['district_id']);
+                    // $('#district_id').val(response[0]['district_id']);
                     $('#province').val(response[0]['province_name']);
-                    $('#province_id').val(response[0]['province_id']);
-                    $('#id').val(response[0]['city']);
+                    // $('#province_id').val(response[0]['province_id']);
+                    $('#id').val(response[0]['id']);
                     $('#user_modal').modal('show');
                 }
             })
@@ -477,6 +505,78 @@
                 }
             })
         })
+
+        $('#nic').on('change', function() {
+            $nic = $(this).val();
+            $.ajax({
+                type: 'post',
+                url: base_url + 'users/Users/check_nic',
+                async: false,
+                dataType: 'json',
+                data: {
+                    'nic': $nic
+                },
+                success: function(response) {
+                    if (response == true) {
+                        $('#alert-nic').show();
+                        $(':input[type="submit"]').prop('disabled', true)
+
+                    } else if (response == false) {
+                        $('#alert-nic').hide();
+                        $(':input[type="submit"]').prop('disabled', false)
+
+                    }
+                }
+            });
+        });
+
+        $('#phone').on('change', function() {
+            $phone = $(this).val();
+            $.ajax({
+                type: 'post',
+                url: base_url + 'users/Users/check_phone',
+                async: false,
+                dataType: 'json',
+                data: {
+                    'phone': $phone
+                },
+                success: function(response) {
+                    if (response == true) {
+                        $('#alert-phone').show();
+                        $(':input[type="submit"]').prop('disabled', true)
+
+                    } else if (response == false) {
+                        $('#alert-phone').hide();
+                        $(':input[type="submit"]').prop('disabled', false)
+
+                    }
+                }
+            });
+        });
+
+        $('#email').on('change', function() {
+            $email = $(this).val();
+            $.ajax({
+                type: 'post',
+                url: base_url + 'users/Users/check_email',
+                async: false,
+                dataType: 'json',
+                data: {
+                    'email': $email
+                },
+                success: function(response) {
+                    if (response == true) {
+                        $('#alert-email').show();
+                        $(':input[type="submit"]').prop('disabled', true)
+
+                    } else if (response == false) {
+                        $('#alert-email').hide();
+                        $(':input[type="submit"]').prop('disabled', false)
+
+                    }
+                }
+            });
+        });
 
     });
 

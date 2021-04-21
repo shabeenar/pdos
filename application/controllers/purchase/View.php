@@ -44,17 +44,17 @@ class View extends CI_Controller {
 
         $recieved_quantity=$this->PurchaseModel->confirm_po($po_id,$data);
 
-        redirect('purchase/View?id='.$po_id);
 
-//        if ($recieved_quantity){
-//            $alert = array(
-//                'type' =>"warning",
-//                'message' =>"updated successfully",
-//            );
-//            $this->session->set_flashdata('alert',$alert);
-//            redirect('purchase/View?id='.$po_id);
-//
-//        }
+
+        if ($recieved_quantity){
+            $alert = array(
+                'type' =>"warning",
+                'message' =>"Added to stock",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect('purchase/View?id='.$po_id);
+
+        }
 
     }
 

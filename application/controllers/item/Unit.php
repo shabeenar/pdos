@@ -111,6 +111,13 @@ class Unit extends CI_Controller {
         }
 
     }
+
+    public function check_name() {
+        $name = $this->input->post('name');
+        $result = $this->UnitModel->check_name($name);
+        echo json_encode($result);
+    }
+
 }
 
 //patterns

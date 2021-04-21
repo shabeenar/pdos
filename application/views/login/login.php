@@ -40,7 +40,20 @@
                                     <h1 class="text-gray-900" style="font-size:28px"><b>Patient Diet Ordering System</h1>
                                     <h1 class="text-gray-700 mb-4" style="font-size:20px">Colombo South Teaching Hospital</h1>
                                 </div>
-                                <form class="user" action="<?php echo base_url('login/login/signup'); ?>" method="post" data-toggle="validator">
+
+                                <?php if(!$this->session->flashdata('alert')['alert'] && $this->session->flashdata('alert')) { ?>
+                                    <div class='alert alert-danger'>
+                                        Email or password incorrect!
+                                    </div>
+                                <?php } ?>
+
+                                <?php if(!$this->session->flashdata('access_alert')['access_alert'] && $this->session->flashdata('access_alert')) { ?>
+                                    <div class='alert alert-danger'>
+                                        User Doesnt have the Access
+                                    </div>
+                                <?php } ?>
+
+                                <form class="user" action="<?php echo base_url('login/Login/signup'); ?>" method="post" data-toggle="validator">
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address Here" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" required>
                                         <div class="help-block with-errors"></div>

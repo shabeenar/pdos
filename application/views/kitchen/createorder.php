@@ -34,7 +34,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label>Order Date</label>
-                        <input type="date" class="form-control" name="date" id="order_date">
+                        <input type="date" class="form-control" name="date" id="order_date" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                 </div>
                 <table class="table table-bordered" id="order_table">
@@ -42,6 +42,7 @@
                     <tr>
                         <th>Ward</th>
                         <th>Patient Category</th>
+                        <th>Diet Category</th>
                         <th>Total Patients</th>
                         <th>Breakfast</th>
                         <th>Lunch</th>
@@ -100,6 +101,7 @@
                     row += '<tr>';
                     row += '<td><select name="order_patient_ward[]" id="order_patient_ward" class="form-control">' + options + '</select></td>';
                     row += '<td><select name="order_patient_category[]" id="order_patient_category" class="form-control"></select></td>';
+                    row += '<td><select name="order_diet_category[]" id="order_diet_category" class="form-control"></select></td>';
                     row += '<td><input name="order_total_patient[]" id="order_total_patient" class="form-control" readonly></td>';
                     row += '<td><select name="order_breakfast[]" id="order_breakfast" class="form-control">' + breakfast + '</select></td>';
                     row += '<td><select name="order_lunch[]" id="order_lunch" class="form-control">' + lunch + '</select></td>';
@@ -136,9 +138,33 @@
             $(this).closest('tr').find('#order_patient_category').append(categories);
         })
 
-        $('#order_lines').on('change', '#order_patient_category',function () {
+        // new
+
+        $('#order_lines').on('change', '#order_patient_category', function () {
             var patient_category = $(this).val();
+            var diet_category = ["<option disabled selected>Select Category</option>"];
+
+            $.ajax({
+                type: 'post',
+                url: base_url + 'kitchen/CreateOrder/get_patient_categories',
+                async: false,
+                dataType: 'json',
+                data: {'id': patient_category},
+                success: function (response) {
+                    response.forEach((row) => {
+                        diet_category.push('<option value="' + row.category_id + '">' + row.category_name + '</option>');
+                    })
+                }
+            })
+            $(this).closest('tr').find('#order_diet_category option').remove();
+            $(this).closest('tr').find('#order_diet_category').append(diet_category);
+        })
+
+
+        $('#order_lines').on('change', '#order_diet_category',function () {
+            var diet_category = $(this).val();
             var ward = $('#order_patient_ward').val();
+            var patient_category = $('#order_patient_category').val();
             var total = "";
 
             $.ajax({
@@ -146,7 +172,7 @@
                 url: base_url + 'kitchen/CreateOrder/get_total_patients',
                 async: false,
                 dataType: 'json',
-                data: {'id': patient_category,  'ward_id':ward},
+                data: {'id': diet_category,  'ward_id':ward, 'patient_category_id':patient_category},
                 success: function (response) {
                     total = response;
 
@@ -155,10 +181,8 @@
             })
             $(this).closest('tr').find('#order_total_patient').val(total);
 
-
-
-
         })
+
 
     })
 

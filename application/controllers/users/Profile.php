@@ -15,6 +15,7 @@ class Profile extends CI_Controller {
         $this->load->model('ProvinceModel');
         $this->load->model('CitiesModel');
         $this->load->model('RoleNames');
+        $this->load->model('ProfileModel');
     }
 
     public function index()
@@ -61,6 +62,56 @@ class Profile extends CI_Controller {
                 'messages' => "",
             );
             echo json_encode($result);
+        }
+    }
+
+    public function update_user(){
+        $update = array(
+            'first_name'=> $this->input->post('name'),
+            'last_name' => $this->input->post('name'),
+            'nic'       => $this->input->post('nic'),
+            'phone'     => $this->input->post('phone'),
+            'email'     => $this->input->post('email'),
+            'birthday'  => $this->input->post('birthday'),
+            'street'    => $this->input->post('street'),
+            'street_two'=> $this->input->post('street_two'),
+            'city_id'    => $this->input->post('city_id'),
+            'district_id'=> $this->input->post('district'),
+            'province_id'=> $this->input->post('province'),
+            'gender'    => $this->input->post('gender'),
+            'role_id'    => $this->input->post('role'),
+            'ward_id'   => $this->input->post('ward'),
+        );
+
+
+
+        $id = $this->input->post('update_id');
+
+
+        $result = $this->UsersModel->update_user($update, $id);
+
+var_dump($result);
+die();
+        if ($result){
+            $alert = array(
+                'type' =>"warning",
+                'message' =>"updated successfully",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect("users/Users");
+        }
+    }
+
+    public function inactivate(){
+        $id = $this->input->post('id');
+        $result = $this->UsersModel->inactivate($id);
+        if ($result){
+            $alert = array(
+                'type' =>"success",
+                'message' =>"User Deactivated",
+            );
+            $this->session->set_flashdata('alert',$alert);
+            redirect("users/Users");
         }
     }
 

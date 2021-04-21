@@ -47,6 +47,16 @@ Class UnitModel extends CI_Model {
         }
 
     }
+
+    public function check_name($name) {
+        $query = $this->db->select("*")->from('unit')->where('name', $name);
+        if(count($query->get()->result_array()) == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 
 ?>

@@ -97,6 +97,11 @@
             </div>
             <form action="<?php echo base_url('item/item/create_item'); ?>" method="post" id="item_create_form" data-toggle="validator" data-toggle="validator">
                 <div class="modal-body">
+
+                    <div class="alert alert-danger" id="alert-name">
+                        Given item name already exsists
+                    </div>
+
                     <div class="row">
 
                         <div class="alert alert-danger form-group col-md-12" id="alert_id">
@@ -119,7 +124,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Item Name</label>
-                            <input type="text" class="form-control" name="name" required>
+                            <input type="text" class="form-control" name="name" id="name" required>
                             <div class="help-block with-errors"></div>
 
                         </div>
@@ -138,14 +143,14 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Quantity</label>
-                            <input type="text" class="form-control" name="quantity" id="quantity_name" required>
+                            <input type="number" class="form-control" name="quantity" id="quantity_name" required>
                             <div class="help-block with-errors"></div>
 
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label>Item Price</label>
+                            <label>Item Price (per quantity) Rs.</label>
                             <input type="number" class="form-control" name="price" pattern="\-?\d+\.\d+" required>
                             <div class="help-block with-errors"></div>
 
@@ -202,7 +207,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Quantity</label>
-                            <input type="text" class="form-control" name="quantity" id="update_quantity" required>
+                            <input type="number" class="form-control" name="quantity" id="update_quantity" required>
                             <div class="help-block with-errors"></div>
 
                         </div>
@@ -221,7 +226,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label>Item Price</label>
+                            <label>Item Price (per quantity) Rs.</label>
                             <input type="number" class="form-control" name="price" id="update_price" pattern="\-?\d+\.\d+" required>
                             <div class="help-block with-errors"></div>
 
@@ -272,7 +277,9 @@
 
 <script>
     $(document).ready(function () {
+        $('#alert-name').hide();
         $('#alert_id').hide();
+
         $('#item_table').on('click', '#update_button', function () {
             var id = $(this).attr('data-id');
 
@@ -347,6 +354,32 @@
                 }
             })
         } )
+
+        $('#name').on('change', function() {
+            $name = $(this).val();
+            $.ajax({
+                type: 'post',
+                url: base_url + 'item/Item/check_name',
+                async: false,
+                dataType: 'json',
+                data: {
+                    'name': $name
+                },
+                success: function(response) {
+                    if (response == true) {
+                        $('#alert-name').show();
+                        $(':input[type="submit"]').prop('disabled', true)
+
+                    } else if (response == false) {
+                        $('#alert-name').hide();
+                        $(':input[type="submit"]').prop('disabled', false)
+
+                    }
+                }
+            });
+        });
+
+
     });
 
     // 08/01/2020 <= 09/01/2020

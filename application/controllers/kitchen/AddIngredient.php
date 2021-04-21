@@ -12,16 +12,19 @@ class AddIngredient extends CI_Controller {
         $this->load->model('MealIngredientsModel');
         $this->load->model('ItemModel');
         $this->load->model('MealsModel');
+        $this->load->model('ItemCategoryModel');
     }
 
     public function index()
     {
 
         $id = $this->input->get('id');
-
         $data = array(
-            'meal_ingredients' => $this->MealIngredientsModel->select($id),
+            'ingredients' => $this->MealIngredientsModel->mainlines($id),
+            'ingredient_lines' => $this->MealIngredientsModel->lines($id),
+            'meals' => $this->MealIngredientsModel->select_meal($id),
         );
+
 
         $this->load->view('header');
         $this->load->view('kitchen/addingredient', $data);
@@ -29,33 +32,59 @@ class AddIngredient extends CI_Controller {
     }
 
     public function generate_ingredient_line(){
-        $products = $this->ItemModel->select();
+        $categories = $this->ItemCategoryModel->select();
 
-        $row = '<option selected disabled>Select Product</option>';
-        foreach($products as $product) {
-            $row .= '<option value="'.$product->id.'">'.$product->name.'</option>';
+        $row = '<option selected disabled>Select Category</option>';
+        foreach($categories as $category) {
+            $row .= '<option value="'.$category->id.'">'.$category->name.'</option>';
         }
         echo $row;
     }
 
+    public function get_item_names(){
+        $id = $this->input->post('id');
+        $result = $this->MealIngredientsModel->get_item_names($id);
+        echo json_encode($result);
+    }
+
     public function add_ingredient(){
-        $meal = array(
-            'meals_id' => $this->input->post('meal_name'),
+
+        $ingredient = array(
+            'meals_id' => $this->input->post('meal_id'),
+            'date' => $this->input->post('date'),
         );
 
-        $meal_id = $this->MealIngredientsModel->create_meal($meal);
+        $ingredient_id = $this->MealIngredientsModel->create($ingredient);
+
 
         $ingredient_lines = array();
         $lines = array();
 
         for ($i = 0; $i < count($this->input->post('ingredient_product')); $i++) {
-            $lines['meal_id'] = $meal_id;
+            $lines['meal_ingredient_id'] = $ingredient_id;
+            $lines['item_category_id'] = $this->input->post('ingredient_product_category')[$i];
             $lines['item_id'] = $this->input->post('ingredient_product')[$i];
             $lines['quantity'] = $this->input->post('ingredient_qty')[$i];
             array_push($ingredient_lines, $lines);
         }
 
-        $result = $this->MealIngredientsModel->add_ingredient($ingredient_lines, $meal_id);
+        $result = $this->MealIngredientsModel->add_ingredient($ingredient_lines, $ingredient_id);
+
+        if ($result == true) {
+            redirect('kitchen/viewingredients?id='. $ingredient_id);
+        }else if ($result == false) {
+            redirect('kitchen/AddIngredient');
+        }
+
+    }
+
+    public function check_quantity(){
+        $id= $this->input->post('ingredient_product');
+        $result = $this->MealIngredientsModel->check_quantity($id);
+
+        echo json_encode($result);
+
+
     }
 
 

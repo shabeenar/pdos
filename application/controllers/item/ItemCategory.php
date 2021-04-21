@@ -111,4 +111,11 @@ class ItemCategory extends CI_Controller {
             redirect('item/ItemCategory');
         }
     }
+
+    public function check_name() {
+        $name = $this->input->post('name');
+        $result = $this->ItemCategoryModel->check_name($name);
+        echo json_encode($result);
+    }
+
 }
