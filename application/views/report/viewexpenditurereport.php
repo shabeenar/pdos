@@ -20,13 +20,20 @@
                 </thead>
                 <!--display data on index-->
                 <tbody>
+                <?php $sum = 0?>
                 <?php foreach ($expenses as $expense) {?>
                     <tr>
                         <td><?php echo $expense->date; ?></td>
                         <td><?php echo $expense->supplier_name; ?></td>
                         <td><?php echo $expense->total_price; ?></td>
+                        <?php $sum += $expense->total_price;?>
+
                     </tr>
                 <?php } ?>
+                <tr>
+                    <td colspan="2"><b>Total Sum</b></td>
+                    <td><?php echo $sum;?></td>
+                </tr>
                 </tbody>
             </table>
 

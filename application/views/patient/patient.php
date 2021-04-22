@@ -68,7 +68,7 @@
                                 <h5><span class="badge badge-success">Active</span></h5>
 
                             <?php } else { ?>
-                                <h5><span class="badge badge-danger ">Inactivate</span></h5>
+                                <h5><span class="badge badge-danger ">Discharged</span></h5>
 
                             <?php } ?>
                         </td>

@@ -30,26 +30,6 @@
 <body class="bg-gradient-primary">
 
 <div class="container">
-    <?php if ($this->session->flashdata('alert')) { ?>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $.notify({
-                        message: '<?php echo $this->session->flashdata('alert')['message']?>'
-                    },
-                    {
-                        type: '<?php echo $this->session->flashdata('alert')['type']?>',
-                        placement: {
-                            from: "bottom",
-                            align: "right"
-                        },
-                        animate: {
-                            enter: 'animated fadeInDown',
-                            exit: 'animated fadeOutUp'
-                        },
-                    });
-            });
-        </script>
-    <?php } ?>
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
@@ -67,7 +47,14 @@
                                     <h1 class="text-gray-900" style="font-size:28px"><b>Patient Diet Ordering System</h1>
                                     <h1 class="text-gray-700 mb-4" style="font-size:20px">Colombo South Teaching Hospital</h1>
                                 </div>
-                                <form class="user" action="<?php echo base_url('login/login/forgotpassword'); ?>" method="post" data-toggle="validator">
+
+                                <?php if(!$this->session->flashdata('alert')['alert'] && $this->session->flashdata('alert')) { ?>
+                                    <div class='alert alert-danger'>
+                                        Email incorrect!
+                                    </div>
+                                <?php } ?>
+
+                                <form class="user" action="<?php echo base_url('login/ForgotPassword/forgotpassword'); ?>" method="post" data-toggle="validator">
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address Here" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" required>
                                     </div>

@@ -33,7 +33,7 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block"><img src="<?php echo base_url('assets/img/login'); ?>" width="500" height="550" style="box-shadow: 5px 10px 10px 0px rgba(0,0,0,0.5)"></div>
+                        <div class="col-lg-6 d-none d-lg-block"><img src="<?php echo base_url('assets/img/login_image'); ?>" width="500" height="600" style="box-shadow: 5px 10px 10px 0px rgba(0,0,0,0.5)"></div>
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
@@ -68,6 +68,7 @@
                                     </button>
                                 </form>
                                 <hr>
+
                                 <div class="text-center">
                                     <a class="small" href="<?php echo base_url('login/forgotpassword'); ?>">Forgot Password?</a>
                                 </div>

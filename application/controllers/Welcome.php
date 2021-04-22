@@ -15,6 +15,7 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
+
 	    $categories = $this->WelcomeModel->select();
 
 
@@ -29,6 +30,7 @@ class Welcome extends CI_Controller {
 
 
         }
+
 
         if ($chart_data) {
             $chart_data = (preg_replace('/"([^"]+)"\s*:\s*/', '$1:', json_encode($chart_data)));

@@ -5,15 +5,22 @@ class Users extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        if(!$this->session->userdata('name')) {
-            redirect(redirect('login/login'));
-        }
+        if(($this->session->userdata('role_id')==5 )) {
+            if(!$this->session->userdata('name')) {
+                redirect(redirect('login/login'));
+            }
+
         $this->load->model('UsersModel');
         $this->load->model('WardModel');
         $this->load->model('DistrictModel');
         $this->load->model('ProvinceModel');
         $this->load->model('CitiesModel');
         $this->load->model('RoleNames');
+
+        } else{
+            $this->session->set_flashdata('access_alert', array('access_alert' => false));
+            redirect('login/Login');
+        }
     }
 
     public function index()
@@ -44,7 +51,6 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('city', 'City', 'required');
         $this->form_validation->set_rules('gender', 'Gender', 'required');
         $this->form_validation->set_rules('role', 'Role', 'required');
-        $this->form_validation->set_rules('ward', 'Ward Name', 'required');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -103,7 +109,6 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('city', 'City', 'required');
         $this->form_validation->set_rules('gender', 'Gender', 'required');
         $this->form_validation->set_rules('role', 'Role', 'required');
-        $this->form_validation->set_rules('ward', 'Ward Name', 'required');
 
         $mail_settings = Array(
             'protocol'    => 'smtp',
@@ -181,7 +186,6 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('city', 'City', 'required');
         $this->form_validation->set_rules('gender', 'Gender', 'required');
         $this->form_validation->set_rules('role', 'Role', 'required');
-        $this->form_validation->set_rules('ward', 'Ward Name', 'required');
 
         $id = $this->input->post('update_id');
 

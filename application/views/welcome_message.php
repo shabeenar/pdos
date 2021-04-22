@@ -107,6 +107,8 @@
 
             </div>
 
+
+
         </div>
 
     </div>
@@ -131,7 +133,9 @@
             // Get context with jQuery - using jQuery's .get() method.
             var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
             var pieChart       = new Chart(pieChartCanvas);
-            var PieData        = [{value:"2",color:"#fff6ee",highlight:"#b642e2",label:"Heart patients"},{value:"2",color:"#5a0144",highlight:"#8eb378",label:"Fever patients"},{value:"1",color:"#493cb2",highlight:"#e06b87",label:"Kidney patients"},{value:"1",color:"#a86515",highlight:"#ad97cb",label:"Influenza"},{value:"1",color:"#ed98f3",highlight:"#c324e7",label:"Norovirus"}];
+
+            var PieData        = <?php if ($piedata){echo $piedata;}?>
+
             var pieOptions     = {
                 //Boolean - Whether we should show a stroke on each segment
                 segmentShowStroke    : true,

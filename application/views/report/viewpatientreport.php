@@ -23,6 +23,7 @@
                 </thead>
                 <!--display data on index-->
                 <tbody>
+                <?php $sum = 0?>
                 <?php foreach ($patients as $patient) {?>
                     <tr>
                         <td><?php echo $patient->in_date; ?></td>
@@ -31,8 +32,14 @@
                         <td><?php echo $patient->ward_name; ?></td>
                         <td><?php echo $patient->bed; ?></td>
                         <td><?php echo $patient->diet_category; ?></td>
+                        <?php $sum += $patient->total_patients;?>
                     </tr>
                 <?php } ?>
+
+                <tr>
+                    <td colspan="3"><b>Total Patients</b></td>
+                    <td><?php echo $sum;?></td>
+                </tr>
                 </tbody>
             </table>
 

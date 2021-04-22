@@ -181,13 +181,13 @@
         <!-- Nav Company Details -->
         <li class="nav-item active">
 
-            <?php if ($this->session->userdata('role_id') == '2') { ?>
+<!--            --><?php //if ($this->session->userdata('role_id') == '2') { ?>
 
             <a class="nav-link" href="<?php echo base_url("company/company"); ?>">
                 <i class="fas fa-fw fa-building"></i>
                 <span>Company Details</span></a>
 
-            <?php } ?>
+<!--            --><?php //} ?>
         </li>
 
     </ul>

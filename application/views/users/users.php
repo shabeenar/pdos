@@ -54,7 +54,7 @@
                         <td><?php echo $user->phone; ?></td>
                         <td><?php echo $user->nic; ?></td>
                         <td><?php echo $user->role_name; ?></td>
-                        <td><?php echo $user->id.' - '.$user->ward_name; ?></td>
+                        <td><?php echo $user->ward_name; ?></td>
 
                         <td class="text-center">
                             <?php if ($user->active == 1) { ?>
@@ -227,13 +227,12 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Ward</label>
-                            <select class="form-control" name="ward" required>
+                            <select class="form-control" name="ward">
                                 <option disabled selected value style="display:none;">Select Ward</option>
                                 <?php foreach ($wards as $ward) { ?>
                                     <option value="<?php echo $ward->id;?>"><?php echo $ward->number.' - '.$ward->name; ?></option>
                                 <?php } ?>
                             </select>
-                            <div class="help-block with-errors"></div>
 
                         </div>
                     </div>
@@ -373,13 +372,12 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Ward</label>
-                            <select class="form-control" name="ward" id="update_ward" required>
+                            <select class="form-control" name="ward" id="update_ward">
                                 <option disabled selected value style="display:none;">Select Ward</option>
                                 <?php foreach ($wards as $ward) { ?>
                                     <option value="<?php echo $ward->id;?>"><?php echo $ward->number.' - '.$ward->name; ?></option>
                                 <?php } ?>
                             </select>
-                            <div class="help-block with-errors"></div>
 
                         </div>
                     </div>

@@ -17,18 +17,23 @@
                     <th>Patient Category</th>
                     <th>Total Patient</th>
 
+
                 </tr>
                 </thead>
                 <!--display data on index-->
                 <tbody>
+
                 <?php foreach ($orders as $order) {?>
                     <tr>
                         <td><?php echo $order->order_date; ?></td>
                         <td><?php echo $order->ward_name; ?></td>
                         <td><?php echo $order->patient_category_name; ?></td>
                         <td><?php echo $order->total_patients; ?></td>
+
                     </tr>
                 <?php } ?>
+
+
                 </tbody>
             </table>
 

@@ -14,6 +14,18 @@ Class MealIngredientsModel extends CI_Model {
         $this->db->select('meal_ingredient.*, meals.meal_name as meal_name');
         $this->db->from('meal_ingredient');
         $this->db->join('meals', 'meals.id = meal_ingredient.meals_id');
+        $this->db->where('meal_ingredient.id', $id);
+        $this->db->order_by('meal_ingredient.id','asd');
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
+    public function view_per_meal($id){
+
+        $this->db->select('meal_ingredient.*, meals.meal_name as meal_name');
+        $this->db->from('meal_ingredient');
+        $this->db->join('meals', 'meals.id = meal_ingredient.meals_id');
         $this->db->where('meal_ingredient.meals_id', $id);
         $this->db->order_by('meal_ingredient.id','asd');
         $query = $this->db->get();
@@ -44,6 +56,7 @@ Class MealIngredientsModel extends CI_Model {
 
     public function create($ingredientl){
         $this->db->insert('meal_ingredient', $ingredientl);
+
         $insert_id = $this->db->insert_id();
         return $insert_id;
 
@@ -72,7 +85,7 @@ Class MealIngredientsModel extends CI_Model {
     }
 
     public function get_item_names($id){
-        $this->db->select('item_category.id as category_id, item.name as category_name');
+        $this->db->select('item.id as category_id, item.name as category_name');
         $this->db->from('item');
         $this->db->join('item_category', 'item_category.id = item.item_category_id');
         $this->db->where('item_category_id',$id);

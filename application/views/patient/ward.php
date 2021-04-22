@@ -99,9 +99,10 @@
                             <label>Ward Gender</label>
                             <select class="form-control" name="gender">
                                 <option disabled selected value style="display:none;">Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="children">Children</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Children">Children</option>
+                                <option value="All">All</option>
                             </select>
                         </div>
                     </div>
@@ -149,9 +150,10 @@
                             <label>Ward Gender</label>
                             <select class="form-control" name="gender" id="update_gender">
                                 <option disabled selected value style="display:none;">Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="children">Children</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Children">Children</option>
+                                <option value="All">All</option>
                             </select>
                         </div>
                     </div>

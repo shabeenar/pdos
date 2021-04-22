@@ -30,20 +30,21 @@ Class ReportModel extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+
     // to get the monthly production
-    public function total_monthly_production()
-    {
-        $this->db->select_sum('manufacturing_order_lines.quantity');
-        $this->db->select('manufacturing_order_lines.*,MONTHNAME(manufacturing.complete_date) as createDate');
-        $this->db->from('manufacturing_order_lines');
-        $this->db->join('products', 'products.id=manufacturing_order_lines.product_id');
-        $this->db->join('manufacturing', 'manufacturing.id=manufacturing_order_lines.manufacturing_id');
-        $this->db->where('manufacturing.status', 'Complete');
-        $this->db->group_by('MONTHNAME(manufacturing.complete_date)');
-        $this->db->order_by('manufacturing_order_lines.manufacturing_id','asd');
-        $query = $this->db->get();
-        return $query->result();
-    }
+//    public function total_monthly_production()
+//    {
+//        $this->db->select_sum('manufacturing_order_lines.quantity');
+//        $this->db->select('manufacturing_order_lines.*,MONTHNAME(manufacturing.complete_date) as createDate');
+//        $this->db->from('manufacturing_order_lines');
+//        $this->db->join('products', 'products.id=manufacturing_order_lines.product_id');
+//        $this->db->join('manufacturing', 'manufacturing.id=manufacturing_order_lines.manufacturing_id');
+//        $this->db->where('manufacturing.status', 'Complete');
+//        $this->db->group_by('MONTHNAME(manufacturing.complete_date)');
+//        $this->db->order_by('manufacturing_order_lines.manufacturing_id','asd');
+//        $query = $this->db->get();
+//        return $query->result();
+//    }
 
     public function get_total_expenses($from, $to){
         $this->db->select('purchase.*, supplier.name as supplier_name');

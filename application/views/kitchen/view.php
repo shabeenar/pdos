@@ -45,7 +45,7 @@
                     <div class="form-group col-sm-4">
                         <label>Confirm Order Date</label>
                         <?php foreach ($orders as $order) { ?>
-                        <input type="date" class="form-control" id="confirm_order_date" name="confirm_order_date" value="<?php echo $order->confirm_date; ?>" <?php if ($order->status != 1) { echo "readonly"; } ?> >
+                        <input type="date" class="form-control" id="confirm_order_date" name="confirm_order_date" value="<?php if ($order->status != 1){echo $order->confirm_date;} else{ echo date("Y-m-d"); }; ?>" <?php if($order->status != 1){ echo "readonly"; }?> >
                         <?php } ?>
                     </div>
                 </div>

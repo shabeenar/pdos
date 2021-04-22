@@ -6,10 +6,17 @@ class ViewUserReport extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        if(!$this->session->userdata('name')) {
-            redirect(redirect('login/login'));
-        }
+        if(($this->session->userdata('role_id')==5 )) {
+            if(!$this->session->userdata('name')) {
+                redirect(redirect('login/login'));
+            }
+
         $this->load->model('ReportModel');
+
+        } else{
+            $this->session->set_flashdata('access_alert', array('access_alert' => false));
+            redirect('login/Login');
+        }
 
     }
 

@@ -37,9 +37,6 @@
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#supplier_modal">Add Supplier</button>
             </div>
 
-<!--            <div class="text-right mb-4">-->
-<!--            <button type="button" class="btn btn-secondary" name="copy" id="copy" tabindex="0">Copy</button>-->
-<!--            </div>-->
 
                     <!--supplier table-->
                     <table class="table table-bordered" id="supplier_table">
@@ -302,7 +299,7 @@
 
 
 <script>
-
+    $(document).ready(function () {
 
         $('#supplier_table').on('click', '#update_button', function() {
             var id = $(this).attr('data-id');
@@ -373,6 +370,7 @@
                 }
             })
         })
+
 
     });
 </script>

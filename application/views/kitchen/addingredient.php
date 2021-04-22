@@ -39,12 +39,11 @@
             <div class="row">
                 <label class="col-sm-2 col-form-label text-right">Meal Name</label>
                 <div class="form-group col-sm-3">
-                    <?php foreach ($meals as $meal) { ?>
-                    <input type="text" class="form-control" id="meal_name" name="meal_name" value="<?php echo $meal->meal_name; ?>" readonly>
-                    <?php } ?>
-                    <?php foreach ($ingredients as $ingredient) { ?>
-                        <input type="hidden"  name="meal_id"  id="meal_id"  value="<?php echo $ingredient->id; ?>">
-                    <?php } ?>
+
+                    <input type="text" class="form-control" id="meal_name" name="meal_name" value="<?php echo $ingredients[0]->meal_name; ?>" readonly>
+
+                        <input type="hidden"  name="meal_id"  id="meal_id"  value="<?php echo $ingredients[0]->id; ?>">
+
                 </div>
 
                 <label class="col-sm-2 col-form-label text-right">Date</label>

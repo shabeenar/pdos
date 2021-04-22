@@ -17,7 +17,7 @@ Class UsersModel extends CI_Model {
     public function select(){
         $this->db->select('users.*,ward.name as ward_name, role_names.role as role_name');
         $this->db->from('users');
-        $this->db->join('ward','ward.number = users.ward_id');
+        $this->db->join('ward','ward.id = users.ward_id');
         $this->db->join('role_names','role_names.id = users.role_id');
         $this->db->where(array('users.status' => 1));
         $query = $this->db->get();

@@ -6,13 +6,20 @@ class AddIngredient extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        if(!$this->session->userdata('name')) {
-            redirect(redirect('login/login'));
-        }
+        if(($this->session->userdata('role_id')==5 ) OR ($this->session->userdata('role_id')==3 )) {
+            if(!$this->session->userdata('name')) {
+                redirect(redirect('login/login'));
+            }
+
         $this->load->model('MealIngredientsModel');
         $this->load->model('ItemModel');
         $this->load->model('MealsModel');
         $this->load->model('ItemCategoryModel');
+
+        } else{
+            $this->session->set_flashdata('access_alert', array('access_alert' => false));
+            redirect('login/Login');
+        }
     }
 
     public function index()
@@ -60,7 +67,7 @@ class AddIngredient extends CI_Controller {
         $ingredient_lines = array();
         $lines = array();
 
-        for ($i = 0; $i < count($this->input->post('ingredient_product')); $i++) {
+        for ($i = 0; $i < count($this->input->post('ingredient_product_category')); $i++) {
             $lines['meal_ingredient_id'] = $ingredient_id;
             $lines['item_category_id'] = $this->input->post('ingredient_product_category')[$i];
             $lines['item_id'] = $this->input->post('ingredient_product')[$i];
@@ -71,7 +78,7 @@ class AddIngredient extends CI_Controller {
         $result = $this->MealIngredientsModel->add_ingredient($ingredient_lines, $ingredient_id);
 
         if ($result == true) {
-            redirect('kitchen/viewingredients?id='. $ingredient_id);
+            redirect('kitchen/mealingredients?id='. $ingredient_id);
         }else if ($result == false) {
             redirect('kitchen/AddIngredient');
         }
