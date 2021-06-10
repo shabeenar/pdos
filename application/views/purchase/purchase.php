@@ -153,7 +153,7 @@
                     var options = response
                     var row = "";
                     row += '<tr>';
-                    row += '<td><select name="purchase_product[]" id="purchase_product" class="form-control">' + options + '</select></td>';
+                    row += '<td><select name="purchase_product[]" id="purchase_product" class="form-control" required>' + options + '</select></td>';
                     row += '<td><input type="number" name="purchase_price[]" id="purchase_price" class="form-control" required/></td>';
                     row += '<td><input type="number" name="purchase_qty[]" id="purchase_qty" class="form-control" placeholder="0.00" required onKeyPress="return NumbersOnly(this, event,true)"/></td>';
                     row += '<td><input type="text" name="purchase_uom[]" id="purchase_uom" class="form-control" readonly/><input type="hidden" name="purchase_uom_id[]" id="purchase_uom_id" class="form-control"/></td>';

@@ -14,7 +14,7 @@
                 <tr>
                     <th>Date</th>
                     <th>Supplier Name</th>
-                    <th>Ammount Total</th>
+                    <th>Total Ammount</th>
 
                 </tr>
                 </thead>

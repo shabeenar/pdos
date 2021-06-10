@@ -512,10 +512,10 @@
                 data: {'city': city},
                 success: function(response) {
                     $('#district').val(response[0]['district_name']);
-                    $('#district_id').val(response[0]['district_id']);
+                    // $('#district_id').val(response[0]['district_id']);
                     $('#province').val(response[0]['province_name']);
-                    $('#province_id').val(response[0]['province_id']);
-                    $('#id').val(response[0]['city']);
+                    // $('#province_id').val(response[0]['province_id']);
+                    $('#id').val(response[0]['id']);
                     $('#patient_modal').modal('show');
                 }
             })

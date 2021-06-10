@@ -12,22 +12,24 @@ Class PatientModel extends CI_Model {
     }
 
     public function select(){
-        $this->db->select('patient.*,cities.name_en as city_name,districts.name_en as district_name,provinces.name_en as province_name,ward.name as ward_name');
+        $this->db->select('patient.*,ward.name as ward_name, patient_category.category_name as patient_category, cities.name_en as city_name, districts.name_en as district_name,provinces.name_en as province_name');
         $this->db->from('patient');
         $this->db->join('cities','cities.id = patient.city_id');
         $this->db->join('districts','districts.id = patient.district_id');
         $this->db->join('provinces','provinces.id = patient.province_id');
         $this->db->join('ward','ward.number = patient.ward_id');
+        $this->db->join('patient_category','patient_category.id = patient.patient_category_id');
         $this->db->where(array('patient.status' => 1));
         $query = $this->db->get();
         return $query->result();
     }
 
     public function get_patient($id){
-        $this->db->select('patient.*,districts.name_en as district_name,provinces.name_en as province_name');
+        $this->db->select('patient.*, patient_category.category_name as patient_category');
         $this->db->from('patient');
-        $this->db->join('districts','districts.id = patient.district_id');
-        $this->db->join('provinces','provinces.id = patient.province_id');
+//        $this->db->join('districts','districts.id = patient.district_id');
+//        $this->db->join('provinces','provinces.id = patient.province_id');
+        $this->db->join('patient_category','patient_category.id = patient.patient_category_id');
         $this->db->where('patient.id',$id);
         $query = $this->db->get();
         return $query->result();

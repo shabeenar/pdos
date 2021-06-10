@@ -13,21 +13,21 @@ Class SupplierModel extends CI_Model {
 
 //get data from db
     public function select(){
-        $this->db->select('supplier.*,cities.name_en as city_name,districts.name_en as district_name,provinces.name_en as province_name');
+//        $this->db->select('supplier.*,cities.name_en as city_name,districts.name_en as district_name,provinces.name_en as province_name');
         $this->db->from('supplier');
-        $this->db->join('cities','cities.id = supplier.city_id');
-        $this->db->join('districts','districts.id = supplier.district_id');
-        $this->db->join('provinces','provinces.id = supplier.province_id');
+//        $this->db->join('cities','cities.id = supplier.city_id');
+//        $this->db->join('districts','districts.id = supplier.district_id');
+//        $this->db->join('provinces','provinces.id = supplier.province_id');
         $this->db->where(array('supplier.status' => 1));
         $query = $this->db->get();
         return $query->result();
     }
 
     public function get_supplier($id){
-        $this->db->select('supplier.*,districts.name_en as district_name,provinces.name_en as province_name');
+//        $this->db->select('supplier.*,districts.name_en as district_name,provinces.name_en as province_name');
         $this->db->from('supplier');
-        $this->db->join('districts','districts.id = supplier.district_id');
-        $this->db->join('provinces','provinces.id = supplier.province_id');
+//        $this->db->join('districts','districts.id = supplier.district_id');
+//        $this->db->join('provinces','provinces.id = supplier.province_id');
         $this->db->where('supplier.id',$id);
         $query = $this->db->get();
         return $query->result();

@@ -58,8 +58,8 @@
                                 <td><?php echo $supplier->phone; ?></td>
                                 <td>
                                     <?php echo $supplier->street.', '.$supplier->street_two.','; ?><br>
-                                    <?php echo $supplier->city_name.', '.$supplier->district_name,','; ?><br>
-                                    <?php echo $supplier->province_name; ?>
+                                    <?php echo $supplier->city_id.', '.$supplier->district_id,','; ?><br>
+                                    <?php echo $supplier->province_id; ?>
                                 </td>
                                 <td><?php echo $supplier->email; ?></td>
 
@@ -342,9 +342,9 @@
                 data: {'city': city},
                 success: function(response) {
                     $('#district').val(response[0]['district_name']);
-                    $('#district_id').val(response[0]['district_id']);
+                    // $('#district_id').val(response[0]['district_id']);
                     $('#province').val(response[0]['province_name']);
-                    $('#province_id').val(response[0]['province_id']);
+                    // $('#province_id').val(response[0]['province_id']);
                     $('#id').val(response[0]['city']);
                     $('#supplier_modal').modal('show');
                 }

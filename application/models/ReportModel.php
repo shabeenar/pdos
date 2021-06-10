@@ -50,9 +50,11 @@ Class ReportModel extends CI_Model {
         $this->db->select('purchase.*, supplier.name as supplier_name');
         $this->db->from('purchase');
         $this->db->join('supplier', 'supplier.id = purchase.supplier_id');
+
         $this->db->where('date >=', $from);
         $this->db->where('date <=', $to);
-
+        $this->db->where('total_price>25000');
+        $this->db->order_by('purchase.total_price','asd');
         $query = $this->db->get();
         return $query->result();
     }
